@@ -1,33 +1,56 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Blood Esports</title>
-  <link rel="stylesheet" href="assets/style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blood Esports</title>
+    <link rel="stylesheet" href="assets/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
-
-<div class="container">
-  <h1 class="gold">Blood Esports</h1>
-  <h2>Luxury. Aggression. Control.</h2>
-
-  <div class="section">
-    <h2>Clans</h2>
-    <div class="card-grid">
-      <a href="clans/4kt.html" class="card">4KT</a>
-      <a href="clans/otf.html" class="card">OTF</a>
+    <!-- Blood drip effect -->
+    <div class="blood-drip" id="bloodDrip"></div>
+    
+    <div class="container">
+        <header>
+            <h1 class="logo">Blood Esports</h1>
+            <p class="tagline">"It's a parade inside my city yeahhh"</p>
+        </header>
+        
+        <div class="section">
+            <h2>Clans</h2>
+            <div class="card-grid">
+                <a href="clans/4kt.html" class="card pulse">4KT</a>
+                <a href="clans/otf.html" class="card pulse">OTF</a>
+            </div>
+        </div>
+        
+        <div class="section">
+            <h2>Leadership</h2>
+            <div class="leadership-info">
+                <div class="leader-card">
+                    <h3>Clan Master</h3>
+                    <p>Choco</p>
+                    <p><i>Strategic leader and founder of Blood Esports</i></p>
+                </div>
+                <div class="leader-card">
+                    <h3>Clan Manager</h3>
+                    <p>Danny</p>
+                    <p><i>Operations and team coordination expert</i></p>
+                </div>
+            </div>
+        </div>
+        
+        <a class="btn" href="https://discord.gg/99uuMvMBX" target="_blank">
+            <i class="fab fa-discord"></i> Join the Clan
+        </a>
+        
+        <footer>
+            <p>© 2026 Blood Esports | Competitive Gaming Redefined</p>
+            <p class="copyright">All rights reserved. Blood Esports is a registered trademark.</p>
+        </footer>
     </div>
-  </div>
 
-  <div class="section">
-    <h2>Leadership</h2>
-    <p><strong>Clan Master:</strong> Choco</p>
-    <p><strong>Clan Manager:</strong> Danny</p>
-  </div>
-
-  <a class="btn" href="https://discord.gg/99uuMvMBX" target="_blank">Join the Clan</a>
-
-  <footer>© 2026 Blood Esports</footer>
-</div>
-
+    <script src="assets/script.js"></script>
 </body>
 </html>
