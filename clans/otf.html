@@ -22,13 +22,14 @@
             align-items: center;
             justify-content: center;
             text-align: center;
-            padding: 2rem;
+            padding: 1rem;
+            overflow-y: auto;
         }
         
         .construction-icon-large {
-            font-size: 6rem;
+            font-size: clamp(3rem, 10vw, 6rem);
             color: var(--gold);
-            margin-bottom: 2rem;
+            margin-bottom: 1.5rem;
             animation: pulse 2s infinite;
         }
         
@@ -39,38 +40,39 @@
         }
         
         .construction-title {
-            font-size: 3.5rem;
+            font-size: clamp(1.8rem, 6vw, 3.5rem);
             color: var(--gold);
-            margin-bottom: 1rem;
+            margin-bottom: 0.8rem;
             text-transform: uppercase;
-            letter-spacing: 3px;
+            letter-spacing: 2px;
         }
         
         .construction-subtitle {
-            font-size: 1.5rem;
+            font-size: clamp(1rem, 3vw, 1.5rem);
             color: var(--red);
-            margin-bottom: 2rem;
+            margin-bottom: 1.5rem;
             font-family: 'Orbitron', sans-serif;
         }
         
         .construction-message {
-            max-width: 600px;
+            max-width: 90%;
             color: #aaa;
-            font-size: 1.1rem;
+            font-size: clamp(0.9rem, 2.5vw, 1.1rem);
             line-height: 1.6;
-            margin-bottom: 3rem;
+            margin-bottom: 2rem;
         }
         
         .construction-progress {
             width: 100%;
             max-width: 500px;
-            margin: 2rem 0;
+            margin: 1.5rem 0;
         }
         
         .progress-label {
             color: var(--gold);
             margin-bottom: 0.5rem;
             font-weight: 600;
+            font-size: clamp(0.9rem, 2vw, 1rem);
         }
         
         .progress-bar-outer {
@@ -95,28 +97,68 @@
         
         .construction-actions {
             display: flex;
-            gap: 1.5rem;
-            margin-top: 2rem;
+            gap: 1rem;
+            margin-top: 1.5rem;
             flex-wrap: wrap;
             justify-content: center;
+            width: 100%;
+            max-width: 800px;
         }
         
-        /* OTF Content Styles (Blurred/Under Construction) */
+        /* Navigation Responsive Styles */
+        .luxury-nav {
+            padding: 0.5rem 1rem;
+        }
+        
+        .diamond-nav {
+            flex-direction: column;
+            padding: 1rem;
+        }
+        
+        .nav-center {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 0.5rem;
+            margin: 1rem 0;
+            width: 100%;
+        }
+        
+        .nav-link {
+            padding: 0.5rem 0.8rem;
+            font-size: 0.9rem;
+            white-space: nowrap;
+        }
+        
+        .nav-left, .nav-right {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            margin: 0.5rem 0;
+        }
+        
+        .logo-display {
+            font-size: clamp(1.2rem, 4vw, 1.8rem);
+        }
+        
+        /* Content Responsive Styles */
         .otf-content {
             filter: blur(5px);
             opacity: 0.3;
             pointer-events: none;
+            padding: 1rem;
+            overflow-x: hidden;
         }
         
         .coming-soon-badge {
-            position: absolute;
-            top: 20px;
-            right: 20px;
+            position: fixed;
+            top: 10px;
+            right: 10px;
             background: linear-gradient(45deg, var(--gold), var(--red));
             color: white;
-            padding: 8px 20px;
+            padding: 6px 15px;
             border-radius: 20px;
-            font-size: 0.9rem;
+            font-size: 0.8rem;
             font-weight: 600;
             z-index: 100;
             animation: bounce 2s infinite;
@@ -127,94 +169,13 @@
             50% { transform: translateY(-5px); }
         }
         
-        .section-coming-soon {
-            position: relative;
-            background: linear-gradient(145deg, rgba(40, 40, 40, 0.3), rgba(20, 20, 20, 0.3));
-            border: 2px dashed rgba(255, 215, 0, 0.3);
-            border-radius: 15px;
-            padding: 2rem;
-            margin-bottom: 2rem;
-            backdrop-filter: blur(5px);
-        }
-        
-        .section-coming-soon h2 {
-            color: rgba(212, 175, 55, 0.5);
-        }
-        
-        .placeholder-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 1.5rem;
-            margin-top: 1.5rem;
-        }
-        
-        .placeholder-card {
-            background: rgba(255, 255, 255, 0.05);
-            border: 2px dashed rgba(255, 215, 0, 0.2);
-            border-radius: 10px;
-            padding: 2rem;
-            text-align: center;
-            position: relative;
-        }
-        
-        .placeholder-icon {
-            font-size: 2.5rem;
-            color: rgba(255, 215, 0, 0.3);
-            margin-bottom: 1rem;
-        }
-        
-        .placeholder-text {
-            color: rgba(170, 170, 170, 0.5);
-            font-size: 0.9rem;
-        }
-        
-        .countdown-timer {
-            background: rgba(255, 215, 0, 0.1);
-            border: 2px solid var(--gold);
-            border-radius: 15px;
-            padding: 2rem;
-            margin: 3rem 0;
+        .team-header {
+            padding: 1.5rem 1rem;
             text-align: center;
         }
         
-        .countdown-title {
-            color: var(--gold);
-            font-size: 1.5rem;
-            margin-bottom: 1.5rem;
-        }
-        
-        .countdown-display {
-            display: flex;
-            justify-content: center;
-            gap: 1.5rem;
-            flex-wrap: wrap;
-        }
-        
-        .countdown-unit {
-            background: var(--black);
-            border: 2px solid var(--gold);
-            border-radius: 10px;
-            padding: 1rem;
-            min-width: 80px;
-        }
-        
-        .countdown-number {
-            font-size: 2.5rem;
-            font-weight: 900;
-            color: var(--gold);
-            line-height: 1;
-        }
-        
-        .countdown-label {
-            color: #aaa;
-            font-size: 0.8rem;
-            margin-top: 0.5rem;
-            text-transform: uppercase;
-        }
-        
-        /* OTF Tag Styles */
         .otf-tag-display {
-            font-size: 4rem;
+            font-size: clamp(2.5rem, 8vw, 4rem);
             font-family: 'SimHei', 'Microsoft YaHei', sans-serif;
             color: var(--gold);
             text-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
@@ -223,28 +184,227 @@
             -webkit-background-clip: text;
             background-clip: text;
             -webkit-text-fill-color: transparent;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
         }
         
-        .otf-meaning {
-            text-align: center;
+        .team-meta {
+            flex-direction: column;
+            gap: 0.8rem;
+            margin-top: 1.5rem;
+        }
+        
+        .meta-item {
+            padding: 0.5rem 1rem;
+            font-size: 0.9rem;
+        }
+        
+        .section-coming-soon {
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            border-radius: 10px;
+        }
+        
+        .placeholder-grid {
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        
+        .placeholder-card {
+            padding: 1.5rem;
+        }
+        
+        .placeholder-icon {
+            font-size: 2rem;
+        }
+        
+        .countdown-timer {
+            padding: 1.5rem;
             margin: 2rem 0;
-            padding: 2rem;
-            background: rgba(255, 215, 0, 0.05);
-            border-radius: 15px;
-            border: 1px solid rgba(255, 215, 0, 0.2);
         }
         
-        .otf-meaning h3 {
-            color: var(--gold);
-            font-size: 1.8rem;
+        .countdown-title {
+            font-size: clamp(1.2rem, 3vw, 1.5rem);
             margin-bottom: 1rem;
         }
         
-        .otf-meaning p {
-            color: #ccc;
-            max-width: 600px;
-            margin: 0 auto;
-            line-height: 1.6;
+        .countdown-display {
+            gap: 0.8rem;
+        }
+        
+        .countdown-unit {
+            padding: 0.8rem;
+            min-width: 70px;
+        }
+        
+        .countdown-number {
+            font-size: clamp(1.8rem, 4vw, 2.5rem);
+        }
+        
+        .countdown-label {
+            font-size: 0.7rem;
+        }
+        
+        .otf-meaning {
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+        }
+        
+        /* Buttons Responsive */
+        .btn-discord, .btn-secondary, .btn-primary {
+            padding: 0.8rem 1.5rem;
+            font-size: 0.9rem;
+            white-space: nowrap;
+        }
+        
+        /* Footer Responsive */
+        .minimal-footer {
+            padding: 1.5rem 1rem;
+            margin-top: 2rem;
+        }
+        
+        .clan-name-footer {
+            font-size: clamp(1rem, 3vw, 1.5rem);
+        }
+        
+        .clan-tag-display {
+            font-size: clamp(1.5rem, 4vw, 2rem);
+            margin: 0.5rem 0;
+        }
+        
+        .copyright {
+            font-size: 0.8rem;
+            padding: 0 1rem;
+        }
+        
+        /* Desktop Styles */
+        @media (min-width: 768px) {
+            .diamond-nav {
+                flex-direction: row;
+                padding: 1rem 2rem;
+            }
+            
+            .nav-center {
+                flex-wrap: nowrap;
+                margin: 0;
+                width: auto;
+            }
+            
+            .nav-left, .nav-right {
+                width: auto;
+                margin: 0;
+            }
+            
+            .nav-link {
+                padding: 0.8rem 1.5rem;
+                font-size: 1rem;
+            }
+            
+            .team-meta {
+                flex-direction: row;
+                gap: 2rem;
+            }
+            
+            .construction-overlay {
+                padding: 2rem;
+            }
+            
+            .coming-soon-badge {
+                position: absolute;
+                top: 20px;
+                right: 20px;
+                padding: 8px 20px;
+                font-size: 0.9rem;
+            }
+            
+            .construction-actions {
+                gap: 1.5rem;
+            }
+            
+            .placeholder-grid {
+                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+                gap: 1.5rem;
+            }
+            
+            .countdown-display {
+                gap: 1.5rem;
+            }
+            
+            .btn-discord, .btn-secondary, .btn-primary {
+                padding: 1rem 2rem;
+                font-size: 1rem;
+            }
+        }
+        
+        @media (min-width: 1024px) {
+            .luxury-nav {
+                padding: 0 2rem;
+            }
+            
+            .otf-content {
+                padding: 2rem;
+            }
+            
+            .construction-message {
+                max-width: 600px;
+            }
+            
+            .team-header {
+                padding: 3rem 2rem;
+            }
+        }
+        
+        /* Tablet Styles */
+        @media (min-width: 600px) and (max-width: 767px) {
+            .nav-center {
+                gap: 0.3rem;
+            }
+            
+            .nav-link {
+                padding: 0.6rem 1rem;
+                font-size: 0.85rem;
+            }
+            
+            .construction-actions {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .btn-discord, .btn-secondary, .btn-primary {
+                width: 100%;
+                max-width: 300px;
+                text-align: center;
+            }
+        }
+        
+        /* Very small mobile devices */
+        @media (max-width: 360px) {
+            .construction-title {
+                font-size: 1.5rem;
+            }
+            
+            .construction-subtitle {
+                font-size: 0.9rem;
+            }
+            
+            .nav-center {
+                gap: 0.2rem;
+            }
+            
+            .nav-link {
+                padding: 0.4rem 0.6rem;
+                font-size: 0.75rem;
+            }
+            
+            .countdown-unit {
+                min-width: 60px;
+                padding: 0.6rem;
+            }
+            
+            .countdown-number {
+                font-size: 1.5rem;
+            }
         }
     </style>
 </head>
@@ -268,7 +428,6 @@
                 <a href="../index.html" class="nav-link">HOME</a>
                 <a href="4kt.html" class="nav-link">4KT CLAN</a>
                 <a href="otf.html" class="nav-link active">OTF CLAN</a>
-                <a href="../teams/4kt-shadow-hunters.html" class="nav-link">SHADOW HUNTERS</a>
             </div>
             <div class="nav-right">
                 <a href="https://discord.gg/99uuMvMBX" target="_blank" class="btn-discord">
@@ -506,6 +665,16 @@
             document.querySelector('.otf-content').style.opacity = '1';
             document.querySelector('.otf-content').style.pointerEvents = 'all';
         }, 10000);
+        
+        // Make navigation responsive
+        window.addEventListener('resize', function() {
+            const nav = document.querySelector('.diamond-nav');
+            if (window.innerWidth < 768) {
+                nav.style.flexDirection = 'column';
+            } else {
+                nav.style.flexDirection = 'row';
+            }
+        });
     </script>
 </body>
 </html>
