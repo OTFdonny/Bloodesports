@@ -7,13 +7,642 @@
     <link rel="stylesheet" href="assets/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Enhanced Homepage Styles */
+        
+        /* Refined Hero Section */
+        .luxury-hero {
+            min-height: 90vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            padding: 4rem 2rem;
+            text-align: center;
+        }
+        
+        .hero-content {
+            max-width: 1200px;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .hero-tag {
+            margin-bottom: 2rem;
+        }
+        
+        .tag-badge {
+            display: inline-block;
+            background: linear-gradient(45deg, var(--gold), var(--red));
+            color: white;
+            padding: 12px 30px;
+            border-radius: 25px;
+            font-size: 1rem;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            animation: glow 2s infinite alternate;
+        }
+        
+        @keyframes glow {
+            0% { box-shadow: 0 0 20px rgba(255, 215, 0, 0.3); }
+            100% { box-shadow: 0 0 40px rgba(255, 0, 0, 0.5); }
+        }
+        
+        .hero-title {
+            font-size: 6rem;
+            font-weight: 900;
+            text-transform: uppercase;
+            margin: 1rem 0;
+            line-height: 1;
+            letter-spacing: 5px;
+        }
+        
+        .text-gold, .text-red {
+            display: inline-block;
+            position: relative;
+            padding: 0 10px;
+        }
+        
+        .text-gold {
+            background: linear-gradient(45deg, var(--gold), var(--gold-dark));
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 50px rgba(255, 215, 0, 0.5);
+            animation: gold-shimmer 3s infinite alternate;
+        }
+        
+        .text-red {
+            background: linear-gradient(45deg, var(--red), #ff6b6b);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 50px rgba(255, 0, 0, 0.5);
+            animation: red-pulse 2s infinite alternate;
+        }
+        
+        @keyframes gold-shimmer {
+            0% { filter: hue-rotate(0deg); }
+            100% { filter: hue-rotate(20deg); }
+        }
+        
+        @keyframes red-pulse {
+            0% { opacity: 0.9; }
+            100% { opacity: 1; }
+        }
+        
+        .hero-subtitle {
+            font-size: 2rem;
+            font-style: italic;
+            color: var(--gold-light);
+            margin: 2rem 0 3rem;
+            font-family: 'Orbitron', sans-serif;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .hero-subtitle::before, .hero-subtitle::after {
+            content: '"';
+            color: var(--red);
+            font-size: 3rem;
+            position: absolute;
+            top: -20px;
+        }
+        
+        .hero-subtitle::before {
+            left: -40px;
+        }
+        
+        .hero-subtitle::after {
+            right: -40px;
+        }
+        
+        /* Refined Stats */
+        .hero-stats {
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            margin: 3rem 0;
+            flex-wrap: wrap;
+        }
+        
+        .stat-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(255, 215, 0, 0.3);
+            border-radius: 20px;
+            padding: 2rem;
+            min-width: 150px;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .stat-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 215, 0, 0.1), transparent);
+            transition: left 0.6s ease;
+        }
+        
+        .stat-card:hover::before {
+            left: 100%;
+        }
+        
+        .stat-card:hover {
+            transform: translateY(-10px) scale(1.05);
+            border-color: var(--gold);
+            box-shadow: 0 20px 40px rgba(255, 215, 0, 0.2);
+        }
+        
+        .stat-number {
+            font-size: 3.5rem;
+            font-weight: 900;
+            color: var(--gold);
+            line-height: 1;
+            background: linear-gradient(45deg, var(--gold), var(--gold-light));
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .stat-label {
+            color: #aaa;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-top: 10px;
+        }
+        
+        /* Refined Navigation */
+        .nav-dropdown {
+            position: relative;
+        }
+        
+        .dropdown-menu {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: rgba(20, 20, 20, 0.95);
+            backdrop-filter: blur(20px);
+            min-width: 250px;
+            border: 2px solid var(--gold);
+            border-radius: 15px;
+            padding: 1rem 0;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(20px);
+            transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            z-index: 1000;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+        }
+        
+        .dropdown-menu::before {
+            content: '';
+            position: absolute;
+            top: -10px;
+            left: 20px;
+            width: 20px;
+            height: 20px;
+            background: var(--gold);
+            transform: rotate(45deg);
+            border-top: 2px solid var(--gold);
+            border-left: 2px solid var(--gold);
+        }
+        
+        .nav-dropdown:hover .dropdown-menu {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+        
+        .dropdown-item {
+            display: block;
+            padding: 1rem 2rem;
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .dropdown-item::before {
+            content: '';
+            position: absolute;
+            left: -100%;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 215, 0, 0.1), transparent);
+            transition: left 0.5s ease;
+        }
+        
+        .dropdown-item:hover::before {
+            left: 100%;
+        }
+        
+        .dropdown-item:hover {
+            background: linear-gradient(90deg, rgba(255, 215, 0, 0.1), transparent);
+            color: var(--gold);
+            padding-left: 2.5rem;
+        }
+        
+        .dropdown-item i {
+            margin-right: 10px;
+            width: 20px;
+            text-align: center;
+        }
+        
+        /* Teams Grid */
+        .teams-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+        
+        .team-card {
+            background: linear-gradient(145deg, rgba(30, 30, 30, 0.9), rgba(15, 15, 15, 0.95));
+            border: 2px solid var(--gold);
+            border-radius: 20px;
+            padding: 2rem;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s ease;
+        }
+        
+        .team-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, transparent 30%, rgba(255, 215, 0, 0.05) 50%, transparent 70%);
+            transform: translateX(-100%);
+            transition: transform 0.6s ease;
+        }
+        
+        .team-card:hover::before {
+            transform: translateX(100%);
+        }
+        
+        .team-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--red);
+            box-shadow: 0 20px 40px rgba(255, 0, 0, 0.2);
+        }
+        
+        .team-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 1.5rem;
+        }
+        
+        .team-clan {
+            background: var(--gold);
+            color: var(--black);
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-weight: 700;
+            font-size: 0.9rem;
+        }
+        
+        .team-status {
+            background: rgba(76, 175, 80, 0.2);
+            color: #4CAF50;
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 0.8rem;
+        }
+        
+        .team-name {
+            font-size: 2rem;
+            font-weight: 900;
+            color: white;
+            margin-bottom: 0.5rem;
+        }
+        
+        .team-tag {
+            color: var(--gold);
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            font-family: 'Orbitron', sans-serif;
+        }
+        
+        .team-desc {
+            color: #aaa;
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+        
+        .team-roster-preview {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .player-tag {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 5px 12px;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            color: var(--gold);
+        }
+        
+        .team-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            padding: 12px 25px;
+            background: linear-gradient(45deg, var(--red), var(--red-dark));
+            border-radius: 25px;
+            transition: all 0.3s ease;
+        }
+        
+        .team-link:hover {
+            transform: translateX(10px);
+            background: linear-gradient(45deg, var(--gold), var(--gold-dark));
+            color: var(--black);
+        }
+        
+        /* About Section */
+        .about-section {
+            background: linear-gradient(45deg, rgba(20, 20, 20, 0.95), rgba(10, 10, 10, 0.98));
+            border-top: 2px solid var(--gold);
+            border-bottom: 2px solid var(--gold);
+            padding: 4rem 2rem;
+            margin: 4rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .about-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 30%, rgba(255, 215, 0, 0.03) 0%, transparent 50%),
+                radial-gradient(circle at 80% 70%, rgba(255, 0, 0, 0.03) 0%, transparent 50%);
+        }
+        
+        .about-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: center;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .about-title {
+            font-size: 3rem;
+            font-weight: 900;
+            color: var(--gold);
+            margin-bottom: 1.5rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+        }
+        
+        .about-subtitle {
+            color: var(--red);
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            font-family: 'Orbitron', sans-serif;
+        }
+        
+        .about-description {
+            color: #ccc;
+            font-size: 1.1rem;
+            line-height: 1.8;
+            max-width: 800px;
+            margin: 0 auto 3rem;
+        }
+        
+        .about-features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+        
+        .feature-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 215, 0, 0.2);
+            border-radius: 15px;
+            padding: 2rem;
+            transition: all 0.3s ease;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--gold);
+            box-shadow: 0 15px 30px rgba(255, 215, 0, 0.1);
+        }
+        
+        .feature-icon {
+            font-size: 2.5rem;
+            color: var(--gold);
+            margin-bottom: 1rem;
+        }
+        
+        .feature-title {
+            color: white;
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+        }
+        
+        .feature-desc {
+            color: #aaa;
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+        
+        /* Refined Footer */
+        .luxury-footer {
+            background: linear-gradient(to bottom, rgba(10, 10, 10, 0.95), rgba(5, 5, 5, 0.98));
+            padding: 3rem 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: center;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .footer-logo {
+            font-size: 2.5rem;
+            font-weight: 900;
+            color: var(--gold);
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        
+        .footer-divider {
+            width: 100px;
+            height: 3px;
+            background: linear-gradient(90deg, var(--gold), var(--red));
+            margin: 2rem auto;
+            border-radius: 2px;
+        }
+        
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+        
+        .social-icon {
+            width: 50px;
+            height: 50px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--gold);
+            font-size: 1.3rem;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .social-icon::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 215, 0, 0.2), transparent);
+            transition: left 0.5s ease;
+        }
+        
+        .social-icon:hover::before {
+            left: 100%;
+        }
+        
+        .social-icon:hover {
+            transform: translateY(-5px) scale(1.1);
+            background: var(--gold);
+            color: var(--black);
+            box-shadow: 0 10px 20px rgba(255, 215, 0, 0.3);
+        }
+        
+        .footer-bottom {
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 215, 0, 0.2);
+        }
+        
+        .copyright {
+            color: #666;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .hero-title {
+                font-size: 4.5rem;
+            }
+            
+            .hero-subtitle {
+                font-size: 1.5rem;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 3.5rem;
+            }
+            
+            .hero-subtitle {
+                font-size: 1.2rem;
+            }
+            
+            .hero-stats {
+                gap: 1.5rem;
+            }
+            
+            .stat-card {
+                min-width: 120px;
+                padding: 1.5rem;
+            }
+            
+            .stat-number {
+                font-size: 2.5rem;
+            }
+            
+            .diamond-nav {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .nav-center {
+                order: 3;
+                width: 100%;
+                justify-content: center;
+                margin-top: 1rem;
+            }
+            
+            .dropdown-menu {
+                left: 50%;
+                transform: translateX(-50%) translateY(20px);
+            }
+            
+            .dropdown-menu::before {
+                left: 50%;
+                margin-left: -10px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .hero-title {
+                font-size: 2.8rem;
+            }
+            
+            .hero-subtitle {
+                font-size: 1rem;
+            }
+            
+            .hero-stats {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .stat-card {
+                width: 100%;
+                max-width: 200px;
+            }
+        }
+    </style>
 </head>
 <body>
     <!-- Animated Background -->
     <div class="luxury-bg">
         <div class="gold-particle" id="particles"></div>
-        <div class="red-glow"></div>
-        <div class="black-marble"></div>
     </div>
     
     <!-- Premium Navigation -->
@@ -32,32 +661,39 @@
                 </a>
                 <div class="nav-dropdown">
                     <a href="#" class="nav-link">
-                        <i class="fas fa-crown"></i> CLANS <i class="fas fa-chevron-down"></i>
+                        <i class="fas fa-crown"></i> CLANS
                     </a>
                     <div class="dropdown-menu">
-                        <a href="clans/4kt.html" class="dropdown-item">4KT | 四国王</a>
-                        <a href="clans/otf.html" class="dropdown-item">OTF | 只有家人</a>
+                        <a href="clans/4kt.html" class="dropdown-item">
+                            <i class="fas fa-chess-king"></i> 4KT | 4KTREY BLOODS
+                        </a>
+                        <a href="clans/otf.html" class="dropdown-item">
+                            <i class="fas fa-users"></i> OTF | ONLY THE FAMILY
+                        </a>
                     </div>
                 </div>
                 <div class="nav-dropdown">
                     <a href="#" class="nav-link">
-                        <i class="fas fa-crosshairs"></i> TEAMS <i class="fas fa-chevron-down"></i>
+                        <i class="fas fa-crosshairs"></i> TEAMS
                     </a>
                     <div class="dropdown-menu">
-                        <a href="teams/4kt-shadow-hunters.html" class="dropdown-item">Shadow Hunters</a>
-                        <a href="teams/4kt-storm-troopers.html" class="dropdown-item">Storm Troopers</a>
-                        <a href="teams/4kt-ladybugs.html" class="dropdown-item">Ladybugs</a>
-                        <a href="teams/otf-bloodhounds.html" class="dropdown-item">Blood Hounds</a>
+                        <div class="dropdown-header">4KT CLAN</div>
+                        <a href="teams/4kt-shadow-hunters.html" class="dropdown-item">
+                            <i class="fas fa-crosshairs"></i> Shadow Hunters
+                        </a>
+                        <a href="teams/4kt-storm-troopers.html" class="dropdown-item">
+                            <i class="fas fa-bolt"></i> Storm Troopers
+                        </a>
+                        <a href="teams/4kt-ladybugs.html" class="dropdown-item">
+                            <i class="fas fa-heart"></i> Ladybugs
+                        </a>
+                        <div class="dropdown-divider"></div>
+                        <div class="dropdown-header">OTF CLAN</div>
+                        <a href="teams/otf-bloodhounds.html" class="dropdown-item">
+                            <i class="fas fa-dog"></i> Blood Hounds
+                        </a>
                     </div>
                 </div>
-                <a href="#" class="nav-link">
-                    <i class="fas fa-trophy"></i> TOURNAMENTS
-                </a>
-            </div>
-            <div class="nav-right">
-                <a href="https://discord.gg/99uuMvMBX" target="_blank" class="discord-btn">
-                    <i class="fab fa-discord"></i> JOIN DISCORD
-                </a>
             </div>
         </div>
     </nav>
@@ -66,22 +702,20 @@
     <section class="luxury-hero">
         <div class="hero-content">
             <div class="hero-tag">
-                <span class="tag-badge">ELITE CODM ESPORTS</span>
+                <span class="tag-badge">AFRICA'S PREMIER CODM ORGANIZATION</span>
             </div>
             <h1 class="hero-title">
                 <span class="text-gold">BLOOD</span>
                 <span class="text-red">ESPORTS</span>
             </h1>
             <p class="hero-subtitle">
-                <i class="fas fa-quote-left"></i>
                 IT'S A PARADE INSIDE MY CITY YEAHHH
-                <i class="fas fa-quote-right"></i>
             </p>
             
             <div class="hero-stats">
                 <div class="stat-card">
                     <div class="stat-number">#1</div>
-                    <div class="stat-label">AFRICAN CODM TEAM</div>
+                    <div class="stat-label">AFRICAN CODM</div>
                 </div>
                 <div class="stat-card">
                     <div class="stat-number">50+</div>
@@ -91,25 +725,10 @@
                     <div class="stat-number">4</div>
                     <div class="stat-label">COMPETITIVE TEAMS</div>
                 </div>
-            </div>
-            
-            <div class="hero-actions">
-                <a href="#clans" class="btn-gold">
-                    <i class="fas fa-crown"></i> EXPLORE CLANS
-                </a>
-                <a href="https://discord.gg/99uuMvMBX" target="_blank" class="btn-red">
-                    <i class="fab fa-discord"></i> JOIN NOW
-                </a>
-            </div>
-        </div>
-        
-        <div class="hero-visual">
-            <div class="codm-badge">
-                <img src="assets/images/codm-icon.png" alt="CODM" class="codm-icon">
-                <span>CALL OF DUTY: MOBILE</span>
-            </div>
-            <div class="weapon-display">
-                <div class="weapon gold-ak47"></div>
+                <div class="stat-card">
+                    <div class="stat-number">2022</div>
+                    <div class="stat-label">ESTABLISHED</div>
+                </div>
             </div>
         </div>
     </section>
@@ -131,8 +750,8 @@
                     <div class="badge-glow"></div>
                 </div>
                 <div class="clan-info">
-                    <h3 class="clan-name">4KT | FOUR KINGS TOURNAMENT</h3>
-                    <p class="clan-desc">Elite competitive division. The kings of CODM battlefield.</p>
+                    <h3 class="clan-name">4KT | 4KTREY BLOODS</h3>
+                    <p class="clan-desc">Elite competitive division. Home to Africa's most skilled CODM players.</p>
                     <div class="clan-teams">
                         <span class="team-badge">SHADOW HUNTERS</span>
                         <span class="team-badge">STORM TROOPERS</span>
@@ -151,7 +770,7 @@
                 </div>
                 <div class="clan-info">
                     <h3 class="clan-name">OTF | ONLY THE FAMILY</h3>
-                    <p class="clan-desc">Strategic operations & development. The heart of Blood Esports.</p>
+                    <p class="clan-desc">Community, development & strategy division. Building the future of Blood Esports.</p>
                     <div class="clan-teams">
                         <span class="team-badge">BLOOD HOUNDS</span>
                     </div>
@@ -174,106 +793,121 @@
         </div>
         
         <div class="teams-grid">
-            <div class="team-card featured-team">
+            <div class="team-card">
                 <div class="team-header">
                     <span class="team-clan">4KT</span>
-                    <span class="team-status active">ACTIVE</span>
+                    <span class="team-status active">TIER 1</span>
                 </div>
                 <div class="team-content">
                     <h3 class="team-name">SHADOW HUNTERS</h3>
                     <p class="team-tag">4零丨</p>
-                    <p class="team-desc">Premier competitive team. Masters of tactical gameplay.</p>
+                    <p class="team-desc">Premier competitive team with multiple Tier 1 championship victories.</p>
                     <div class="team-roster-preview">
                         <span class="player-tag">4零丨Mazi</span>
                         <span class="player-tag">4零丨Choco</span>
-                        <span class="player-tag">+5 more</span>
+                        <span class="player-tag">4零丨Virus</span>
                     </div>
                 </div>
                 <a href="teams/4kt-shadow-hunters.html" class="team-link">
                     VIEW ROSTER <i class="fas fa-crosshairs"></i>
                 </a>
-                <div class="team-glow"></div>
             </div>
             
-            <!-- Other teams similarly styled -->
-        </div>
-    </section>
-    
-    <!-- Leadership -->
-    <section class="section-luxury">
-        <div class="section-header">
-            <h2 class="section-title">
-                <span class="title-gold">CLAN</span>
-                <span class="title-red">LEADERSHIP</span>
-            </h2>
-            <p class="section-subtitle">VISIONARIES OF VICTORY</p>
-        </div>
-        
-        <div class="leadership-cards">
-            <div class="leader-card diamond-card">
-                <div class="leader-rank">
-                    <i class="fas fa-crown"></i>
-                    <span>CLAN MASTER</span>
+            <div class="team-card">
+                <div class="team-header">
+                    <span class="team-clan">4KT</span>
+                    <span class="team-status">TIER 2</span>
                 </div>
-                <div class="leader-avatar">
-                    <div class="avatar-frame"></div>
-                    <span class="leader-name">CHOCO</span>
-                </div>
-                <div class="leader-info">
-                    <p class="leader-title">FOUNDER & STRATEGIC LEADER</p>
-                    <p class="leader-desc">Architect of Blood Esports. Master strategist and visionary.</p>
-                    <div class="leader-stats">
-                        <div class="leader-stat">
-                            <span class="stat-value">1000+</span>
-                            <span class="stat-label">WINS</span>
-                        </div>
-                        <div class="leader-stat">
-                            <span class="stat-value">#1</span>
-                            <span class="stat-label">RANK</span>
-                        </div>
+                <div class="team-content">
+                    <h3 class="team-name">STORM TROOPERS</h3>
+                    <p class="team-tag">4零丨</p>
+                    <p class="team-desc">Aggressive playstyle specialists known for overwhelming opponents.</p>
+                    <div class="team-roster-preview">
+                        <span class="player-tag">Coming</span>
+                        <span class="player-tag">Soon</span>
                     </div>
                 </div>
+                <a href="teams/4kt-storm-troopers.html" class="team-link">
+                    VIEW TEAM <i class="fas fa-bolt"></i>
+                </a>
             </div>
             
-            <div class="leader-card diamond-card">
-                <div class="leader-rank">
-                    <i class="fas fa-chess-king"></i>
-                    <span>CLAN MANAGER</span>
+            <div class="team-card">
+                <div class="team-header">
+                    <span class="team-clan">4KT</span>
+                    <span class="team-status all-female">ALL-FEMALE</span>
                 </div>
-                <div class="leader-avatar">
-                    <div class="avatar-frame"></div>
-                    <span class="leader-name">DANNY</span>
-                </div>
-                <div class="leader-info">
-                    <p class="leader-title">OPERATIONS DIRECTOR</p>
-                    <p class="leader-desc">Master of logistics and team coordination. The backbone of operations.</p>
-                    <div class="leader-stats">
-                        <div class="leader-stat">
-                            <span class="stat-value">50+</span>
-                            <span class="stat-label">EVENTS</span>
-                        </div>
-                        <div class="leader-stat">
-                            <span class="stat-value">4</span>
-                            <span class="stat-label">TEAMS</span>
-                        </div>
+                <div class="team-content">
+                    <h3 class="team-name">LADYBUGS</h3>
+                    <p class="team-tag">4零丨</p>
+                    <p class="team-desc">Proving that skill knows no gender. Elite female competitors.</p>
+                    <div class="team-roster-preview">
+                        <span class="player-tag">Forming</span>
+                        <span class="player-tag">Soon</span>
                     </div>
                 </div>
+                <a href="teams/4kt-ladybugs.html" class="team-link">
+                    VIEW TEAM <i class="fas fa-heart"></i>
+                </a>
+            </div>
+            
+            <div class="team-card">
+                <div class="team-header">
+                    <span class="team-clan">OTF</span>
+                    <span class="team-status development">DEVELOPMENT</span>
+                </div>
+                <div class="team-content">
+                    <h3 class="team-name">BLOOD HOUNDS</h3>
+                    <p class="team-tag">T零丨</p>
+                    <p class="team-desc">Development team focused on nurturing new talent and strategies.</p>
+                    <div class="team-roster-preview">
+                        <span class="player-tag">In</span>
+                        <span class="player-tag">Development</span>
+                    </div>
+                </div>
+                <a href="teams/otf-bloodhounds.html" class="team-link">
+                    VIEW TEAM <i class="fas fa-dog"></i>
+                </a>
             </div>
         </div>
     </section>
     
-    <!-- CTA Section -->
-    <section class="cta-luxury">
-        <div class="cta-content">
-            <h2 class="cta-title">READY FOR BATTLE?</h2>
-            <p class="cta-subtitle">Join Africa's most elite CODM organization</p>
-            <div class="cta-buttons">
-                <a href="https://discord.gg/99uuMvMBX" target="_blank" class="cta-btn diamond-btn">
-                    <i class="fab fa-discord"></i> JOIN DISCORD
-                </a>
-                <a href="#clans" class="cta-btn gold-btn">
-                    <i class="fas fa-crown"></i> VIEW TEAMS
-                </a>
+    <!-- About Section -->
+    <section class="about-section">
+        <div class="about-content">
+            <h2 class="about-title">ABOUT BLOOD ESPORTS</h2>
+            <p class="about-subtitle">REVOLUTIONIZING AFRICAN CODM ESPORTS</p>
+            <p class="about-description">
+                Blood Esports stands as Africa's premier Call of Duty Mobile organization, 
+                founded in 2022 with a vision to elevate competitive gaming across the continent. 
+                We combine elite skill development with strategic innovation to dominate 
+                tournaments and shape the future of mobile esports.
+            </p>
+            
+            <div class="about-features">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-trophy"></i>
+                    </div>
+                    <h3 class="feature-title">Competitive Excellence</h3>
+                    <p class="feature-desc">Multiple Tier 1 tournament victories and consistent top placements in African circuits.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <h3 class="feature-title">Community Focus</h3>
+                    <p class="feature-desc">Building a sustainable ecosystem through OTF that nurtures talent and grows the community.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3 class="feature-title">Strategic Innovation</h3>
+                    <p class="feature-desc">Pioneering new strategies and meta-game approaches that redefine competitive play.</p>
+                </div>
             </div>
         </div>
     </section>
@@ -281,39 +915,80 @@
     <!-- Luxury Footer -->
     <footer class="luxury-footer">
         <div class="footer-content">
-            <div class="footer-brand">
-                <div class="footer-logo">BLOOD ESPORTS</div>
-                <p class="footer-tag">ELITE CODM COMPETITION</p>
-                <div class="social-links">
-                    <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
-                    <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
-                    <a href="#" class="social-icon"><i class="fab fa-youtube"></i></a>
-                    <a href="https://discord.gg/99uuMvMBX" class="social-icon"><i class="fab fa-discord"></i></a>
-                </div>
+            <div class="footer-logo">BLOOD ESPORTS</div>
+            
+            <div class="social-links">
+                <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+                <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+                <a href="#" class="social-icon"><i class="fab fa-youtube"></i></a>
+                <a href="https://discord.gg/99uuMvMBX" target="_blank" class="social-icon"><i class="fab fa-discord"></i></a>
             </div>
             
-            <div class="footer-links">
-                <div class="link-group">
-                    <h4>CLANS</h4>
-                    <a href="clans/4kt.html">4KT | 四国王</a>
-                    <a href="clans/otf.html">OTF | 只有家人</a>
-                </div>
-                <div class="link-group">
-                    <h4>TEAMS</h4>
-                    <a href="teams/4kt-shadow-hunters.html">Shadow Hunters</a>
-                    <a href="teams/4kt-storm-troopers.html">Storm Troopers</a>
-                    <a href="teams/4kt-ladybugs.html">Ladybugs</a>
-                    <a href="teams/otf-bloodhounds.html">Blood Hounds</a>
-                </div>
+            <div class="footer-divider"></div>
+            
+            <div class="footer-bottom">
+                <p class="copyright">ALL RIGHTS RESERVED BLOOD ESPORTS 2026</p>
             </div>
-        </div>
-        
-        <div class="footer-bottom">
-            <p class="copyright">© 2026 BLOOD ESPORTS | CALL OF DUTY MOBILE ELITE</p>
-            <p class="copyright">ALL RIGHTS RESERVED | DESIGNED WITH <i class="fas fa-heart" style="color: #ff0000;"></i> FOR CODM</p>
         </div>
     </footer>
     
     <script src="assets/script.js"></script>
+    <script>
+        // Enhanced hover effects for cards
+        document.addEventListener('DOMContentLoaded', function() {
+            // Team card hover effects
+            const teamCards = document.querySelectorAll('.team-card');
+            teamCards.forEach(card => {
+                card.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-15px)';
+                    this.style.boxShadow = '0 30px 60px rgba(255, 0, 0, 0.3)';
+                });
+                
+                card.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(0)';
+                    this.style.boxShadow = 'none';
+                });
+            });
+            
+            // Clan card hover effects
+            const clanCards = document.querySelectorAll('.clan-card');
+            clanCards.forEach(card => {
+                card.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-10px) scale(1.02)';
+                });
+                
+                card.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(0) scale(1)';
+                });
+            });
+            
+            // Stat card counter animation
+            const statNumbers = document.querySelectorAll('.stat-number');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const element = entry.target;
+                        const finalValue = parseInt(element.textContent);
+                        let currentValue = 0;
+                        
+                        const increment = finalValue / 30;
+                        const timer = setInterval(() => {
+                            currentValue += increment;
+                            if (currentValue >= finalValue) {
+                                element.textContent = finalValue + (element.textContent.includes('+') ? '+' : '');
+                                clearInterval(timer);
+                            } else {
+                                element.textContent = Math.floor(currentValue);
+                            }
+                        }, 50);
+                        
+                        observer.unobserve(element);
+                    }
+                });
+            }, { threshold: 0.5 });
+            
+            statNumbers.forEach(stat => observer.observe(stat));
+        });
+    </script>
 </body>
 </html>
