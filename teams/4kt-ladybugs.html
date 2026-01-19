@@ -331,6 +331,83 @@
             margin-bottom: 1rem;
         }
 
+        /* Trophy Tier Badges */
+        .tier-badge {
+            display: inline-block;
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            letter-spacing: 1px;
+        }
+
+        .tier-2 {
+            background: linear-gradient(45deg, var(--red), var(--red-dark));
+            color: white;
+            border: 2px solid var(--gold);
+        }
+
+        .tier-blood {
+            background: linear-gradient(45deg, #8B0000, #FF0000);
+            color: white;
+            border: 2px solid var(--gold);
+        }
+
+        .tier-ogr {
+            background: linear-gradient(45deg, #4169E1, #00008B);
+            color: white;
+            border: 2px solid var(--gold);
+        }
+
+        /* Achievement List */
+        .achievement-list {
+            list-style: none;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .achievement-item {
+            background: rgba(255, 255, 255, 0.05);
+            border-left: 4px solid var(--pink);
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            border-radius: 8px;
+            text-align: left;
+            transition: all 0.3s ease;
+        }
+
+        .achievement-item:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateX(10px);
+        }
+
+        .achievement-item-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.5rem;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .achievement-item-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: white;
+        }
+
+        .achievement-item-tournament {
+            color: var(--pink-light);
+            font-weight: 500;
+        }
+
+        .achievement-item-desc {
+            color: #ccc;
+            font-size: 1rem;
+            line-height: 1.5;
+        }
+
         /* Stats Grid */
         .stats-grid {
             display: grid;
@@ -385,38 +462,6 @@
             font-size: 1rem;
             text-transform: uppercase;
             letter-spacing: 1px;
-        }
-
-        /* OGR Rankings Highlight */
-        .ogr-highlight {
-            background: linear-gradient(45deg, rgba(255, 215, 0, 0.1), rgba(255, 105, 180, 0.1));
-            border: 2px solid var(--gold);
-            border-radius: 15px;
-            padding: 2.5rem;
-            margin: 3rem 0;
-            text-align: center;
-        }
-
-        .ogr-title {
-            font-size: 2rem;
-            color: var(--gold);
-            margin-bottom: 1rem;
-            text-transform: uppercase;
-        }
-
-        .ogr-subtitle {
-            font-size: 1.5rem;
-            color: var(--pink);
-            margin-bottom: 1.5rem;
-            font-weight: 600;
-        }
-
-        .ogr-description {
-            color: #ccc;
-            font-size: 1.1rem;
-            line-height: 1.6;
-            max-width: 800px;
-            margin: 0 auto;
         }
 
         /* Coming Soon Section */
@@ -619,10 +664,6 @@
                 font-size: 1.1rem;
             }
             
-            .ogr-title {
-                font-size: 1.5rem;
-            }
-            
             .coming-soon-title {
                 font-size: 1.8rem;
             }
@@ -703,7 +744,7 @@
                 </div>
                 <div class="meta-item">
                     <i class="fas fa-trophy"></i>
-                    <span>OGR RANKED</span>
+                    <span>3+ TOURNAMENT WINS</span>
                 </div>
             </div>
         </header>
@@ -714,29 +755,59 @@
             <div class="team-description">
                 <p>The 4KT Ladybugs represent the pinnacle of female excellence in African Call of Duty Mobile esports. As the premier all-female team under the 4KTrey Bloods banner, we're not just playing the game – we're shattering stereotypes and redefining what's possible for women in competitive gaming.</p>
                 <p>Our mission is to create a platform where female gamers can showcase their skills at the highest level, compete in major tournaments, and inspire the next generation of female esports athletes. We believe in skill, strategy, and sisterhood.</p>
-                <p>With multiple OGR (Onward Female Gaming Rankings) achievements under our belt, the Ladybugs have established themselves as a force to be reckoned with in the competitive scene.</p>
+                <p>With multiple tournament achievements including OGR (Onward Female Gaming Rankings) and BER (Blood Esports Rankings) victories, the Ladybugs have established themselves as a dominant force in the competitive scene.</p>
             </div>
         </section>
         
-        <!-- OGR Rankings Highlight -->
-        <section class="ogr-highlight">
-            <h2 class="ogr-title">OGR ACHIEVEMENTS</h2>
-            <h3 class="ogr-subtitle">2x Onward Female Gaming Rankings</h3>
-            <p class="ogr-description">
-                The Ladybugs have been officially ranked in the prestigious Onward Female Gaming Rankings (OGR) not once, but twice – a testament to our consistent performance and dominance in female CODM esports. This recognition places us among the elite female teams in Africa.
-            </p>
+        <!-- Major Achievements -->
+        <section class="achievements-section">
+            <h2 class="achievements-title">CHAMPIONSHIP ACHIEVEMENTS</h2>
+            <p class="achievements-subtitle">Proving excellence across multiple tournaments</p>
+            
+            <div class="achievement-list">
+                <!-- Achievement 1 -->
+                <div class="achievement-item">
+                    <div class="achievement-item-header">
+                        <div class="achievement-item-title">2x OGR RANKED</div>
+                        <div class="achievement-item-tournament">
+                            <span class="tier-badge tier-ogr">OGR TIER 2</span> Onward Female Gaming Rankings
+                        </div>
+                    </div>
+                    <p class="achievement-item-desc">
+                        Consistently ranked among Africa's top female CODM teams in the prestigious Onward Female Gaming Rankings, demonstrating sustained competitive excellence across two separate ranking periods.
+                    </p>
+                </div>
+                
+                <!-- Achievement 2 - NEW BER ACHIEVEMENT -->
+                <div class="achievement-item">
+                    <div class="achievement-item-header">
+                        <div class="achievement-item-title">TIER 2 CHAMPIONS</div>
+                        <div class="achievement-item-tournament">
+                            <span class="tier-badge tier-blood">BER TIER 2</span> Blood Esports Rankings
+                        </div>
+                    </div>
+                    <p class="achievement-item-desc">
+                        Crowned champions in the Blood Esports Rankings Tier 2 tournament, proving our dominance within our own organization's competitive ecosystem and securing our place among the elite.
+                    </p>
+                </div>
+            </div>
         </section>
         
-        <!-- Main Achievements -->
-        <section class="achievements-section">
-            <h2 class="achievements-title">MAJOR ACHIEVEMENTS</h2>
-            <p class="achievements-subtitle">Proving excellence through results</p>
-            
+        <!-- Achievement Cards -->
+        <div class="achievements-showcase">
             <div class="achievement-badge-large">
                 <div class="achievement-title">2x OGR RANKED</div>
                 <div class="achievement-subtitle">Onward Female Gaming Rankings</div>
                 <p class="achievement-desc">
                     Consistently ranked among Africa's top female CODM teams in the prestigious Onward Female Gaming Rankings, demonstrating sustained competitive excellence.
+                </p>
+            </div>
+            
+            <div class="achievement-badge-large">
+                <div class="achievement-title">BER TIER 2 CHAMPIONS</div>
+                <div class="achievement-subtitle">Blood Esports Rankings</div>
+                <p class="achievement-desc">
+                    Victories in our organization's own competitive rankings tournament at Tier 2 level, showcasing our skill against top female competitors in the Blood Esports ecosystem.
                 </p>
             </div>
             
@@ -747,15 +818,7 @@
                     Regular competitors in major female-only tournaments across Africa, consistently placing in top positions and earning respect throughout the community.
                 </p>
             </div>
-            
-            <div class="achievement-badge-large">
-                <div class="achievement-title">TRAILBLAZERS</div>
-                <div class="achievement-subtitle">Pioneers in Female Esports</div>
-                <p class="achievement-desc">
-                    Setting new standards for female competitive gaming in Africa and inspiring countless other women to pursue esports at a professional level.
-                </p>
-            </div>
-        </section>
+        </div>
         
         <!-- Stats Section -->
         <section class="section-luxury">
@@ -767,6 +830,14 @@
                     </div>
                     <div class="stat-number">2x</div>
                     <div class="stat-label">OGR Rankings</div>
+                </div>
+                
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-crown"></i>
+                    </div>
+                    <div class="stat-number">1x</div>
+                    <div class="stat-label">BER Tier 2 Winners</div>
                 </div>
                 
                 <div class="stat-card">
@@ -799,14 +870,6 @@
                     </div>
                     <div class="stat-number">7</div>
                     <div class="stat-label">Team Members</div>
-                </div>
-                
-                <div class="stat-card">
-                    <div class="stat-icon">
-                        <i class="fas fa-calendar-alt"></i>
-                    </div>
-                    <div class="stat-number">10+</div>
-                    <div class="stat-label">Tournaments</div>
                 </div>
             </div>
         </section>
@@ -856,7 +919,7 @@
                 </div>
                 
                 <p style="margin-bottom: 2rem;">
-                    Tryouts are held monthly through our Discord server. Show us your skills and become part of Africa's premier female esports team.
+                    With our proven track record in OGR and BER tournaments, joining the Ladybugs means becoming part of a championship-winning team. Tryouts are held monthly through our Discord server.
                 </p>
                 
                 <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
@@ -874,7 +937,7 @@
         <footer class="minimal-footer">
             <div class="clan-name-footer">4KT LADYBUGS</div>
             <div class="clan-tag-display">4零丨</div>
-            <p class="copyright">© 2026 BLOOD ESPORTS | 2x OGR RANKED | REDEFINING FEMALE ESPORTS</p>
+            <p class="copyright">© 2026 BLOOD ESPORTS | 2x OGR RANKED | BER TIER 2 CHAMPIONS</p>
         </footer>
     </div>
     
