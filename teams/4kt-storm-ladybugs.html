@@ -8,14 +8,208 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet">
     <style>
-        /* Ladybugs Under Construction Styles */
-        .ladybugs-construction-overlay {
+        :root {
+            --gold: #FFD700;
+            --gold-light: #FFF8DC;
+            --gold-dark: #D4AF37;
+            --red: #FF0000;
+            --red-dark: #8B0000;
+            --pink: #FF69B4;
+            --pink-dark: #C71585;
+            --black: #0A0A0A;
+            --black-matte: #1A1A1A;
+            --gray-diamond: #2A2A2A;
+        }
+
+        /* Reset and Base */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Montserrat', 'Orbitron', sans-serif;
+        }
+
+        body {
+            background-color: var(--black);
+            color: white;
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+
+        /* Animated Background */
+        .luxury-bg {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(45deg, rgba(20, 10, 20, 0.98), rgba(30, 15, 30, 0.95));
+            z-index: -2;
+            background: 
+                radial-gradient(circle at 20% 30%, rgba(255, 215, 0, 0.03) 0%, transparent 50%),
+                radial-gradient(circle at 80% 70%, rgba(255, 105, 180, 0.03) 0%, transparent 50%),
+                linear-gradient(45deg, var(--black) 0%, var(--black-matte) 100%);
+        }
+
+        .gold-particle {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                radial-gradient(2px 2px at 20% 30%, var(--gold) 50%, transparent 100%),
+                radial-gradient(2px 2px at 40% 70%, var(--pink) 50%, transparent 100%),
+                radial-gradient(2px 2px at 60% 20%, var(--gold) 50%, transparent 100%);
+            animation: float 20s infinite linear;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0) rotate(0deg); }
+            100% { transform: translateY(-1000px) rotate(360deg); }
+        }
+
+        /* Navigation */
+        .luxury-nav {
+            background: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 2px solid var(--pink);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        }
+
+        .diamond-nav {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .logo-display {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.8rem;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .logo-gold {
+            color: var(--gold);
+            text-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
+        }
+
+        .logo-red {
+            color: var(--pink);
+            text-shadow: 0 0 20px rgba(255, 105, 180, 0.5);
+        }
+
+        .logo-badge {
+            background: var(--pink);
+            color: white;
+            font-size: 0.7rem;
+            padding: 3px 8px;
+            border-radius: 4px;
+            margin-left: 10px;
+            font-weight: bold;
+        }
+
+        .nav-center {
+            display: flex;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .nav-link {
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            padding: 10px 15px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .nav-link:hover, .nav-link.active {
+            background: linear-gradient(45deg, rgba(255, 215, 0, 0.1), rgba(255, 105, 180, 0.1));
+            color: var(--pink);
+            box-shadow: 0 5px 15px rgba(255, 105, 180, 0.2);
+        }
+
+        .nav-dropdown {
+            position: relative;
+        }
+
+        .dropdown-menu {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: rgba(26, 26, 26, 0.95);
+            backdrop-filter: blur(20px);
+            min-width: 200px;
+            border: 2px solid var(--pink);
+            border-radius: 15px;
+            padding: 10px 0;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(10px);
+            transition: all 0.3s ease;
+            z-index: 1000;
+        }
+
+        .nav-dropdown:hover .dropdown-menu {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .dropdown-item {
+            display: block;
+            padding: 10px 20px;
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .dropdown-item:hover {
+            background: linear-gradient(90deg, rgba(255, 105, 180, 0.2), transparent);
+            color: var(--pink);
+            padding-left: 25px;
+        }
+
+        .btn-discord {
+            background: linear-gradient(45deg, #5865F2, #7289DA);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .btn-discord:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(88, 101, 242, 0.5);
+        }
+
+        /* Under Construction Overlay */
+        .construction-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(10, 10, 10, 0.98);
             z-index: 999;
             display: flex;
             flex-direction: column;
@@ -24,143 +218,223 @@
             text-align: center;
             padding: 2rem;
         }
-        
-        .ladybugs-icon-large {
+
+        .construction-icon {
             font-size: 6rem;
-            color: #FF69B4;
+            color: var(--pink);
             margin-bottom: 2rem;
-            animation: ladybugs-pulse 2s infinite alternate;
+            animation: pulse 2s infinite;
         }
-        
-        @keyframes ladybugs-pulse {
-            0% { transform: scale(1); color: #FF69B4; }
-            50% { transform: scale(1.05); color: #C71585; }
-            100% { transform: scale(1); color: #FF69B4; }
+
+        @keyframes pulse {
+            0% { transform: scale(1); opacity: 0.7; }
+            50% { transform: scale(1.1); opacity: 1; }
+            100% { transform: scale(1); opacity: 0.7; }
         }
-        
-        .ladybugs-title {
+
+        .construction-title {
             font-size: 3.5rem;
-            color: #FF69B4;
+            color: var(--pink);
             margin-bottom: 1rem;
             text-transform: uppercase;
             letter-spacing: 3px;
-            text-shadow: 0 0 20px rgba(255, 105, 180, 0.5);
         }
-        
-        .ladybugs-subtitle {
+
+        .construction-subtitle {
             font-size: 1.8rem;
             color: var(--gold);
             margin-bottom: 2rem;
             font-family: 'Orbitron', sans-serif;
         }
-        
-        .ladybugs-message {
+
+        .construction-message {
             max-width: 600px;
             color: #aaa;
             font-size: 1.1rem;
             line-height: 1.6;
             margin-bottom: 3rem;
         }
-        
-        .ladybugs-progress {
+
+        .construction-progress {
             width: 100%;
             max-width: 500px;
             margin: 2rem 0;
         }
-        
-        .ladybugs-progress-label {
-            color: #FF69B4;
+
+        .progress-label {
+            color: var(--pink);
             margin-bottom: 0.5rem;
             font-weight: 600;
         }
-        
-        .ladybugs-progress-bar-outer {
+
+        .progress-bar-outer {
             height: 10px;
             background: rgba(255, 255, 255, 0.1);
             border-radius: 5px;
             overflow: hidden;
         }
-        
-        .ladybugs-progress-bar-inner {
+
+        .progress-bar-inner {
             height: 100%;
-            background: linear-gradient(90deg, #FF69B4, #C71585);
+            background: linear-gradient(90deg, var(--pink), var(--pink-dark));
             border-radius: 5px;
             width: 55%;
-            animation: ladybugs-progress-load 3s ease-out;
+            animation: progress-load 3s ease-out;
         }
-        
-        @keyframes ladybugs-progress-load {
+
+        @keyframes progress-load {
             0% { width: 0%; }
             100% { width: 55%; }
         }
-        
-        .ladybugs-actions {
+
+        .construction-actions {
             display: flex;
             gap: 1.5rem;
             margin-top: 2rem;
             flex-wrap: wrap;
             justify-content: center;
         }
-        
-        /* Ladybugs Content (Blurred/Under Construction) */
-        .ladybugs-content {
-            filter: blur(5px);
-            opacity: 0.3;
-            pointer-events: none;
+
+        /* Content Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+            position: relative;
+            z-index: 1;
         }
-        
-        .ladybugs-coming-soon-badge {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            background: linear-gradient(45deg, #FF69B4, #C71585);
-            color: white;
-            padding: 8px 20px;
-            border-radius: 20px;
-            font-size: 0.9rem;
+
+        /* Buttons */
+        .btn-primary, .btn-secondary {
+            padding: 15px 30px;
+            border-radius: 10px;
+            text-decoration: none;
             font-weight: 600;
-            z-index: 100;
-            animation: ladybugs-bounce 2s infinite;
+            font-size: 1rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border: none;
+            cursor: pointer;
         }
-        
-        @keyframes ladybugs-bounce {
-            0%, 100% { transform: translateY(0) rotate(0deg); }
-            50% { transform: translateY(-5px) rotate(5deg); }
+
+        .btn-primary {
+            background: linear-gradient(45deg, var(--pink), var(--pink-dark));
+            color: white;
         }
-        
+
+        .btn-secondary {
+            background: linear-gradient(45deg, var(--gold), var(--gold-dark));
+            color: var(--black);
+        }
+
+        .btn-primary:hover, .btn-secondary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Team Header */
+        .team-header {
+            text-align: center;
+            padding: 3rem 0;
+            position: relative;
+        }
+
+        .team-badge-large {
+            font-size: 4rem;
+            color: var(--pink);
+            margin-bottom: 1rem;
+        }
+
+        .team-title {
+            font-size: 3.5rem;
+            font-weight: 900;
+            text-transform: uppercase;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(45deg, var(--pink), var(--pink-dark));
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .team-tagline {
+            font-size: 1.5rem;
+            color: var(--gold);
+            font-style: italic;
+            margin-bottom: 1rem;
+        }
+
+        .clan-motto {
+            font-size: 1.2rem;
+            color: #aaa;
+            margin-bottom: 2rem;
+        }
+
+        .team-meta {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .meta-item {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 10px 20px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        /* Team Info */
         .ladybugs-team-info {
             background: linear-gradient(45deg, rgba(255, 105, 180, 0.05), rgba(199, 21, 133, 0.05));
-            border: 2px solid #FF69B4;
+            border: 2px solid var(--pink);
             border-radius: 20px;
             padding: 2.5rem;
             margin: 2rem auto;
             max-width: 600px;
             text-align: center;
         }
-        
+
         .ladybugs-team-tag {
             font-size: 3rem;
             font-family: 'SimHei', 'Microsoft YaHei', sans-serif;
-            color: #FF69B4;
+            color: var(--pink);
             margin: 1rem 0;
             text-shadow: 0 0 20px rgba(255, 105, 180, 0.5);
         }
-        
+
         .ladybugs-team-description {
             color: #ccc;
             font-size: 1.1rem;
             line-height: 1.6;
             margin-bottom: 1.5rem;
         }
-        
-        .placeholder-grid-ladybugs {
+
+        .feminine-badge {
+            display: inline-block;
+            background: linear-gradient(45deg, var(--pink), var(--pink-dark));
+            color: white;
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-weight: 600;
+            margin: 10px 0;
+        }
+
+        /* Placeholder Grid */
+        .placeholder-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 1.5rem;
             margin: 2rem 0;
         }
-        
-        .placeholder-card-ladybugs {
+
+        .placeholder-card {
             background: rgba(255, 105, 180, 0.05);
             border: 2px dashed rgba(255, 105, 180, 0.3);
             border-radius: 15px;
@@ -168,26 +442,136 @@
             text-align: center;
             position: relative;
         }
-        
-        .placeholder-card-ladybugs .placeholder-icon {
+
+        .placeholder-icon {
             font-size: 2.5rem;
             color: rgba(255, 105, 180, 0.3);
             margin-bottom: 1rem;
         }
-        
-        .placeholder-card-ladybugs .placeholder-text {
+
+        .placeholder-text {
             color: rgba(170, 170, 170, 0.5);
             font-size: 0.9rem;
         }
-        
-        .feminine-badge {
+
+        /* Section Luxury */
+        .section-luxury {
+            background-color: rgba(20, 20, 20, 0.8);
+            border-radius: 15px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            border: 1px solid rgba(255, 105, 180, 0.2);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(10px);
+        }
+
+        .section-title {
+            color: var(--pink);
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid rgba(255, 105, 180, 0.3);
             display: inline-block;
-            background: linear-gradient(45deg, #FF69B4, #C71585);
+        }
+
+        /* Footer */
+        .minimal-footer {
+            text-align: center;
+            padding: 3rem 0;
+            border-top: 1px solid rgba(255, 105, 180, 0.2);
+            margin-top: 3rem;
+        }
+
+        .clan-name-footer {
+            font-size: 1.2rem;
+            color: var(--pink);
+            margin-bottom: 1rem;
+        }
+
+        .clan-tag-display {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--pink);
+            margin: 1rem 0;
+        }
+
+        .copyright {
+            color: #666;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+        }
+
+        /* Coming Soon Badge */
+        .coming-soon-badge {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: linear-gradient(45deg, var(--pink), var(--pink-dark));
             color: white;
             padding: 8px 20px;
             border-radius: 20px;
+            font-size: 0.9rem;
             font-weight: 600;
-            margin: 10px 0;
+            z-index: 100;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-5px) rotate(5deg); }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .diamond-nav {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            .nav-center {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .construction-title {
+                font-size: 2.5rem;
+            }
+            
+            .construction-subtitle {
+                font-size: 1.2rem;
+            }
+            
+            .team-title {
+                font-size: 2.5rem;
+            }
+            
+            .team-meta {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .placeholder-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .construction-title {
+                font-size: 2rem;
+            }
+            
+            .team-title {
+                font-size: 2rem;
+            }
+            
+            .ladybugs-team-tag {
+                font-size: 2rem;
+            }
+            
+            .construction-actions {
+                flex-direction: column;
+                align-items: center;
+            }
         }
     </style>
 </head>
@@ -222,28 +606,28 @@
     </nav>
     
     <!-- Under Construction Overlay -->
-    <div class="ladybugs-construction-overlay">
-        <div class="ladybugs-icon-large">
+    <div class="construction-overlay">
+        <div class="construction-icon">
             <i class="fas fa-heart"></i>
         </div>
-        <h1 class="ladybugs-title">COMING SOON</h1>
-        <p class="ladybugs-subtitle">4KT LADYBUGS - ALL-FEMALE TEAM</p>
-        <p class="ladybugs-message">
+        <h1 class="construction-title">COMING SOON</h1>
+        <p class="construction-subtitle">4KT LADYBUGS - ALL-FEMALE TEAM</p>
+        <p class="construction-message">
             The Ladybugs are being formed as 4KT's premier all-female competitive team. 
             We're bringing together the most skilled female CODM players to prove that 
             excellence knows no gender in competitive gaming.
         </p>
         
-        <div class="ladybugs-progress">
-            <div class="ladybugs-progress-label">Team Formation Progress</div>
-            <div class="ladybugs-progress-bar-outer">
-                <div class="ladybugs-progress-bar-inner"></div>
+        <div class="construction-progress">
+            <div class="progress-label">Team Formation Progress</div>
+            <div class="progress-bar-outer">
+                <div class="progress-bar-inner"></div>
             </div>
-            <div class="progress-percentage" style="color: #FF69B4; margin-top: 0.5rem; font-weight: 600;">55% Complete</div>
+            <div class="progress-percentage" style="color: var(--pink); margin-top: 0.5rem; font-weight: 600;">55% Complete</div>
         </div>
         
-        <div class="ladybugs-actions">
-            <a href="https://discord.gg/99uuMvMBX" target="_blank" class="btn-discord">
+        <div class="construction-actions">
+            <a href="https://discord.gg/99uuMvMBX" target="_blank" class="btn-primary">
                 <i class="fab fa-discord"></i> JOIN DISCORD FOR TRYOUTS
             </a>
             <a href="../clans/4kt.html" class="btn-secondary">
@@ -255,10 +639,10 @@
         </div>
     </div>
     
-    <!-- Main Content (Blurred/Under Construction) -->
-    <div class="container ladybugs-content">
+    <!-- Main Content -->
+    <div class="container">
         <!-- Coming Soon Badge -->
-        <div class="ladybugs-coming-soon-badge">
+        <div class="coming-soon-badge">
             <i class="fas fa-heart"></i> UNDER CONSTRUCTION
         </div>
         
@@ -304,20 +688,20 @@
         <!-- Roster Placeholder -->
         <section class="section-luxury">
             <h2 class="section-title">TEAM ROSTER</h2>
-            <div class="placeholder-grid-ladybugs">
-                <div class="placeholder-card-ladybugs">
+            <div class="placeholder-grid">
+                <div class="placeholder-card">
                     <div class="placeholder-icon">
                         <i class="fas fa-user-plus"></i>
                     </div>
                     <div class="placeholder-text">Female Players Wanted</div>
                 </div>
-                <div class="placeholder-card-ladybugs">
+                <div class="placeholder-card">
                     <div class="placeholder-icon">
                         <i class="fas fa-user-plus"></i>
                     </div>
                     <div class="placeholder-text">Open Tryouts</div>
                 </div>
-                <div class="placeholder-card-ladybugs">
+                <div class="placeholder-card">
                     <div class="placeholder-icon">
                         <i class="fas fa-user-plus"></i>
                     </div>
@@ -329,22 +713,22 @@
         <!-- Team Mission -->
         <section class="section-luxury">
             <h2 class="section-title">MISSION & VISION</h2>
-            <div class="placeholder-grid-ladybugs">
-                <div class="placeholder-card-ladybugs">
+            <div class="placeholder-grid">
+                <div class="placeholder-card">
                     <div class="placeholder-icon">
                         <i class="fas fa-venus"></i>
                     </div>
                     <h3 style="color: rgba(255, 105, 180, 0.5);">REPRESENTATION</h3>
                     <div class="placeholder-text">Showcasing female talent</div>
                 </div>
-                <div class="placeholder-card-ladybugs">
+                <div class="placeholder-card">
                     <div class="placeholder-icon">
                         <i class="fas fa-trophy"></i>
                     </div>
                     <h3 style="color: rgba(255, 105, 180, 0.5);">COMPETITION</h3>
                     <div class="placeholder-text">Competing at highest level</div>
                 </div>
-                <div class="placeholder-card-ladybugs">
+                <div class="placeholder-card">
                     <div class="placeholder-icon">
                         <i class="fas fa-users"></i>
                     </div>
@@ -362,15 +746,27 @@
         </footer>
     </div>
     
-    <script src="../assets/script.js"></script>
     <script>
-        // Optional: Remove overlay after 10 seconds for preview (remove in production)
-        setTimeout(() => {
-            document.querySelector('.ladybugs-construction-overlay').style.display = 'none';
-            document.querySelector('.ladybugs-content').style.filter = 'none';
-            document.querySelector('.ladybugs-content').style.opacity = '1';
-            document.querySelector('.ladybugs-content').style.pointerEvents = 'all';
-        }, 10000);
+        // Enhanced hover effects
+        document.addEventListener('DOMContentLoaded', function() {
+            const placeholderCards = document.querySelectorAll('.placeholder-card');
+            placeholderCards.forEach(card => {
+                card.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-5px)';
+                    this.style.boxShadow = '0 15px 30px rgba(255, 105, 180, 0.2)';
+                });
+                
+                card.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(0)';
+                    this.style.boxShadow = 'none';
+                });
+            });
+            
+            // Optional: Remove overlay after 10 seconds for preview
+            setTimeout(() => {
+                document.querySelector('.construction-overlay').style.display = 'none';
+            }, 10000);
+        });
     </script>
 </body>
 </html>
