@@ -131,6 +131,84 @@
             letter-spacing: 1px;
         }
         
+        /* Symbol Meaning Section */
+        .symbol-section {
+            background: linear-gradient(45deg, rgba(20, 20, 20, 0.9), rgba(10, 10, 10, 0.95));
+            border: 2px solid var(--gold);
+            border-radius: 15px;
+            padding: 2.5rem;
+            margin: 2rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .symbol-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 30%, rgba(255, 215, 0, 0.05) 0%, transparent 50%),
+                radial-gradient(circle at 80% 70%, rgba(255, 0, 0, 0.05) 0%, transparent 50%);
+        }
+        
+        .symbol-header {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .chinese-symbol {
+            font-size: 5rem;
+            font-family: 'SimHei', 'Microsoft YaHei', sans-serif;
+            color: var(--gold);
+            text-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
+            background: linear-gradient(45deg, var(--gold), #FFA500);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .symbol-meaning {
+            text-align: left;
+        }
+        
+        .symbol-meaning h3 {
+            font-size: 1.8rem;
+            color: var(--gold);
+            margin-bottom: 1rem;
+        }
+        
+        .meaning-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+        
+        .meaning-card {
+            background: rgba(255, 255, 255, 0.05);
+            border-left: 3px solid var(--gold);
+            padding: 1.5rem;
+            border-radius: 8px;
+        }
+        
+        .meaning-card h4 {
+            color: var(--gold);
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+        }
+        
+        .meaning-card p {
+            color: #ccc;
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+        
         /* Simplified Footer */
         .minimal-footer {
             text-align: center;
@@ -212,8 +290,36 @@
         <section class="section-luxury">
             <h2 class="section-title">4KTREY BLOODS</h2>
             <div class="content-card">
-                <p>4KT (4KTrey Bloods) represents the absolute pinnacle of competitive Call of Duty Mobile in Africa. As the elite division of Blood Esports, we house only the most skilled players who have proven themselves in battle.</p>
-                <p>Our clan tag <strong>4零丨</strong> is feared across all ranked ladders. We don't just play the game – we dominate it with precision, strategy, and unmatched teamwork.</p>
+                <p>4KT (4KTrey Bloods) represents the absolute pinnacle of competitive Call of Duty Mobile in Africa. As the elite division of Blood Esports, we house only the most skilled players who embody excellence, precision, and strategic mastery.</p>
+                <p>Our identity is built on a foundation of skill, respect, and the relentless pursuit of victory. Every member represents the highest standards of competitive gaming.</p>
+            </div>
+        </section>
+        
+        <!-- Chinese Symbol Meaning -->
+        <section class="symbol-section">
+            <div class="symbol-header">
+                <div class="chinese-symbol">零丨</div>
+                <div class="symbol-meaning">
+                    <h3>THE BEAUTY OF OUR SYMBOL</h3>
+                    <p>The Chinese characters in our clan tag <strong>4零丨</strong> carry deep meaning that reflects our philosophy and identity.</p>
+                </div>
+            </div>
+            
+            <div class="meaning-grid">
+                <div class="meaning-card">
+                    <h4>零 (Líng) - ZERO / PERFECTION</h4>
+                    <p>Represents the beginning, potential, and infinite possibilities. In gaming, it symbolizes starting fresh, endless growth, and the pursuit of perfect execution. Zero is not empty - it's full of potential waiting to be realized.</p>
+                </div>
+                
+                <div class="meaning-card">
+                    <h4>丨 (Gǔn) - VERTICAL LINE / PILLAR</h4>
+                    <p>Symbolizes strength, stability, and unwavering focus. It represents the unbreakable connection between skill and success, the straight path to victory, and the foundation upon which champions are built.</p>
+                </div>
+                
+                <div class="meaning-card">
+                    <h4>TOGETHER: 4零丨</h4>
+                    <p>The combination creates a powerful statement: "Four pillars of infinite potential." It represents our four core values: Skill, Strategy, Unity, and Excellence. The tag reminds us that from zero (beginnings) comes greatness, supported by unwavering pillars of strength.</p>
+                </div>
             </div>
         </section>
         
@@ -233,7 +339,7 @@
                     <div class="label">Win Rate</div>
                 </div>
                 <div class="stat-item">
-                    <div class="number">2024</div>
+                    <div class="number">2022</div>
                     <div class="label">Year Founded</div>
                 </div>
             </div>
@@ -296,7 +402,7 @@
         <footer class="minimal-footer">
             <div class="clan-name-footer">4KTREY BLOODS</div>
             <div class="clan-tag-display">4零丨</div>
-            <p class="copyright">© 2026 BLOOD ESPORTS | 4KT CLAN</p>
+            <p class="copyright">© 2026 BLOOD ESPORTS | EST. 2022</p>
         </footer>
     </div>
     
