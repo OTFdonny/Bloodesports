@@ -3,10 +3,134 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>4KT | 4kTreyBloods - Blood Esports</title>
+    <title>4KT | 4KTrey Bloods - Blood Esports</title>
     <link rel="stylesheet" href="../assets/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Additional styles for 4KT page */
+        .clan-motto {
+            font-size: 1.8rem;
+            color: var(--gold);
+            font-style: italic;
+            text-align: center;
+            margin: 1rem 0 2rem;
+            font-family: 'Orbitron', sans-serif;
+            text-shadow: 0 0 15px rgba(255, 215, 0, 0.3);
+        }
+        
+        .tier-badge {
+            display: inline-block;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            letter-spacing: 1px;
+        }
+        
+        .tier-1 {
+            background: linear-gradient(45deg, var(--gold), var(--gold-dark));
+            color: var(--black);
+        }
+        
+        .tier-2 {
+            background: linear-gradient(45deg, var(--red), var(--red-dark));
+            color: white;
+        }
+        
+        .all-female {
+            background: linear-gradient(45deg, #FF69B4, #C71585);
+            color: white;
+        }
+        
+        .team-card-enhanced {
+            background: linear-gradient(145deg, rgba(40, 40, 40, 0.8), rgba(20, 20, 20, 0.9));
+            border: 2px solid rgba(255, 215, 0, 0.3);
+            border-radius: 15px;
+            padding: 2rem;
+            text-align: center;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .team-card-enhanced::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--gold), var(--red));
+        }
+        
+        .team-card-enhanced:hover {
+            transform: translateY(-10px);
+            border-color: var(--gold);
+            box-shadow: 0 15px 30px rgba(255, 215, 0, 0.2);
+        }
+        
+        .team-card-enhanced h3 {
+            font-size: 1.8rem;
+            color: white;
+            margin: 1rem 0 0.5rem;
+        }
+        
+        .team-card-enhanced .team-tag {
+            font-size: 1.2rem;
+            color: var(--gold);
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+        
+        .team-card-enhanced p {
+            color: #aaa;
+            margin-bottom: 1.5rem;
+            line-height: 1.5;
+        }
+        
+        .teams-grid-enhanced {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+        
+        .clan-stats {
+            background: linear-gradient(45deg, rgba(255, 215, 0, 0.05), rgba(255, 0, 0, 0.05));
+            border: 2px solid rgba(255, 215, 0, 0.2);
+            border-radius: 15px;
+            padding: 2rem;
+            margin: 2rem 0;
+        }
+        
+        .stats-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            text-align: center;
+        }
+        
+        .stat-item {
+            padding: 1rem;
+        }
+        
+        .stat-item .number {
+            font-size: 2.5rem;
+            font-weight: 900;
+            color: var(--gold);
+            line-height: 1;
+            margin-bottom: 0.5rem;
+        }
+        
+        .stat-item .label {
+            color: #aaa;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+    </style>
 </head>
 <body>
     <!-- Animated Background -->
@@ -46,7 +170,7 @@
             </div>
             <h1 class="team-title">4KT CLAN</h1>
             <p class="team-tagline">4KTrey Bloods</p>
-            <p class="team-subtitle">The Elite Competitive Division</p>
+            <div class="clan-motto">"It's a parade inside my city yeahhh"</div>
             <div class="team-meta">
                 <div class="meta-item">
                     <i class="fas fa-hashtag"></i>
@@ -58,79 +182,138 @@
                 </div>
                 <div class="meta-item">
                     <i class="fas fa-trophy"></i>
-                    <span>#1 AFRICAN CODM</span>
+                    <span>TIER 1 CHAMPIONS</span>
                 </div>
             </div>
         </header>
         
         <!-- Clan Description -->
         <section class="section-luxury">
-            <h2 class="section-title">4Ktrey</h2>
+            <h2 class="section-title">4KTREY BLOODS</h2>
             <div class="content-card">
-                <p>4KT represents the pinnacle of competitive Call of Duty Mobile in Africa. As the elite division of Blood Esports, we house only the most skilled players who have proven themselves in battle.</p>
+                <p>4KT (4KTrey Bloods) represents the absolute pinnacle of competitive Call of Duty Mobile in Africa. As the elite division of Blood Esports, we house only the most skilled players who have proven themselves in battle.</p>
+                <p>Our clan tag <strong>4零丨</strong> is feared across all ranked ladders. We don't just play the game – we dominate it with precision, strategy, and unmatched teamwork.</p>
+            </div>
+        </section>
+        
+        <!-- Clan Stats -->
+        <section class="clan-stats">
+            <div class="stats-row">
+                <div class="stat-item">
+                    <div class="number">50+</div>
+                    <div class="label">Tournament Wins</div>
+                </div>
+                <div class="stat-item">
+                    <div class="number">#1</div>
+                    <div class="label">African Ranking</div>
+                </div>
+                <div class="stat-item">
+                    <div class="number">85%</div>
+                    <div class="label">Win Rate</div>
+                </div>
+                <div class="stat-item">
+                    <div class="number">2024</div>
+                    <div class="label">Year Founded</div>
+                </div>
             </div>
         </section>
         
         <!-- Teams Section -->
         <section class="section-luxury">
             <h2 class="section-title">OUR CHAMPION TEAMS</h2>
-            <div class="teams-grid">
+            <div class="teams-grid-enhanced">
                 <!-- Shadow Hunters -->
-                <div class="player-card">
+                <div class="team-card-enhanced">
+                    <span class="tier-badge tier-1">TIER 1 TEAM</span>
                     <h3>SHADOW HUNTERS</h3>
-                    <p class="player-role">Tier 1 Team</p>
                     <div class="team-tag">4零丨</div>
-                    <p>Our star team, dominating the competitive scene with precision and strategy.</p>
-                    <a href="../teams/4kt-shadow-hunters.html" class="btn-primary">VIEW ROSTER</a>
+                    <p>Our premier competitive team, dominating the scene with tactical precision and strategic mastery. Multiple Tier 1 champions.</p>
+                    <a href="../teams/4kt-shadow-hunters.html" class="btn-primary">
+                        <i class="fas fa-crosshairs"></i> VIEW ROSTER
+                    </a>
                 </div>
                 
                 <!-- Storm Troopers -->
-                <div class="player-card">
+                <div class="team-card-enhanced">
+                    <span class="tier-badge tier-2">TIER 2 TEAM</span>
                     <h3>STORM TROOPERS</h3>
-                    <p class="player-role">Tier 2 Team</p>
                     <div class="team-tag">4零丨</div>
-                    <p>Known for relentless aggression and fast-paced gameplay that overwhelms opponents.</p>
-                    <a href="../teams/4kt-storm-troopers.html" class="btn-primary">VIEW TEAM</a>
+                    <p>Aggressive playstyle specialists. Known for overwhelming opponents with fast-paced, relentless gameplay.</p>
+                    <a href="../teams/4kt-storm-troopers.html" class="btn-primary">
+                        <i class="fas fa-bolt"></i> VIEW TEAM
+                    </a>
                 </div>
                 
                 <!-- Ladybugs -->
-                <div class="player-card">
+                <div class="team-card-enhanced">
+                    <span class="tier-badge all-female">ALL-FEMALE TEAM</span>
                     <h3>LADYBUGS</h3>
-                    <p class="player-role">All-Female Competitive Team</p>
                     <div class="team-tag">4零丨</div>
-                    <p>Proving that skill knows no gender. The fiercest female competitors in CODM.</p>
-                    <a href="../teams/4kt-ladybugs.html" class="btn-primary">VIEW TEAM</a>
+                    <p>Proving that skill knows no gender. The fiercest female competitors in African CODM esports.</p>
+                    <a href="../teams/4kt-ladybugs.html" class="btn-primary">
+                        <i class="fas fa-heart"></i> VIEW TEAM
+                    </a>
                 </div>
             </div>
         </section>
         
-     
         <!-- Leadership -->
         <section class="section-luxury">
             <h2 class="section-title">CLAN LEADERSHIP</h2>
             <div class="leadership-cards">
                 <div class="leader-card">
-                    <div class="leader-icon">
-                        <i class="fas fa-crown"></i>
+                    <div class="leader-avatar">
+                        <div class="avatar-frame">
+                            <i class="fas fa-crown"></i>
+                        </div>
                     </div>
-                    <h3>CLAN MASTER</h3>
-                    <div class="leader-name">CHOCO</div>
-                    <p>Founder and strategic mastermind behind 4KT's dominance.</p>
+                    <div class="leader-info">
+                        <h3>CLAN MASTER</h3>
+                        <div class="leader-name">CHOCO</div>
+                        <p class="leader-title">Founder & Strategic Leader</p>
+                        <p class="leader-desc">The visionary behind 4KT's dominance. Master strategist and in-game leader.</p>
+                        <div class="leader-stats">
+                            <div class="leader-stat">
+                                <span class="stat-value">5.2</span>
+                                <span class="stat-label">KD RATIO</span>
+                            </div>
+                            <div class="leader-stat">
+                                <span class="stat-value">#1</span>
+                                <span class="stat-label">RANK</span>
+                            </div>
+                        </div>
+                    </div>
                 </div>
+                
                 <div class="leader-card">
-                    <div class="leader-icon">
-                        <i class="fas fa-chess-king"></i>
+                    <div class="leader-avatar">
+                        <div class="avatar-frame">
+                            <i class="fas fa-chess-king"></i>
+                        </div>
                     </div>
-                    <h3>CLAN MANAGER</h3>
-                    <div class="leader-name">DANNY</div>
-                    <p>Operations director ensuring peak performance across all teams.</p>
+                    <div class="leader-info">
+                        <h3>CLAN MANAGER</h3>
+                        <div class="leader-name">DANNY</div>
+                        <p class="leader-title">Operations Director</p>
+                        <p class="leader-desc">Ensures peak performance across all teams. Master of logistics and coordination.</p>
+                        <div class="leader-stats">
+                            <div class="leader-stat">
+                                <span class="stat-value">50+</span>
+                                <span class="stat-label">EVENTS</span>
+                            </div>
+                            <div class="leader-stat">
+                                <span class="stat-value">4</span>
+                                <span class="stat-label">TEAMS</span>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
         
-        <!-- CTA -->
+        <!-- CTA Section -->
         <section class="cta-luxury">
-            <h2>READY TO JOIN THE KINGS?</h2>
+            <h2>GOT WHAT IT TAKES?</h2>
             <p>Tryouts are held monthly for exceptional players.</p>
             <div class="cta-buttons">
                 <a href="https://discord.gg/99uuMvMBX" target="_blank" class="btn-discord">
@@ -148,8 +331,14 @@
         <div class="footer-content">
             <div class="footer-brand">
                 <div class="footer-logo">BLOOD ESPORTS</div>
-                <p class="footer-tag">4KT | FOUR KINGS TOURNAMENT</p>
-                <p>Clan Tag: 4零丨</p>
+                <p class="footer-tag">4KT | 4KTREY BLOODS</p>
+                <p>Clan Tag: 4零丨 | Elite CODM Division</p>
+                <div class="social-links">
+                    <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="social-icon"><i class="fab fa-youtube"></i></a>
+                    <a href="https://discord.gg/99uuMvMBX" class="social-icon"><i class="fab fa-discord"></i></a>
+                </div>
             </div>
             <div class="footer-links">
                 <div class="link-group">
@@ -158,10 +347,17 @@
                     <a href="../teams/4kt-storm-troopers.html">Storm Troopers</a>
                     <a href="../teams/4kt-ladybugs.html">Ladybugs</a>
                 </div>
+                <div class="link-group">
+                    <h4>QUICK LINKS</h4>
+                    <a href="../index.html">Home</a>
+                    <a href="otf.html">OTF Clan</a>
+                    <a href="https://discord.gg/99uuMvMBX" target="_blank">Discord</a>
+                </div>
             </div>
         </div>
         <div class="footer-bottom">
-            <p class="copyright">© 2026 BLOOD ESPORTS | 4KT CLAN</p>
+            <p class="copyright">© 2026 BLOOD ESPORTS | 4KT CLAN - 4KTREY BLOODS</p>
+            <p class="copyright">All rights reserved. Call of Duty: Mobile is a registered trademark of Activision Publishing, Inc.</p>
         </div>
     </footer>
     
