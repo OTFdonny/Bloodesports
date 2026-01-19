@@ -3,148 +3,509 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Blood Esports - OTF Clan</title>
+    <title>OTF | Only The Family - Blood Esports</title>
     <link rel="stylesheet" href="../assets/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* OTF Under Construction Styles */
+        .construction-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(10, 10, 10, 0.95);
+            z-index: 999;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 2rem;
+        }
+        
+        .construction-icon-large {
+            font-size: 6rem;
+            color: var(--gold);
+            margin-bottom: 2rem;
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); opacity: 0.7; }
+            50% { transform: scale(1.1); opacity: 1; }
+            100% { transform: scale(1); opacity: 0.7; }
+        }
+        
+        .construction-title {
+            font-size: 3.5rem;
+            color: var(--gold);
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+        }
+        
+        .construction-subtitle {
+            font-size: 1.5rem;
+            color: var(--red);
+            margin-bottom: 2rem;
+            font-family: 'Orbitron', sans-serif;
+        }
+        
+        .construction-message {
+            max-width: 600px;
+            color: #aaa;
+            font-size: 1.1rem;
+            line-height: 1.6;
+            margin-bottom: 3rem;
+        }
+        
+        .construction-progress {
+            width: 100%;
+            max-width: 500px;
+            margin: 2rem 0;
+        }
+        
+        .progress-label {
+            color: var(--gold);
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+        
+        .progress-bar-outer {
+            height: 10px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 5px;
+            overflow: hidden;
+        }
+        
+        .progress-bar-inner {
+            height: 100%;
+            background: linear-gradient(90deg, var(--gold), var(--red));
+            border-radius: 5px;
+            width: 75%;
+            animation: progress-load 3s ease-out;
+        }
+        
+        @keyframes progress-load {
+            0% { width: 0%; }
+            100% { width: 75%; }
+        }
+        
+        .construction-actions {
+            display: flex;
+            gap: 1.5rem;
+            margin-top: 2rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        
+        /* OTF Content Styles (Blurred/Under Construction) */
+        .otf-content {
+            filter: blur(5px);
+            opacity: 0.3;
+            pointer-events: none;
+        }
+        
+        .coming-soon-badge {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: linear-gradient(45deg, var(--gold), var(--red));
+            color: white;
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            z-index: 100;
+            animation: bounce 2s infinite;
+        }
+        
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-5px); }
+        }
+        
+        .section-coming-soon {
+            position: relative;
+            background: linear-gradient(145deg, rgba(40, 40, 40, 0.3), rgba(20, 20, 20, 0.3));
+            border: 2px dashed rgba(255, 215, 0, 0.3);
+            border-radius: 15px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            backdrop-filter: blur(5px);
+        }
+        
+        .section-coming-soon h2 {
+            color: rgba(212, 175, 55, 0.5);
+        }
+        
+        .placeholder-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+        
+        .placeholder-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 2px dashed rgba(255, 215, 0, 0.2);
+            border-radius: 10px;
+            padding: 2rem;
+            text-align: center;
+            position: relative;
+        }
+        
+        .placeholder-icon {
+            font-size: 2.5rem;
+            color: rgba(255, 215, 0, 0.3);
+            margin-bottom: 1rem;
+        }
+        
+        .placeholder-text {
+            color: rgba(170, 170, 170, 0.5);
+            font-size: 0.9rem;
+        }
+        
+        .countdown-timer {
+            background: rgba(255, 215, 0, 0.1);
+            border: 2px solid var(--gold);
+            border-radius: 15px;
+            padding: 2rem;
+            margin: 3rem 0;
+            text-align: center;
+        }
+        
+        .countdown-title {
+            color: var(--gold);
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .countdown-display {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+        }
+        
+        .countdown-unit {
+            background: var(--black);
+            border: 2px solid var(--gold);
+            border-radius: 10px;
+            padding: 1rem;
+            min-width: 80px;
+        }
+        
+        .countdown-number {
+            font-size: 2.5rem;
+            font-weight: 900;
+            color: var(--gold);
+            line-height: 1;
+        }
+        
+        .countdown-label {
+            color: #aaa;
+            font-size: 0.8rem;
+            margin-top: 0.5rem;
+            text-transform: uppercase;
+        }
+        
+        /* OTF Tag Styles */
+        .otf-tag-display {
+            font-size: 4rem;
+            font-family: 'SimHei', 'Microsoft YaHei', sans-serif;
+            color: var(--gold);
+            text-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
+            margin: 1rem 0;
+            background: linear-gradient(45deg, var(--gold), #FFA500);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .otf-meaning {
+            text-align: center;
+            margin: 2rem 0;
+            padding: 2rem;
+            background: rgba(255, 215, 0, 0.05);
+            border-radius: 15px;
+            border: 1px solid rgba(255, 215, 0, 0.2);
+        }
+        
+        .otf-meaning h3 {
+            color: var(--gold);
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+        }
+        
+        .otf-meaning p {
+            color: #ccc;
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+    </style>
 </head>
 <body>
-    <!-- Blood drip effect -->
-    <div class="blood-drip" id="bloodDrip"></div>
+    <!-- Animated Background -->
+    <div class="luxury-bg">
+        <div class="gold-particle" id="particles"></div>
+    </div>
     
     <!-- Navigation -->
-    <nav class="main-nav">
-        <div class="nav-container">
-            <a href="../index.html" class="nav-logo">Blood Esports</a>
-            <div class="nav-links">
-                <a href="../index.html">Home</a>
-                <a href="4kt.html">4KT</a>
-                <a href="otf.html" class="active">OTF</a>
-                <a href="../teams/4kt-shadow-hunters.html">Shadow Hunters</a>
+    <nav class="luxury-nav">
+        <div class="diamond-nav">
+            <div class="nav-left">
+                <div class="logo-display">
+                    <span class="logo-gold">BLOOD</span>
+                    <span class="logo-red">ESPORTS</span>
+                    <div class="logo-badge">CODM</div>
+                </div>
+            </div>
+            <div class="nav-center">
+                <a href="../index.html" class="nav-link">HOME</a>
+                <a href="4kt.html" class="nav-link">4KT CLAN</a>
+                <a href="otf.html" class="nav-link active">OTF CLAN</a>
+                <a href="../teams/4kt-shadow-hunters.html" class="nav-link">SHADOW HUNTERS</a>
+            </div>
+            <div class="nav-right">
+                <a href="https://discord.gg/99uuMvMBX" target="_blank" class="btn-discord">
+                    <i class="fab fa-discord"></i> DISCORD
+                </a>
             </div>
         </div>
     </nav>
     
-    <div class="container">
-        <header class="clan-header">
-            <div class="clan-badge">
+    <!-- Under Construction Overlay -->
+    <div class="construction-overlay">
+        <div class="construction-icon-large">
+            <i class="fas fa-tools"></i>
+        </div>
+        <h1 class="construction-title">COMING SOON</h1>
+        <p class="construction-subtitle">OTF CLAN REINVENTION</p>
+        <p class="construction-message">
+            The OTF (Only The Family) division is undergoing a complete transformation. 
+            We're building something extraordinary for our community, content creators, 
+            and strategic minds. Stay tuned for the reveal!
+        </p>
+        
+        <div class="construction-progress">
+            <div class="progress-label">Development Progress</div>
+            <div class="progress-bar-outer">
+                <div class="progress-bar-inner"></div>
+            </div>
+            <div class="progress-percentage" style="color: var(--gold); margin-top: 0.5rem; font-weight: 600;">75% Complete</div>
+        </div>
+        
+        <div class="countdown-timer">
+            <div class="countdown-title">EXPECTED LAUNCH</div>
+            <div class="countdown-display">
+                <div class="countdown-unit">
+                    <div class="countdown-number" id="days">30</div>
+                    <div class="countdown-label">Days</div>
+                </div>
+                <div class="countdown-unit">
+                    <div class="countdown-number" id="hours">12</div>
+                    <div class="countdown-label">Hours</div>
+                </div>
+                <div class="countdown-unit">
+                    <div class="countdown-number" id="minutes">45</div>
+                    <div class="countdown-label">Minutes</div>
+                </div>
+                <div class="countdown-unit">
+                    <div class="countdown-number" id="seconds">30</div>
+                    <div class="countdown-label">Seconds</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="construction-actions">
+            <a href="https://discord.gg/99uuMvMBX" target="_blank" class="btn-discord">
+                <i class="fab fa-discord"></i> JOIN DISCORD FOR UPDATES
+            </a>
+            <a href="4kt.html" class="btn-secondary">
+                <i class="fas fa-crown"></i> VISIT 4KT CLAN
+            </a>
+            <a href="../index.html" class="btn-primary">
+                <i class="fas fa-home"></i> BACK TO HOME
+            </a>
+        </div>
+    </div>
+    
+    <!-- Main Content (Blurred/Under Construction) -->
+    <div class="container otf-content">
+        <!-- Coming Soon Badge -->
+        <div class="coming-soon-badge">
+            <i class="fas fa-hammer"></i> UNDER CONSTRUCTION
+        </div>
+        
+        <!-- Clan Header -->
+        <header class="team-header">
+            <div class="team-badge-large">
                 <i class="fas fa-shield-alt"></i>
             </div>
-            <h1 class="clan-title">OTF Clan</h1>
-            <p class="clan-tagline">"Only The Family"</p>
-            <p class="clan-description">Strategic operations and development division</p>
+            <h1 class="team-title">OTF CLAN</h1>
+            <p class="team-tagline">ONLY THE FAMILY</p>
+            <div class="clan-motto">"The Heart of Blood Esports"</div>
+            
+            <!-- OTF Tag Display -->
+            <div class="otf-tag-display">T零丨</div>
+            
+            <div class="team-meta">
+                <div class="meta-item">
+                    <i class="fas fa-hashtag"></i>
+                    <span>CLAN TAG: T零丨</span>
+                </div>
+                <div class="meta-item">
+                    <i class="fas fa-users"></i>
+                    <span>COMMUNITY DIVISION</span>
+                </div>
+                <div class="meta-item">
+                    <i class="fas fa-seedling"></i>
+                    <span>DEVELOPMENT FOCUS</span>
+                </div>
+            </div>
         </header>
         
-        <div class="section">
-            <h2><i class="fas fa-info-circle"></i> About OTF</h2>
+        <!-- OTF Meaning -->
+        <section class="otf-meaning">
+            <h3>THE MEANING OF OTF</h3>
+            <p>OTF (Only The Family) represents the foundation, community, and developmental heart of Blood Esports. 
+            While 4KT competes at the highest level, OTF builds the future - nurturing talent, creating content, 
+            and developing the strategies that power our success.</p>
+        </section>
+        
+        <!-- About OTF (Placeholder) -->
+        <section class="section-coming-soon">
+            <h2 class="section-title">ABOUT OTF</h2>
             <div class="content-card">
-                <p>OTF (Only The Family) is the strategic and developmental division of Blood Esports. We focus on nurturing new talent, developing strategies, and building the community that supports our competitive teams.</p>
-                
-                <div class="stats-grid">
-                    <div class="stat">
-                        <div class="stat-number">100+</div>
-                        <div class="stat-label">Community Members</div>
-                    </div>
-                    <div class="stat">
-                        <div class="stat-number">25+</div>
-                        <div class="stat-label">Coached Players</div>
-                    </div>
-                    <div class="stat">
-                        <div class="stat-number">10</div>
-                        <div class="stat-label">Content Creators</div>
-                    </div>
-                    <div class="stat">
-                        <div class="stat-number">2023</div>
-                        <div class="stat-label">Established</div>
-                    </div>
-                </div>
+                <p>This section is currently being developed. Our OTF division focuses on community building, 
+                talent development, content creation, and strategic research to support our competitive teams.</p>
             </div>
-        </div>
+        </section>
         
-        <div class="section">
-            <h2><i class="fas fa-tasks"></i> OTF Departments</h2>
-            <div class="card-grid">
-                <div class="card">
-                    <i class="fas fa-graduation-cap"></i>
-                    <h3>Training Academy</h3>
-                    <p>Player development and coaching</p>
-                </div>
-                <div class="card">
-                    <i class="fas fa-video"></i>
-                    <h3>Content Creation</h3>
-                    <p>Streaming and media production</p>
-                </div>
-                <div class="card">
-                    <i class="fas fa-chart-line"></i>
-                    <h3>Strategy Division</h3>
-                    <p>Game analysis and tactics</p>
-                </div>
-                <div class="card">
-                    <i class="fas fa-users"></i>
-                    <h3>Community</h3>
-                    <p>Events and community management</p>
-                </div>
-            </div>
-        </div>
-        
-        <div class="section">
-            <h2><i class="fas fa-star"></i> OTF Mission</h2>
-            <div class="mission-statement">
-                <p>OTF exists to build the foundation of Blood Esports. We believe that strong communities create strong competitors. Our mission is threefold:</p>
-                <ul class="mission-list">
-                    <li><i class="fas fa-check"></i> Develop new talent through our training programs</li>
-                    <li><i class="fas fa-check"></i> Create engaging content that grows our community</li>
-                    <li><i class="fas fa-check"></i> Support 4KT with strategic analysis and research</li>
-                </ul>
-            </div>
-        </div>
-        
-        <div class="section">
-            <h2><i class="fas fa-calendar-alt"></i> Community Events</h2>
-            <div class="events">
-                <div class="event">
-                    <div class="event-date">
-                        <span class="month">NOV</span>
-                        <span class="day">10</span>
+        <!-- OTF Departments (Placeholder) -->
+        <section class="section-coming-soon">
+            <h2 class="section-title">OTF DEPARTMENTS</h2>
+            <div class="placeholder-grid">
+                <div class="placeholder-card">
+                    <div class="placeholder-icon">
+                        <i class="fas fa-graduation-cap"></i>
                     </div>
-                    <div class="event-details">
-                        <h3>New Player Workshop</h3>
-                        <p>Learn the basics from experienced players</p>
-                    </div>
+                    <div class="placeholder-text">Training Academy - Coming Soon</div>
                 </div>
-                <div class="event">
-                    <div class="event-date">
-                        <span class="month">NOV</span>
-                        <span class="day">22</span>
+                <div class="placeholder-card">
+                    <div class="placeholder-icon">
+                        <i class="fas fa-video"></i>
                     </div>
-                    <div class="event-details">
-                        <h3>Community Tournament</h3>
-                        <p>Casual tournament for all skill levels</p>
+                    <div class="placeholder-text">Content Creation - Coming Soon</div>
+                </div>
+                <div class="placeholder-card">
+                    <div class="placeholder-icon">
+                        <i class="fas fa-chart-line"></i>
                     </div>
+                    <div class="placeholder-text">Strategy Division - Coming Soon</div>
+                </div>
+                <div class="placeholder-card">
+                    <div class="placeholder-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <div class="placeholder-text">Community Hub - Coming Soon</div>
                 </div>
             </div>
-        </div>
+        </section>
         
-        <div class="section cta-section">
-            <h2><i class="fas fa-hands-helping"></i> Join OTF</h2>
-            <p>Whether you're a player, content creator, or strategist, OTF has a place for you.</p>
-            <div class="cta-buttons">
-                <a class="btn btn-primary" href="https://discord.gg/99uuMvMBX" target="_blank">
-                    <i class="fab fa-discord"></i> Join Our Community
-                </a>
-                <a class="btn btn-secondary" href="../index.html">
-                    <i class="fas fa-home"></i> Back to Home
-                </a>
+        <!-- Blood Hounds Team (Placeholder) -->
+        <section class="section-coming-soon">
+            <h2 class="section-title">OTF BLOOD HOUNDS</h2>
+            <div class="placeholder-card" style="max-width: 400px; margin: 0 auto;">
+                <div class="placeholder-icon">
+                    <i class="fas fa-dog"></i>
+                </div>
+                <h3 style="color: rgba(212, 175, 55, 0.5);">BLOOD HOUNDS</h3>
+                <div class="placeholder-text">Development Team - Formation in Progress</div>
             </div>
-        </div>
+        </section>
         
-        <footer>
-            <div class="footer-content">
-                <div class="footer-logo">Blood Esports - OTF Division</div>
-                <p class="copyright">© 2026 Blood Esports | Only The Family</p>
+        <!-- Community Events (Placeholder) -->
+        <section class="section-coming-soon">
+            <h2 class="section-title">COMMUNITY EVENTS</h2>
+            <div class="placeholder-grid">
+                <div class="placeholder-card">
+                    <div class="placeholder-icon">
+                        <i class="fas fa-calendar"></i>
+                    </div>
+                    <div class="placeholder-text">Monthly Tournaments</div>
+                </div>
+                <div class="placeholder-card">
+                    <div class="placeholder-icon">
+                        <i class="fas fa-gamepad"></i>
+                    </div>
+                    <div class="placeholder-text">Training Workshops</div>
+                </div>
+                <div class="placeholder-card">
+                    <div class="placeholder-icon">
+                        <i class="fas fa-film"></i>
+                    </div>
+                    <div class="placeholder-text">Content Creator Meetups</div>
+                </div>
             </div>
+        </section>
+        
+        <!-- OTF Mission (Placeholder) -->
+        <section class="section-coming-soon">
+            <h2 class="section-title">OTF MISSION</h2>
+            <div class="content-card">
+                <p>Our mission statement is being refined to better reflect our commitment to community, 
+                development, and supporting the competitive excellence of Blood Esports.</p>
+            </div>
+        </section>
+        
+        <!-- Minimal Footer -->
+        <footer class="minimal-footer">
+            <div class="clan-name-footer">ONLY THE FAMILY</div>
+            <div class="clan-tag-display">T零丨</div>
+            <p class="copyright">© 2026 BLOOD ESPORTS | OTF CLAN - UNDER CONSTRUCTION</p>
         </footer>
     </div>
-
+    
     <script src="../assets/script.js"></script>
+    <script>
+        // Countdown Timer Script
+        function updateCountdown() {
+            // Set launch date to 30 days from now
+            const launchDate = new Date();
+            launchDate.setDate(launchDate.getDate() + 30);
+            
+            const now = new Date();
+            const timeLeft = launchDate - now;
+            
+            if (timeLeft > 0) {
+                const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
+                
+                document.getElementById('days').textContent = days.toString().padStart(2, '0');
+                document.getElementById('hours').textContent = hours.toString().padStart(2, '0');
+                document.getElementById('minutes').textContent = minutes.toString().padStart(2, '0');
+                document.getElementById('seconds').textContent = seconds.toString().padStart(2, '0');
+            }
+        }
+        
+        // Initialize countdown and update every second
+        updateCountdown();
+        setInterval(updateCountdown, 1000);
+        
+        // Optional: Remove overlay after 10 seconds for preview (remove in production)
+        setTimeout(() => {
+            document.querySelector('.construction-overlay').style.display = 'none';
+            document.querySelector('.otf-content').style.filter = 'none';
+            document.querySelector('.otf-content').style.opacity = '1';
+            document.querySelector('.otf-content').style.pointerEvents = 'all';
+        }, 10000);
+    </script>
 </body>
 </html>
