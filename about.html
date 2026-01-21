@@ -28,7 +28,7 @@
 
         #particle-canvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; pointer-events: none; }
 
-        /* NAVIGATION - MATCHES HOME PAGE LOGIC */
+        /* NAVIGATION */
         .luxury-nav { background: rgba(0,0,0,0.95); border-bottom: 2px solid var(--gold); padding: 1rem 2rem; position: sticky; top: 0; z-index: 1000; }
         .nav-container { max-width: 1400px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
         .nav-brand { display: flex; align-items: center; gap: 12px; }
@@ -57,32 +57,28 @@
         .dock-item { color: white; text-decoration: none; text-align: center; font-family: 'Orbitron'; font-size: 0.65rem; font-weight: 700; transition: 0.3s; }
         .dock-item i { display: block; font-size: 1.2rem; color: var(--gold); margin-bottom: 4px; }
 
-        /* CONTENT SECTIONS */
-        .about-hero { padding: 6rem 1.5rem; text-align: center; }
-        .about-title { font-family: 'Orbitron'; font-size: clamp(2.5rem, 8vw, 5rem); font-weight: 900; color: var(--gold); text-shadow: var(--neon-glow); margin-bottom: 20px; }
-        .about-subtitle { font-family: 'Orbitron'; color: #888; letter-spacing: 3px; max-width: 800px; margin: 0 auto; line-height: 1.6; }
+        /* CONTENT STYLING */
+        .about-section { padding: 6rem 1.5rem; max-width: 1000px; margin: 0 auto; text-align: center; }
+        .about-title { font-family: 'Orbitron'; font-size: clamp(2.5rem, 8vw, 5rem); font-weight: 900; color: var(--gold); text-shadow: var(--neon-glow); margin-bottom: 30px; }
+        .deep-writeup { color: #ccc; font-size: 1.1rem; line-height: 1.8; margin-bottom: 4rem; text-align: justify; }
 
-        .pillar-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; max-width: 1200px; margin: 4rem auto; padding: 0 1.5rem; }
-        .pillar-card { background: var(--glass); border: 1px solid #333; padding: 3rem 2rem; border-radius: 20px; text-align: center; transition: 0.4s; backdrop-filter: blur(10px); }
-        .pillar-card:hover { border-color: var(--red); transform: translateY(-10px); box-shadow: 0 0 25px rgba(255, 0, 0, 0.2); }
-        .pillar-icon { font-size: 3rem; color: var(--red); margin-bottom: 20px; filter: drop-shadow(0 0 10px var(--red)); }
-        .pillar-card h3 { font-family: 'Orbitron'; color: var(--gold); margin-bottom: 15px; letter-spacing: 2px; }
+        .team-deep-dive { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; margin-bottom: 5rem; }
+        .team-info-card { background: var(--glass); border: 1px solid #333; padding: 2.5rem; border-radius: 20px; text-align: left; transition: 0.4s; backdrop-filter: blur(10px); }
+        .team-info-card:hover { border-color: var(--gold); box-shadow: var(--neon-glow); }
+        .team-info-card h3 { font-family: 'Orbitron'; color: var(--gold); margin-bottom: 10px; }
+        .team-info-card span { color: var(--red); font-family: 'Orbitron'; font-size: 0.7rem; font-weight: 900; letter-spacing: 2px; display: block; margin-bottom: 15px; }
 
         /* LEADERSHIP */
-        .leadership-sec { padding: 4rem 1.5rem; text-align: center; }
         .leader-flex { display: flex; justify-content: center; gap: 40px; flex-wrap: wrap; margin-top: 3rem; }
         .leader-card { width: 350px; background: rgba(15,15,15,0.9); border-left: 4px solid var(--gold); padding: 2.5rem; border-radius: 0 15px 15px 0; text-align: left; transition: 0.3s; }
-        .leader-card:hover { background: rgba(255,215,0,0.05); }
-        .leader-role { font-family: 'Orbitron'; color: var(--gold); font-size: 0.7rem; letter-spacing: 2px; font-weight: 900; }
-        .leader-name { font-family: 'Orbitron'; font-size: 2rem; margin: 10px 0; letter-spacing: 1px; }
+        .leader-name { font-family: 'Orbitron'; font-size: 2rem; color: white; margin: 10px 0; }
 
         /* FOOTER */
         .footer { text-align: center; padding: 4rem 1.5rem; border-top: 1px solid #222; background: #000000; }
         .footer-text { font-family: 'Orbitron'; font-size: 0.75rem; color: #555; letter-spacing: 3px; text-transform: uppercase; margin-bottom: 15px; }
-        .legal-links a { color: #888; text-decoration: none; font-size: 0.7rem; font-family: 'Orbitron'; margin: 0 10px; transition: 0.3s; }
-        .legal-links a:hover { color: var(--gold); }
+        .legal-links a { color: #888; text-decoration: none; font-size: 0.7rem; font-family: 'Orbitron'; margin: 0 10px; }
 
-        @media (max-width: 850px) { .mobile-dock { display: flex; } .desktop-links { display: none; } }
+        @media (max-width: 850px) { .desktop-links { display: none; } .mobile-dock { display: flex; } }
     </style>
 </head>
 <body>
@@ -96,7 +92,6 @@
                 <div class="nav-title"><span style="color:var(--gold)">BLOOD</span> <span style="color:var(--red)">ESPORTS</span></div>
             </div>
             <div class="desktop-links">
-                <a href="about.html">ABOUT</a>
                 <a href="clans/4kt.html">4KT</a>
                 <a href="clans/otf.html">OTF</a>
                 <a href="events.html">EVENTS</a>
@@ -105,44 +100,59 @@
     </nav>
 
     <div class="mobile-dock">
-        <a href="about.html" class="dock-item"><i class="fas fa-info-circle"></i>ABOUT</a>
+        <a href="index.html" class="dock-item"><i class="fas fa-home"></i>HOME</a>
         <a href="clans/4kt.html" class="dock-item"><i class="fas fa-crown"></i>4KT</a>
         <a href="clans/otf.html" class="dock-item"><i class="fas fa-users"></i>OTF</a>
         <a href="events.html" class="dock-item"><i class="fas fa-calendar-alt"></i>EVENTS</a>
     </div>
 
-    <section class="about-hero">
+    <section class="about-section">
         <h1 class="about-title">THE KINGDOM</h1>
-        <p class="about-subtitle">ESTABLISHED 2022. 100+ MEMBERS STRONG. WE ARE THE ELITE OF CODM.</p>
-    </section>
-
-    <div class="pillar-grid">
-        <div class="pillar-card">
-            <i class="fas fa-shield-alt pillar-icon"></i>
-            <h3>UNMATCHED SKILL</h3>
-            <p>Our Tier 1 division is a fortress of strategic brilliance and mechanical precision.</p>
+        <div class="deep-writeup">
+            Established in 2022, Blood Esports emerged as a direct response to the call for professional-grade mobile competition. With a foundation built on iron discipline and a 100+ member strong community, we have carved our name into the CODM elite. We believe that victory isn't just about the final score; it's about the hours of strategic preparation, the mental fortitude of our players, and the unbreakable bond of our family.
         </div>
-        <div class="pillar-card">
-            <i class="fas fa-fist-raised pillar-icon"></i>
-            <h3>FAMILY LEGACY</h3>
-            <p>Through our OTF division, we turn dedicated grinders into competitive legends.</p>
-        </div>
-    </div>
 
-    <section class="leadership-sec">
-        <h2 style="font-family:'Orbitron'; font-size: 2rem; color: var(--gold); letter-spacing: 5px;">COMMAND CENTER</h2>
-        <div style="width: 80px; height: 4px; background: var(--red); margin: 20px auto;"></div>
+        <h2 style="font-family: 'Orbitron'; color: var(--gold); margin-bottom: 2rem; letter-spacing: 4px;">TEAM ANALYSIS</h2>
         
+        <div class="team-deep-dive">
+            <div class="team-info-card">
+                <span>TIER 1 ELITE</span>
+                <h3>SHADOW HUNTERS</h3>
+                <p>The apex predators of the kingdom. Shadow Hunters focus on Tier 1 competitive dominance, utilizing advanced rotation tactics and objective control that leaves opponents stranded.</p>
+            </div>
+            <div class="team-card team-info-card">
+                <span>COMPETITIVE EDGE</span>
+                <h3>STORM TROOPERS</h3>
+                <p>Known for their aggressive blitzkrieg playstyle. Storm Troopers specialize in overwhelming enemy lines through sheer speed and high-precision mechanical skill.</p>
+            </div>
+            <div class="team-info-card">
+                <span>FEMALE POWERHOUSE</span>
+                <h3>LADYBUGS</h3>
+                <p>Redefining the competitive meta. The Ladybugs are our elite all-female squad, crushing stereotypes and high-rank leaderboards with surgical precision.</p>
+            </div>
+            <div class="team-info-card">
+                <span>MP MASTERS</span>
+                <h3>4KT SYNDICATE</h3>
+                <p>The clutch specialists. Syndicate is a roster of Multiplayer experts designed for one thing: winning the impossible through superior gunplay and team coordination.</p>
+            </div>
+            <div class="team-info-card">
+                <span>THE FUTURE</span>
+                <h3>BLOOD HOUNDS</h3>
+                <p>Our premier development division. The Hounds are where the next generation of 4KT legends are forged, focusing on the fundamentals required to reach the pinnacle of esports.</p>
+            </div>
+        </div>
+
+        <h2 style="font-family:'Orbitron'; color: var(--gold); margin-bottom: 2rem;">COMMANDERS</h2>
         <div class="leader-flex">
             <div class="leader-card">
-                <div class="leader-role">FOUNDER & MASTERMIND</div>
+                <div style="font-family:'Orbitron'; color:var(--gold); font-size:0.7rem; letter-spacing:2px;">FOUNDER</div>
                 <div class="leader-name">CHOCO</div>
-                <p>Leading Blood Esports with strategic vision since day one.</p>
+                <p style="color:#888;">The architect of our competitive philosophy and the heart of the Blood family.</p>
             </div>
             <div class="leader-card">
-                <div class="leader-role">OPERATIONS DIRECTOR</div>
+                <div style="font-family:'Orbitron'; color:var(--gold); font-size:0.7rem; letter-spacing:2px;">DIRECTOR</div>
                 <div class="leader-name">DANNY</div>
-                <p>Coordinating logs and team performance across all elite divisions.</p>
+                <p style="color:#888;">The administrative power ensuring our 100+ members stay organized and battle-ready.</p>
             </div>
         </div>
     </section>
