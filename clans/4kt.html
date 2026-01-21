@@ -57,8 +57,9 @@
         .team-card:hover { border-color: var(--gold); transform: translateY(-10px); box-shadow: 0 0 35px rgba(255, 215, 0, 0.2); }
         .team-logo-img { width: 120px; height: 120px; object-fit: contain; margin-bottom: 20px; filter: drop-shadow(0 0 10px var(--gold)); }
         
-        .roster-btn { display: inline-block; padding: 12px 30px; border: 1px solid var(--gold); color: var(--gold); text-decoration: none; font-family: 'Orbitron'; font-weight: 900; transition: 0.3s; width: 100%; }
-        .roster-btn:hover { background: var(--gold); color: black; box-shadow: var(--neon-glow); }
+        /* Updated button style to match your request */
+        .team-btn { display: inline-block; padding: 12px 30px; border: 1px solid var(--gold); color: var(--gold); text-decoration: none; font-family: 'Orbitron'; font-weight: 900; transition: 0.3s; width: 100%; text-transform: uppercase; }
+        .team-btn:hover { background: var(--gold); color: black; box-shadow: var(--neon-glow); }
 
         /* STATS BAR */
         .stats-bar { display: flex; justify-content: space-around; background: rgba(10,10,10,0.8); border: 1px solid #333; padding: 2rem; border-radius: 15px; margin: 4rem auto; max-width: 1000px; text-align: center; }
@@ -127,25 +128,28 @@
             <img src="../shadow.png" alt="Shadow Hunters" class="team-logo-img">
             <h3 class="team-name">SHADOW HUNTERS</h3>
             <p style="color:var(--gold); font-family:'Orbitron'; font-size:0.7rem; margin-bottom:20px;">4零丨 DIVISION</p>
-            <a href="4kt-shadow-hunters.html" class="roster-btn">VIEW ROSTER</a>
+            <a href="4kt-shadow-hunters.html" class="team-btn">VIEW TEAM</a>
         </div>
+        
         <div class="team-card">
             <img src="../storm.png" alt="Storm Troopers" class="team-logo-img">
             <h3 class="team-name">STORM TROOPERS</h3>
             <p style="color:var(--gold); font-family:'Orbitron'; font-size:0.7rem; margin-bottom:20px;">4零丨 DIVISION</p>
-            <a href="roster-storm.html" class="roster-btn">VIEW ROSTER</a>
+            <a href="4kt-storm-troopers.html" class="team-btn">VIEW TEAM</a>
         </div>
+        
         <div class="team-card">
             <img src="../ladybugs.png" alt="Ladybugs" class="team-logo-img">
             <h3 class="team-name">LADYBUGS</h3>
             <p style="color:var(--gold); font-family:'Orbitron'; font-size:0.7rem; margin-bottom:20px;">4零丨 DIVISION</p>
-            <a href="roster-ladybugs.html" class="roster-btn">VIEW ROSTER</a>
+            <a href="4kt-ladybugs.html" class="team-btn">VIEW TEAM</a>
         </div>
+        
         <div class="team-card">
             <img src="../syndicate.png" alt="Syndicate" class="team-logo-img">
             <h3 class="team-name">4KT SYNDICATE</h3>
             <p style="color:var(--gold); font-family:'Orbitron'; font-size:0.7rem; margin-bottom:20px;">4零丨 DIVISION</p>
-            <a href="roster-syndicate.html" class="roster-btn">VIEW ROSTER</a>
+            <a href="4kt-syndicate.html" class="team-btn">VIEW TEAM</a>
         </div>
     </div>
 
@@ -159,6 +163,7 @@
         let particles = [];
         function init() {
             canvas.width = window.innerWidth; canvas.height = window.innerHeight;
+            particles = []; // Clear existing particles on resize
             for (let i = 0; i < 150; i++) {
                 particles.push({ x: Math.random() * canvas.width, y: Math.random() * canvas.height, size: Math.random() * 2.5, speed: Math.random() * 0.4 + 0.1 });
             }
