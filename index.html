@@ -13,7 +13,7 @@
             --red: #FF0000;
             --black: #000000;
             --glass: rgba(255, 255, 255, 0.05);
-            --neon-glow: 0 0 15px rgba(255, 215, 0, 0.3);
+            --neon-glow: 0 0 20px rgba(255, 215, 0, 0.5);
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -44,7 +44,7 @@
         .desktop-links a { color: white; text-decoration: none; font-weight: 700; font-family: 'Orbitron'; font-size: 0.8rem; transition: 0.3s; }
         .desktop-links a:hover { color: var(--gold); text-shadow: var(--neon-glow); }
 
-        /* FLOATING GLASS DOCK */
+        /* FLOATING GLASS DOCK (MOBILE) */
         .mobile-dock {
             display: none;
             position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%);
@@ -71,15 +71,31 @@
         .stat-val { display: block; font-family: 'Orbitron'; font-size: 2.2rem; color: var(--gold); font-weight: 900; }
         .stat-lab { font-size: 0.7rem; color: #666; text-transform: uppercase; letter-spacing: 2px; }
 
-        /* OUR TEAMS SECTION WITH LOGOS */
-        .elite-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 20px; max-width: 1250px; margin: 4rem auto; padding: 0 1.5rem; }
-        .team-card { background: var(--glass); border: 1px solid #333; padding: 2.5rem 1.5rem; text-align: center; border-radius: 15px; position: relative; transition: 0.4s; backdrop-filter: blur(10px); }
-        .team-card:hover { border-color: var(--gold); transform: translateY(-10px); box-shadow: 0 0 25px rgba(255, 215, 0, 0.2); }
-        .tier-badge { position: absolute; top: 15px; left: 50%; transform: translateX(-50%); font-size: 0.6rem; padding: 4px 12px; border-radius: 20px; font-weight: 900; font-family: 'Orbitron'; }
+        /* OUR TEAMS SECTION */
+        .elite-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 30px; max-width: 1250px; margin: 4rem auto; padding: 0 1.5rem; }
+        .team-card { background: var(--glass); border: 1px solid #333; padding: 3rem 1.5rem; text-align: center; border-radius: 15px; position: relative; transition: 0.4s; backdrop-filter: blur(10px); }
+        .team-card:hover { border-color: var(--gold); transform: translateY(-10px); box-shadow: 0 0 35px rgba(255, 215, 0, 0.2); }
         
-        /* TEAM LOGO IMAGE STYLE */
-        .team-logo-img { width: 80px; height: 80px; object-fit: contain; margin: 15px auto; display: block; filter: drop-shadow(0 0 5px rgba(255, 215, 0, 0.3)); }
+        /* FANCY TEAM LOGO STYLING */
+        .team-logo-container {
+            width: 120px; height: 120px;
+            margin: 20px auto;
+            position: relative;
+            display: flex; align-items: center; justify-content: center;
+        }
+        .team-logo-img { 
+            width: 100%; height: 100%; 
+            object-fit: contain; 
+            transition: 0.5s;
+            filter: drop-shadow(0 0 10px rgba(255, 215, 0, 0.4));
+        }
+        .team-card:hover .team-logo-img { 
+            transform: scale(1.15); 
+            filter: drop-shadow(0 0 25px var(--gold));
+        }
 
+        .tier-badge { position: absolute; top: 15px; left: 50%; transform: translateX(-50%); font-size: 0.6rem; padding: 4px 12px; border-radius: 20px; font-weight: 900; font-family: 'Orbitron'; z-index: 2; }
+        
         /* CTA SECTION */
         .cta-section { background: rgba(10, 10, 10, 0.8); border: 2px solid var(--gold); padding: 4rem 2rem; margin: 4rem auto; border-radius: 20px; text-align: center; max-width: 850px; }
         .join-btn { background: var(--gold); color: black; padding: 18px 50px; text-decoration: none; font-weight: 900; font-family: 'Orbitron'; display: inline-block; border: 2px solid var(--gold); transition: 0.3s; letter-spacing: 2px; }
@@ -96,7 +112,6 @@
         .legal-links a { color: #888; text-decoration: none; font-size: 0.7rem; font-family: 'Orbitron'; text-transform: uppercase; transition: 0.3s; }
         .legal-links a:hover { color: var(--gold); }
 
-        /* RESPONSIVE */
         @media (max-width: 850px) {
             .desktop-links { display: none; }
             .mobile-dock { display: flex; }
@@ -140,35 +155,35 @@
     </section>
 
     <div style="text-align: center; margin-top: 4rem;">
-        <h2 style="font-family: 'Orbitron'; font-size: 2rem; color: var(--gold); letter-spacing: 5px; text-transform: uppercase;">Our Teams</h2>
-        <div style="width: 80px; height: 4px; background: var(--red); margin: 20px auto;"></div>
+        <h2 style="font-family: 'Orbitron'; font-size: 2.2rem; color: var(--gold); letter-spacing: 6px; text-transform: uppercase; text-shadow: var(--neon-glow);">Our Teams</h2>
+        <div style="width: 100px; height: 4px; background: var(--red); margin: 20px auto; box-shadow: 0 0 10px var(--red);"></div>
     </div>
 
     <div class="elite-grid">
         <div class="team-card">
             <div class="tier-badge" style="background:var(--gold); color:black;">TIER 1</div>
             <h3 style="font-family:'Orbitron';">SHADOW HUNTERS</h3>
-            <img src="shadow.png" alt="Shadow Hunters Logo" class="team-logo-img">
+            <div class="team-logo-container"><img src="shadow.png" alt="Shadow Hunters" class="team-logo-img"></div>
         </div>
         <div class="team-card">
             <div class="tier-badge" style="background:var(--red); color:white;">TIER 2</div>
             <h3 style="font-family:'Orbitron';">STORM TROOPERS</h3>
-            <img src="storm.png" alt="Storm Troopers Logo" class="team-logo-img">
+            <div class="team-logo-container"><img src="storm.png" alt="Storm Troopers" class="team-logo-img"></div>
         </div>
         <div class="team-card">
             <div class="tier-badge" style="background:#FF69B4; color:white;">ALL-FEMALE</div>
             <h3 style="font-family:'Orbitron';">LADYBUGS</h3>
-            <img src="ladybugs.png" alt="Ladybugs Logo" class="team-logo-img">
+            <div class="team-logo-container"><img src="ladybugs.png" alt="Ladybugs" class="team-logo-img"></div>
         </div>
         <div class="team-card">
             <div class="tier-badge" style="background:#8A2BE2; color:white;">MP SPECIALISTS</div>
             <h3 style="font-family:'Orbitron';">4KT SYNDICATE</h3>
-            <img src="syndicate.png" alt="4KT Syndicate Logo" class="team-logo-img">
+            <div class="team-logo-container"><img src="syndicate.png" alt="4KT Syndicate" class="team-logo-img"></div>
         </div>
         <div class="team-card">
             <div class="tier-badge" style="background:#555; color:white;">DEVELOPMENT</div>
             <h3 style="font-family:'Orbitron';">BLOOD HOUNDS</h3>
-            <img src="hounds.png" alt="Blood Hounds Logo" class="team-logo-img">
+            <div class="team-logo-container"><img src="hounds.png" alt="Blood Hounds" class="team-logo-img"></div>
         </div>
     </div>
 
