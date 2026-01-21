@@ -12,63 +12,66 @@
             --gold: #FFD700;
             --red: #FF0000;
             --black: #000000;
+            --glass: rgba(255, 255, 255, 0.05);
+            --neon-glow: 0 0 20px rgba(255, 215, 0, 0.3);
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
-            background: linear-gradient(-45deg, #000000, #1a0000, #000000, #0a0a0a);
-            background-size: 400% 400%;
-            animation: gradientBG 15s ease infinite;
+            background-color: var(--black);
             color: white;
             font-family: 'Montserrat', sans-serif;
             overflow-x: hidden;
-            line-height: 1.6;
+            padding-bottom: 120px;
         }
 
-        @keyframes gradientBG {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
+        #particle-canvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; pointer-events: none; }
 
-        /* NAVIGATION */
-        .luxury-nav { background: rgba(0,0,0,0.9); border-bottom: 2px solid var(--gold); padding: 1rem 2rem; position: sticky; top: 0; z-index: 1000; }
+        /* NAV & DOCK */
+        .luxury-nav { background: rgba(0,0,0,0.95); border-bottom: 2px solid var(--gold); padding: 1rem 2rem; position: sticky; top: 0; z-index: 1000; }
         .nav-container { max-width: 1400px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
-        .nav-brand { display: flex; align-items: center; gap: 12px; }
-        .nav-logo-small { height: 40px; width: auto; }
         .nav-title { font-family: 'Orbitron'; font-weight: 900; font-size: 1.1rem; letter-spacing: 1px; }
-        .desktop-links a { color: white; text-decoration: none; font-weight: 700; font-family: 'Orbitron'; font-size: 0.8rem; margin-left: 20px; }
-        .desktop-links a:hover { color: var(--gold); }
+        .mobile-dock { display: none; position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); width: 90%; max-width: 400px; background: rgba(10, 10, 10, 0.85); backdrop-filter: blur(15px); border: 1px solid var(--gold); border-radius: 50px; padding: 12px 25px; z-index: 2000; justify-content: space-around; align-items: center; box-shadow: 0 10px 30px rgba(0,0,0,0.5), var(--neon-glow); }
+        .dock-item { color: white; text-decoration: none; text-align: center; font-family: 'Orbitron'; font-size: 0.65rem; font-weight: 700; }
+        .dock-item i { display: block; font-size: 1.2rem; color: var(--gold); margin-bottom: 4px; }
 
-        /* CONTENT SECTION */
-        .about-hero { padding: 6rem 1.5rem; text-align: center; max-width: 900px; margin: 0 auto; }
-        .about-hero h1 { font-family: 'Orbitron'; font-size: 3.5rem; color: var(--gold); margin-bottom: 20px; }
-        .about-hero p { color: #ccc; font-size: 1.1rem; margin-bottom: 30px; }
+        /* ABOUT HERO */
+        .about-hero { padding: 6rem 1.5rem; text-align: center; }
+        .about-title { font-family: 'Orbitron'; font-size: clamp(2.5rem, 8vw, 5rem); font-weight: 900; color: var(--gold); text-shadow: var(--neon-glow); margin-bottom: 20px; }
+        .about-subtitle { font-family: 'Orbitron'; color: #888; letter-spacing: 3px; max-width: 800px; margin: 0 auto; line-height: 1.6; }
 
-        .vision-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; max-width: 1200px; margin: 0 auto 5rem; padding: 0 1.5rem; }
-        .vision-card { background: rgba(255, 255, 255, 0.05); border: 1px solid #333; padding: 3rem; border-radius: 15px; text-align: center; transition: 0.3s; }
-        .vision-card:hover { border-color: var(--red); transform: translateY(-10px); }
-        .vision-card i { font-size: 3rem; color: var(--red); margin-bottom: 20px; }
-        .vision-card h3 { font-family: 'Orbitron'; margin-bottom: 15px; color: var(--gold); }
+        /* PILLARS GRID */
+        .pillar-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; max-width: 1200px; margin: 4rem auto; padding: 0 1.5rem; }
+        .pillar-card { background: var(--glass); border: 1px solid #333; padding: 3rem 2rem; border-radius: 20px; text-align: center; transition: 0.4s; backdrop-filter: blur(10px); }
+        .pillar-card:hover { border-color: var(--red); transform: translateY(-10px); box-shadow: 0 0 25px rgba(255, 0, 0, 0.2); }
+        .pillar-icon { font-size: 3rem; color: var(--red); margin-bottom: 20px; filter: drop-shadow(0 0 10px var(--red)); }
+        .pillar-card h3 { font-family: 'Orbitron'; color: var(--gold); margin-bottom: 15px; letter-spacing: 2px; }
 
-        /* LEADERSHIP SECTION */
-        .leadership { padding: 5rem 1.5rem; background: rgba(0,0,0,0.5); text-align: center; }
-        .leader-container { display: flex; flex-wrap: wrap; justify-content: center; gap: 40px; margin-top: 3rem; }
-        .leader-card { max-width: 350px; background: #0a0a0a; border: 1px solid var(--gold); padding: 2.5rem; border-radius: 10px; }
-        .leader-role { color: var(--gold); font-family: 'Orbitron'; font-size: 0.8rem; letter-spacing: 2px; margin-bottom: 10px; }
-        .leader-name { font-family: 'Orbitron'; font-size: 1.8rem; margin-bottom: 15px; }
-        .leader-bio { color: #888; font-size: 0.9rem; }
+        /* LEADERSHIP COMMAND CENTER */
+        .leadership-sec { padding: 4rem 1.5rem; text-align: center; }
+        .leader-flex { display: flex; justify-content: center; gap: 40px; flex-wrap: wrap; margin-top: 3rem; }
+        .leader-card { width: 350px; background: rgba(15,15,15,0.9); border-left: 4px solid var(--gold); padding: 2.5rem; border-radius: 0 15px 15px 0; text-align: left; transition: 0.3s; }
+        .leader-card:hover { background: rgba(255,215,0,0.05); }
+        .leader-role { font-family: 'Orbitron'; color: var(--gold); font-size: 0.7rem; letter-spacing: 2px; font-weight: 900; }
+        .leader-name { font-family: 'Orbitron'; font-size: 2rem; margin: 10px 0; letter-spacing: 1px; }
+        .leader-bio { color: #888; font-size: 0.9rem; line-height: 1.5; }
 
-        .footer { text-align: center; padding: 3rem; border-top: 1px solid #222; font-family: 'Orbitron'; font-size: 0.7rem; color: #555; letter-spacing: 2px; }
+        /* FOOTER */
+        .footer { text-align: center; padding: 4rem 1.5rem; border-top: 1px solid #222; background: #000000; }
+        .footer-text { font-family: 'Orbitron'; font-size: 0.75rem; color: #555; letter-spacing: 3px; text-transform: uppercase; margin-bottom: 15px; }
+        .legal-links a { color: #888; text-decoration: none; font-size: 0.7rem; font-family: 'Orbitron'; margin: 0 10px; }
+
+        @media (max-width: 850px) { .mobile-dock { display: flex; } .desktop-links { display: none; } }
     </style>
 </head>
 <body>
 
+    <canvas id="particle-canvas"></canvas>
+
     <nav class="luxury-nav">
         <div class="nav-container">
             <div class="nav-brand">
-                <img src="logo.png" alt="Logo" class="nav-logo-small">
                 <div class="nav-title"><span style="color:var(--gold)">BLOOD</span> <span style="color:var(--red)">ESPORTS</span></div>
             </div>
             <div class="desktop-links">
@@ -80,43 +83,82 @@
         </div>
     </nav>
 
-    <header class="about-hero">
-        <h1>OUR STORY</h1>
-        <p>Founded in 2022, Blood Esports was built on a simple vision: to revolutionize the mobile esports scene through elite skill development and strategic dominance. We are more than just a team; we are a kingdom of competitors pushing the boundaries of Call of Duty Mobile.</p>
-    </header>
+    <div class="mobile-dock">
+        <a href="index.html" class="dock-item"><i class="fas fa-home"></i>HOME</a>
+        <a href="clans/4kt.html" class="dock-item"><i class="fas fa-crown"></i>4KT</a>
+        <a href="clans/otf.html" class="dock-item"><i class="fas fa-users"></i>OTF</a>
+        <a href="events.html" class="dock-item"><i class="fas fa-calendar-alt"></i>EVENTS</a>
+    </div>
 
-    <div class="vision-grid">
-        <div class="vision-card">
-            <i class="fas fa-trophy"></i>
-            <h3>DOMINANCE</h3>
-            <p>We strive for nothing less than #1. Our 4KT division represents the pinnacle of competitive excellence.</p>
+    <section class="about-hero">
+        <h1 class="about-title">THE KINGDOM</h1>
+        <p class="about-subtitle">ESTABLISHED 2022. REDEFINING COMPETITIVE DOMINANCE. WE ARE BLOOD ESPORTS.</p>
+    </section>
+
+    <div class="pillar-grid">
+        <div class="pillar-card">
+            <i class="fas fa-shield-alt pillar-icon"></i>
+            <h3>UNMATCHED SKILL</h3>
+            <p>We don't just compete; we dominate. Our Tier 1 division is a fortress of strategic brilliance and mechanical precision.</p>
         </div>
-        <div class="vision-card">
-            <i class="fas fa-users"></i>
-            <h3>FAMILY</h3>
-            <p>Through OTF, we build a community where talent is nurtured and strategy is shared to build the future of the org.</p>
+        <div class="pillar-card">
+            <i class="fas fa-fist-raised pillar-icon"></i>
+            <h3>FAMILY LEGACY</h3>
+            <p>Blood is thicker than water. Our OTF division nurtures the future, turning grinders into legends.</p>
+        </div>
+        <div class="pillar-card">
+            <i class="fas fa-globe pillar-icon"></i>
+            <h3>GLOBAL IMPACT</h3>
+            <p>From local scrims to international tournaments, the world knows the name Blood Esports.</p>
         </div>
     </div>
 
-    <section class="leadership">
-        <h2 style="font-family:'Orbitron'; font-size: 2rem;">LEADERSHIP</h2>
-        <div class="leader-container">
+    <section class="leadership-sec">
+        <h2 style="font-family:'Orbitron'; font-size: 2rem; color: var(--gold); letter-spacing: 5px;">COMMAND CENTER</h2>
+        <div style="width: 80px; height: 4px; background: var(--red); margin: 20px auto;"></div>
+        
+        <div class="leader-flex">
             <div class="leader-card">
-                <div class="leader-role">FOUNDER & CLAN MASTER</div>
+                <div class="leader-role">FOUNDER & MASTERMIND</div>
                 <div class="leader-name">CHOCO</div>
-                <p class="leader-bio">The strategic mastermind and visionary behind Blood Esports. Choco drives the tactical planning and leadership that defines our competitive success.</p>
+                <p class="leader-bio">The visionary. Choco architected the Kingdom's foundation, ensuring Blood Esports remains the apex predator of CODM.</p>
             </div>
             <div class="leader-card">
-                <div class="leader-role">CLAN MANAGER</div>
+                <div class="leader-role">OPERATIONS DIRECTOR</div>
                 <div class="leader-name">DANNY</div>
-                <p class="leader-bio">The operations director ensuring peak performance across all divisions. Danny masters the logistics and team coordination that keeps us running.</p>
+                <p class="leader-bio">The tactician. Danny coordinates the logistics of our massive roster, maintaining peak performance across all divisions.</p>
             </div>
         </div>
     </section>
 
     <footer class="footer">
-        ALL RIGHTS RESERVED BLOOD ESPORTS 2026
+        <p class="footer-text">ALL RIGHTS RESERVED BLOOD ESPORTS 2026</p>
+        <div class="legal-links">
+            <a href="terms.html">Terms</a>
+            <a href="privacy.html">Privacy</a>
+        </div>
     </footer>
 
+    <script>
+        const canvas = document.getElementById('particle-canvas');
+        const ctx = canvas.getContext('2d');
+        let particles = [];
+        function init() {
+            canvas.width = window.innerWidth; canvas.height = window.innerHeight;
+            particles = [];
+            for (let i = 0; i < 150; i++) {
+                particles.push({ x: Math.random() * canvas.width, y: Math.random() * canvas.height, size: Math.random() * 2.5, speed: Math.random() * 0.4 + 0.1 });
+            }
+        }
+        function animate() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height); ctx.fillStyle = '#FFD700';
+            particles.forEach(p => {
+                ctx.beginPath(); ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2); ctx.fill();
+                p.y -= p.speed; if (p.y < 0) p.y = canvas.height;
+            });
+            requestAnimationFrame(animate);
+        }
+        window.addEventListener('resize', init); init(); animate();
+    </script>
 </body>
 </html>
