@@ -25,6 +25,7 @@
         @keyframes fadeInDown { from { opacity: 0; transform: translateY(-30px); } to { opacity: 1; transform: translateY(0); } }
         @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
         @keyframes glow { 0% { text-shadow: 0 0 10px var(--dark-gold); } 50% { text-shadow: 0 0 25px var(--gold), 0 0 40px var(--gold); } 100% { text-shadow: 0 0 10px var(--dark-gold); } }
+        @keyframes float { 0% { transform: translateY(0px); } 50% { transform: translateY(-10px); } 100% { transform: translateY(0px); } }
 
         /* Nav */
         .nav { 
@@ -62,23 +63,25 @@
             text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
         }
 
-        /* Roster Grid */
+        /* Container & Titles */
         .container { max-width: 1200px; margin: 0 auto; padding: 2rem; }
         
-        .roster-title {
-            text-align: center; font-family: 'Orbitron'; color: white; margin-bottom: 3rem;
+        .section-title {
+            text-align: center; font-family: 'Orbitron'; color: white; margin-bottom: 3rem; margin-top: 2rem;
             position: relative; display: inline-block; animation: fadeInUp 1.2s ease-out;
         }
-        .roster-title::after { content: ''; display: block; width: 100%; height: 3px; background: var(--gold); margin-top: 10px; box-shadow: 0 0 10px var(--gold); }
+        .section-title::after { content: ''; display: block; width: 100%; height: 3px; background: var(--gold); margin-top: 10px; box-shadow: 0 0 10px var(--gold); }
 
+        /* Roster Grid */
         .roster-grid { 
             display: grid; 
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); 
             gap: 30px; 
             perspective: 1000px;
+            margin-bottom: 4rem;
         }
 
-        /* Super Cool Cards */
+        /* Player Cards */
         .player-card { 
             background: rgba(255, 255, 255, 0.02); 
             padding: 2.5rem; 
@@ -92,7 +95,7 @@
             backdrop-filter: blur(5px);
         }
 
-        /* Stagger Animation for cards */
+        /* Stagger Animation for Players */
         .player-card:nth-child(1) { animation-delay: 0.1s; }
         .player-card:nth-child(2) { animation-delay: 0.2s; }
         .player-card:nth-child(3) { animation-delay: 0.3s; }
@@ -127,6 +130,50 @@
             color: var(--gold); font-size: 0.85rem; letter-spacing: 3px; text-transform: uppercase; font-weight: 700;
         }
 
+        /* Achievements Section */
+        .achievements-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 25px;
+            margin-top: 2rem;
+        }
+
+        .achievement-card {
+            background: linear-gradient(135deg, rgba(255, 215, 0, 0.05), rgba(0,0,0,0.5));
+            border: 1px solid var(--gold);
+            border-radius: 15px;
+            padding: 2rem;
+            text-align: center;
+            animation: fadeInUp 0.8s ease-out backwards;
+            transition: 0.3s;
+        }
+
+        /* Stagger Animation for Achievements */
+        .achievement-card:nth-child(1) { animation-delay: 0.8s; }
+        .achievement-card:nth-child(2) { animation-delay: 1.0s; }
+        .achievement-card:nth-child(3) { animation-delay: 1.2s; }
+
+        .achievement-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 0 25px rgba(255, 215, 0, 0.3);
+            background: linear-gradient(135deg, rgba(255, 215, 0, 0.15), rgba(0,0,0,0.6));
+        }
+
+        .achievement-icon {
+            font-size: 2.5rem; color: var(--gold); margin-bottom: 15px;
+            filter: drop-shadow(0 0 10px var(--gold));
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .achievement-val {
+            font-family: 'Orbitron'; font-size: 2.5rem; font-weight: 900; color: white;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+        }
+
+        .achievement-label {
+            font-size: 0.8rem; color: #aaa; letter-spacing: 2px; text-transform: uppercase; margin-top: 5px;
+        }
+
         /* Footer */
         footer { text-align: center; padding: 4rem; color: #666; font-size: 0.8rem; font-family: 'Orbitron'; animation: fadeInUp 2s ease-out; }
     </style>
@@ -147,8 +194,9 @@
     </header>
 
     <div class="container">
+        
         <div style="text-align: center;">
-            <h2 class="roster-title">ACTIVE OPERATIVES</h2>
+            <h2 class="section-title">ACTIVE OPERATIVES</h2>
         </div>
 
         <div class="roster-grid">
@@ -188,6 +236,31 @@
                 <div class="player-role">Operative</div>
             </div>
         </div>
+
+        <div style="text-align: center; margin-top: 4rem;">
+            <h2 class="section-title">BATTLE RECORDS</h2>
+        </div>
+
+        <div class="achievements-grid">
+            <div class="achievement-card">
+                <i class="fas fa-trophy achievement-icon"></i>
+                <div class="achievement-val">50+</div>
+                <div class="achievement-label">TOURNAMENT WINS</div>
+            </div>
+
+            <div class="achievement-card">
+                <i class="fas fa-crown achievement-icon" style="animation-delay: 0.2s;"></i>
+                <div class="achievement-val">#1</div>
+                <div class="achievement-label">AFRICAN RANKING</div>
+            </div>
+
+            <div class="achievement-card">
+                <i class="fas fa-crosshairs achievement-icon" style="animation-delay: 0.4s;"></i>
+                <div class="achievement-val">TIER 1</div>
+                <div class="achievement-label">ELITE STATUS</div>
+            </div>
+        </div>
+
     </div>
 
     <footer>
