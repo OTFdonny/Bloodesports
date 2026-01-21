@@ -9,36 +9,37 @@
     <style>
         :root {
             --gold: #FFD700;
-            --pink: #FF69B4;
-            --deep-pink: #C71585;
+            --pink: #FF69B4; /* Main background pink */
+            --deep-pink: #C71585; /* Darker pink for accents/text */
             --black: #050505;
-            --glass: rgba(255, 255, 255, 0.03);
-            --neon-glow: 0 0 20px rgba(255, 105, 180, 0.6);
+            --glass-dark: rgba(0, 0, 0, 0.1); /* Dark glass for pink bg */
+            --neon-glow: 0 0 20px rgba(199, 21, 133, 0.6); /* Deep pink glow */
+            --text-color: var(--black); /* Main text color */
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
-            background-color: var(--black);
-            color: white;
+            background-color: var(--pink); /* Changed to pink */
+            color: var(--text-color); /* Changed to dark text */
             font-family: 'Montserrat', sans-serif;
             overflow-x: hidden;
         }
 
-        /* Animated Background */
-        canvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; }
+        /* Animated Background - Canvas opacity reduced for better text contrast */
+        canvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; opacity: 0.7; }
 
         /* Animations */
         @keyframes fadeInDown { from { opacity: 0; transform: translateY(-30px); } to { opacity: 1; transform: translateY(0); } }
         @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
-        @keyframes glowPink { 0% { text-shadow: 0 0 10px var(--deep-pink); } 50% { text-shadow: 0 0 25px var(--pink), 0 0 40px var(--pink); } 100% { text-shadow: 0 0 10px var(--deep-pink); } }
+        @keyframes glowPink { 0% { text-shadow: 0 0 10px var(--deep-pink); } 50% { text-shadow: 0 0 25px var(--deep-pink), 0 0 40px var(--deep-pink); } 100% { text-shadow: 0 0 10px var(--deep-pink); } }
         @keyframes float { 0% { transform: translateY(0px); } 50% { transform: translateY(-10px); } 100% { transform: translateY(0px); } }
 
         /* Navigation */
         .nav-bar {
-            background: rgba(0,0,0,0.8);
+            background: rgba(255, 255, 255, 0.2); /* Lighter background for nav */
             backdrop-filter: blur(10px);
-            border-bottom: 1px solid var(--pink);
+            border-bottom: 1px solid var(--deep-pink);
             padding: 1rem 2rem;
             position: sticky;
             top: 0;
@@ -48,41 +49,42 @@
         }
 
         .nav-logo { 
-            font-family: 'Orbitron'; font-weight: 900; color: white; text-decoration: none; font-size: 1.2rem; 
+            font-family: 'Orbitron'; font-weight: 900; color: var(--black); text-decoration: none; font-size: 1.2rem; 
             transition: 0.3s; cursor: pointer;
         }
-        .nav-logo:hover { text-shadow: var(--neon-glow); color: var(--pink); }
+        .nav-logo:hover { text-shadow: var(--neon-glow); color: var(--deep-pink); }
 
         .back-btn {
-            font-family: 'Orbitron'; font-size: 0.8rem; color: white; text-decoration: none;
-            border: 1px solid var(--pink); padding: 8px 20px; border-radius: 20px;
+            font-family: 'Orbitron'; font-size: 0.8rem; color: var(--black); text-decoration: none;
+            border: 1px solid var(--deep-pink); padding: 8px 20px; border-radius: 20px;
             transition: 0.3s;
+            font-weight: 600;
         }
-        .back-btn:hover { background: var(--pink); color: white; box-shadow: var(--neon-glow); }
+        .back-btn:hover { background: var(--deep-pink); color: white; box-shadow: var(--neon-glow); }
 
         /* Hero Section */
         .hero { text-align: center; padding: 6rem 1rem 3rem; animation: fadeInDown 1s ease-out; }
         .hero h1 { 
             font-family: 'Orbitron'; 
             font-size: clamp(3rem, 10vw, 5rem); 
-            color: var(--pink); 
+            color: var(--deep-pink); /* Darker pink for title */
             animation: glowPink 3s infinite;
             margin-bottom: 0.5rem;
         }
         .hero p { 
-            font-family: 'Orbitron'; color: var(--gold); letter-spacing: 5px; font-size: 1rem; 
-            text-shadow: 0 0 10px rgba(0,0,0,0.8);
+            font-family: 'Orbitron'; color: var(--black); letter-spacing: 5px; font-size: 1rem; 
+            text-shadow: 0 0 10px rgba(255,255,255,0.5); font-weight: 600;
         }
 
         /* Container & Titles */
         .container { max-width: 1200px; margin: 0 auto; padding: 0 1.5rem; }
 
         .section-title {
-            text-align: center; font-family: 'Orbitron'; color: white; margin-bottom: 3rem; margin-top: 2rem;
+            text-align: center; font-family: 'Orbitron'; color: var(--black); margin-bottom: 3rem; margin-top: 2rem;
             position: relative; display: inline-block; animation: fadeInUp 1.2s ease-out;
-            font-size: 1.8rem;
+            font-size: 1.8rem; font-weight: 700;
         }
-        .section-title::after { content: ''; display: block; width: 100%; height: 3px; background: var(--pink); margin-top: 10px; box-shadow: var(--neon-glow); }
+        .section-title::after { content: ''; display: block; width: 100%; height: 3px; background: var(--deep-pink); margin-top: 10px; box-shadow: var(--neon-glow); }
 
         /* COOLER ROSTER GRID */
         .roster-grid {
@@ -93,11 +95,11 @@
         }
 
         .player-card {
-            background: rgba(255, 255, 255, 0.03);
+            background: var(--glass-dark); /* Used dark glass */
             padding: 3rem 2rem;
             text-align: center;
             border-radius: 20px;
-            border: 1px solid rgba(255, 105, 180, 0.2);
+            border: 1px solid rgba(199, 21, 133, 0.3); /* Deep pink border */
             transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             position: relative;
             overflow: hidden;
@@ -111,29 +113,29 @@
         .player-card:nth-child(3) { animation-delay: 0.3s; }
 
         .player-card:hover { 
-            border-color: var(--pink); 
+            border-color: var(--deep-pink); 
             transform: translateY(-15px) scale(1.03); 
-            box-shadow: 0 0 35px rgba(255, 105, 180, 0.3);
-            background: rgba(255, 105, 180, 0.05);
+            box-shadow: 0 0 35px rgba(199, 21, 133, 0.4);
+            background: rgba(199, 21, 133, 0.1);
         }
 
         /* Shine Effect */
         .player-card::before {
             content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
             transition: 0.5s;
         }
         .player-card:hover::before { left: 100%; }
 
         .player-icon { 
-            font-size: 3.5rem; color: var(--pink); margin-bottom: 1.5rem; 
-            filter: drop-shadow(0 0 10px var(--pink));
+            font-size: 3.5rem; color: var(--deep-pink); margin-bottom: 1.5rem; 
+            filter: drop-shadow(0 0 10px var(--deep-pink));
             transition: 0.3s;
         }
-        .player-card:hover .player-icon { transform: scale(1.2) rotate(10deg); color: white; }
+        .player-card:hover .player-icon { transform: scale(1.2) rotate(10deg); color: var(--black); }
 
-        .player-name { font-family: 'Orbitron'; font-size: 1.8rem; font-weight: 700; color: white; margin-bottom: 5px; }
-        .player-role { color: var(--gold); font-size: 0.8rem; letter-spacing: 3px; text-transform: uppercase; font-weight: bold; }
+        .player-name { font-family: 'Orbitron'; font-size: 1.8rem; font-weight: 700; color: var(--black); margin-bottom: 5px; }
+        .player-role { color: var(--deep-pink); font-size: 0.8rem; letter-spacing: 3px; text-transform: uppercase; font-weight: bold; }
 
         /* Achievements Section - Animated */
         .achievements-grid {
@@ -141,31 +143,31 @@
         }
 
         .award-card {
-            background: linear-gradient(135deg, rgba(255, 105, 180, 0.05), rgba(0,0,0,0.5));
-            border: 1px solid var(--pink); border-radius: 15px; padding: 2rem;
+            background: linear-gradient(135deg, rgba(199, 21, 133, 0.1), rgba(0,0,0,0.05));
+            border: 1px solid var(--deep-pink); border-radius: 15px; padding: 2rem;
             display: flex; align-items: center; gap: 20px;
             animation: fadeInUp 0.8s ease-out backwards;
             transition: 0.3s;
         }
-        .award-card:hover { transform: translateY(-5px); box-shadow: var(--neon-glow); background: rgba(255, 105, 180, 0.1); }
+        .award-card:hover { transform: translateY(-5px); box-shadow: var(--neon-glow); background: rgba(199, 21, 133, 0.2); }
         .award-card:nth-child(1) { animation-delay: 0.5s; }
         .award-card:nth-child(2) { animation-delay: 0.7s; }
 
-        .award-icon { font-size: 2.5rem; color: var(--gold); animation: float 3s ease-in-out infinite; }
+        .award-icon { font-size: 2.5rem; color: var(--gold); animation: float 3s ease-in-out infinite; filter: drop-shadow(0 0 5px var(--gold)); }
         
-        .award-text h3 { font-family: 'Orbitron'; font-size: 1.1rem; color: white; margin-bottom: 5px; }
-        .award-text p { color: #ccc; font-size: 0.8rem; }
+        .award-text h3 { font-family: 'Orbitron'; font-size: 1.1rem; color: var(--black); margin-bottom: 5px; font-weight: 700; }
+        .award-text p { color: var(--black); font-size: 0.8rem; }
 
         /* CTA Button */
         .btn-discord {
-            display: inline-block; background: var(--pink); color: white; padding: 1rem 3rem;
+            display: inline-block; background: var(--deep-pink); color: white; padding: 1rem 3rem;
             border-radius: 50px; text-decoration: none; font-family: 'Orbitron'; font-weight: 900;
-            margin-top: 3rem; transition: 0.3s; box-shadow: 0 0 15px var(--pink);
+            margin-top: 3rem; transition: 0.3s; box-shadow: 0 0 15px var(--deep-pink);
             animation: fadeInUp 1.5s ease-out;
         }
-        .btn-discord:hover { background: white; color: var(--pink); transform: scale(1.1); box-shadow: 0 0 30px var(--pink); }
+        .btn-discord:hover { background: var(--black); color: var(--pink); transform: scale(1.1); box-shadow: 0 0 30px var(--deep-pink); }
 
-        footer { text-align: center; padding: 4rem 1rem; opacity: 0.6; font-size: 0.8rem; font-family: 'Orbitron'; animation: fadeInUp 2s ease-out; }
+        footer { text-align: center; padding: 4rem 1rem; opacity: 0.8; font-size: 0.8rem; font-family: 'Orbitron'; animation: fadeInUp 2s ease-out; color: var(--black); font-weight: 600; }
 
     </style>
 </head>
@@ -246,7 +248,8 @@
         canvas.height = window.innerHeight;
 
         const butterflies = [];
-        const colors = ['#FF69B4', '#FFD700', '#FFFFFF']; // Pink, Gold, White
+        // Changed white to a darker pink for contrast on the pink background
+        const colors = ['#C71585', '#FFD700', '#FF1493']; 
 
         class Butterfly {
             constructor() {
