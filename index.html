@@ -12,6 +12,8 @@
             --gold: #FFD700;
             --red: #FF0000;
             --black: #000000;
+            --glass: rgba(255, 255, 255, 0.05);
+            --neon-glow: 0 0 15px rgba(255, 215, 0, 0.3);
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -21,86 +23,79 @@
             color: white;
             font-family: 'Montserrat', sans-serif;
             overflow-x: hidden;
-            padding-bottom: 70px;
+            padding-bottom: 100px; /* Extra space for Floating Dock */
         }
 
-        /* STAR PARTICLE CANVAS */
-        #particle-canvas {
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            z-index: -1; pointer-events: none;
-        }
+        #particle-canvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; pointer-events: none; }
 
-        /* NAVIGATION */
+        /* TOP NAV (PC ONLY) */
         .luxury-nav { 
             background: rgba(0,0,0,0.95); 
             border-bottom: 2px solid var(--gold); 
             padding: 1rem 2rem; 
             position: sticky; top: 0; z-index: 1000; 
         }
-
-        .nav-container { 
-            max-width: 1400px; margin: 0 auto; 
-            display: flex; justify-content: space-between; align-items: center; 
-        }
-
+        .nav-container { max-width: 1400px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
         .nav-brand { display: flex; align-items: center; gap: 12px; }
         .nav-logo-small { height: 40px; width: auto; }
         .nav-title { font-family: 'Orbitron'; font-weight: 900; font-size: 1.1rem; letter-spacing: 1px; }
 
         .desktop-links { display: flex; gap: 20px; }
-        .desktop-links a { 
-            color: white; text-decoration: none; font-weight: 700; 
-            font-family: 'Orbitron'; font-size: 0.8rem; transition: 0.3s; 
+        .desktop-links a { color: white; text-decoration: none; font-weight: 700; font-family: 'Orbitron'; font-size: 0.8rem; transition: 0.3s; }
+        .desktop-links a:hover { color: var(--gold); text-shadow: var(--neon-glow); }
+
+        /* NEW: FLOATING GLASS DOCK (MOBILE) */
+        .mobile-dock {
+            display: none;
+            position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%);
+            width: 90%; max-width: 400px;
+            background: rgba(10, 10, 10, 0.85);
+            backdrop-filter: blur(15px);
+            border: 1px solid var(--gold);
+            border-radius: 50px;
+            padding: 12px 25px;
+            z-index: 2000;
+            justify-content: space-around;
+            align-items: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5), var(--neon-glow);
         }
-        .desktop-links a:hover { color: var(--gold); text-shadow: 0 0 10px var(--gold); }
-
-        /* MOBILE MENU ICON */
-        .menu-btn { display: none; font-size: 1.5rem; color: var(--gold); cursor: pointer; }
-
-        .mobile-overlay {
-            position: fixed; top: 0; right: -100%; width: 70%; height: 100%;
-            background: rgba(10, 10, 10, 0.98); border-left: 2px solid var(--gold);
-            z-index: 2000; transition: 0.4s; padding: 80px 40px;
-            display: flex; flex-direction: column; gap: 30px;
-        }
-
-        .mobile-overlay.active { right: 0; }
-        .mobile-overlay a { color: white; text-decoration: none; font-family: 'Orbitron'; font-size: 1.2rem; font-weight: 700; }
-        .close-btn { position: absolute; top: 20px; right: 20px; font-size: 2rem; color: var(--red); }
+        .dock-item { color: white; text-decoration: none; text-align: center; font-family: 'Orbitron'; font-size: 0.65rem; font-weight: 700; transition: 0.3s; }
+        .dock-item i { display: block; font-size: 1.2rem; color: var(--gold); margin-bottom: 4px; }
+        .dock-item:hover { transform: translateY(-5px); color: var(--gold); }
 
         /* HERO & STATS */
         .hero { padding: 4rem 1.5rem; text-align: center; }
         .main-logo { width: 220px; margin-bottom: 1.5rem; filter: drop-shadow(0 0 15px rgba(255, 215, 0, 0.5)); }
-        .hero-title { font-family: 'Orbitron'; font-size: clamp(2.5rem, 8vw, 4.5rem); font-weight: 900; line-height: 1.1; }
+        .hero-title { font-family: 'Orbitron'; font-size: clamp(2.5rem, 8vw, 4.5rem); font-weight: 900; line-height: 1.1; text-transform: uppercase; }
         
         .stats-banner { display: flex; justify-content: center; gap: 40px; margin-top: 3rem; flex-wrap: wrap; }
-        .stat-val { display: block; font-family: 'Orbitron'; font-size: 2rem; color: var(--gold); font-weight: 900; }
-        .stat-lab { font-size: 0.7rem; color: #666; text-transform: uppercase; letter-spacing: 1px; }
+        .stat-val { display: block; font-family: 'Orbitron'; font-size: 2.2rem; color: var(--gold); font-weight: 900; }
+        .stat-lab { font-size: 0.7rem; color: #666; text-transform: uppercase; letter-spacing: 2px; }
 
         /* OUR TEAMS SECTION */
         .elite-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 20px; max-width: 1250px; margin: 4rem auto; padding: 0 1.5rem; }
-        .team-card { background: rgba(15, 15, 15, 0.8); border: 1px solid #333; padding: 2.5rem 1.5rem; text-align: center; border-radius: 15px; position: relative; transition: 0.4s; backdrop-filter: blur(5px); }
-        .team-card:hover { border-color: var(--gold); transform: scale(1.03); }
+        .team-card { background: var(--glass); border: 1px solid #333; padding: 2.5rem 1.5rem; text-align: center; border-radius: 15px; position: relative; transition: 0.4s; backdrop-filter: blur(10px); }
+        .team-card:hover { border-color: var(--gold); transform: translateY(-10px); box-shadow: 0 0 25px rgba(255, 215, 0, 0.2); }
         .tier-badge { position: absolute; top: 20px; left: 50%; transform: translateX(-50%); font-size: 0.6rem; padding: 4px 12px; border-radius: 20px; font-weight: 900; font-family: 'Orbitron'; }
         
-        /* FOOTER & CTA */
-        .cta-section { background: rgba(10, 10, 10, 0.8); border: 2px solid var(--gold); padding: 3rem; margin: 4rem auto; border-radius: 20px; text-align: center; max-width: 800px; }
-        .join-btn { background: var(--gold); color: black; padding: 18px 45px; text-decoration: none; font-weight: 900; font-family: 'Orbitron'; display: inline-block; border: 2px solid var(--gold); transition: 0.3s; }
-        .join-btn:hover { background: transparent; color: var(--gold); box-shadow: 0 0 20px var(--gold); }
+        /* CTA SECTION */
+        .cta-section { background: rgba(10, 10, 10, 0.8); border: 2px solid var(--gold); padding: 4rem 2rem; margin: 4rem auto; border-radius: 20px; text-align: center; max-width: 850px; }
+        .join-btn { background: var(--gold); color: black; padding: 18px 50px; text-decoration: none; font-weight: 900; font-family: 'Orbitron'; display: inline-block; border: 2px solid var(--gold); transition: 0.3s; letter-spacing: 2px; }
+        .join-btn:hover { background: transparent; color: var(--gold); box-shadow: 0 0 30px var(--gold); }
 
-        .social-box { display: flex; justify-content: center; gap: 30px; margin-top: 2rem; }
-        .social-box a { color: white; font-size: 2.5rem; transition: 0.3s; }
-        .social-box a:hover { color: var(--gold); transform: translateY(-5px); }
+        .social-box { display: flex; justify-content: center; gap: 35px; margin-top: 2.5rem; }
+        .social-box a { color: white; font-size: 2.8rem; transition: 0.3s; }
+        .social-box a:hover { color: var(--gold); transform: scale(1.2) rotate(5deg); }
 
-        /* PROTECTED COPYRIGHT FOOTER */
-        .footer { text-align: center; padding: 3rem 1.5rem; border-top: 1px solid #222; background: #000000; }
-        .footer-text { font-family: 'Orbitron'; font-size: 0.75rem; color: #555; letter-spacing: 2px; text-transform: uppercase; }
+        /* FOOTER */
+        .footer { text-align: center; padding: 4rem 1.5rem; border-top: 1px solid #222; background: #000000; }
+        .footer-text { font-family: 'Orbitron'; font-size: 0.75rem; color: #555; letter-spacing: 3px; text-transform: uppercase; }
 
         /* RESPONSIVE */
         @media (max-width: 850px) {
             .desktop-links { display: none; }
-            .menu-btn { display: block; }
+            .mobile-dock { display: flex; }
+            .hero { padding-top: 2rem; }
         }
     </style>
 </head>
@@ -120,16 +115,14 @@
                 <a href="clans/otf.html">OTF</a>
                 <a href="events.html">EVENTS</a>
             </div>
-            <div class="menu-btn" onclick="toggleMenu()"><i class="fas fa-bars"></i></div>
         </div>
     </nav>
 
-    <div class="mobile-overlay" id="mobileMenu">
-        <div class="close-btn" onclick="toggleMenu()"><i class="fas fa-times"></i></div>
-        <a href="about.html" onclick="toggleMenu()">ABOUT</a>
-        <a href="clans/4kt.html" onclick="toggleMenu()">4KT</a>
-        <a href="clans/otf.html" onclick="toggleMenu()">OTF</a>
-        <a href="events.html" onclick="toggleMenu()">EVENTS</a>
+    <div class="mobile-dock">
+        <a href="about.html" class="dock-item"><i class="fas fa-info-circle"></i>ABOUT</a>
+        <a href="clans/4kt.html" class="dock-item"><i class="fas fa-crown"></i>4KT</a>
+        <a href="clans/otf.html" class="dock-item"><i class="fas fa-users"></i>OTF</a>
+        <a href="events.html" class="dock-item"><i class="fas fa-calendar-alt"></i>EVENTS</a>
     </div>
 
     <section class="hero">
@@ -143,8 +136,8 @@
     </section>
 
     <div style="text-align: center; margin-top: 4rem;">
-        <h2 style="font-family: 'Orbitron'; font-size: 1.8rem; color: var(--gold); letter-spacing: 3px;">OUR TEAMS</h2>
-        <div style="width: 60px; height: 3px; background: var(--red); margin: 15px auto;"></div>
+        <h2 style="font-family: 'Orbitron'; font-size: 2rem; color: var(--gold); letter-spacing: 5px; text-transform: uppercase;">Our Teams</h2>
+        <div style="width: 80px; height: 4px; background: var(--red); margin: 20px auto;"></div>
     </div>
 
     <div class="elite-grid">
@@ -156,11 +149,12 @@
     </div>
 
     <section class="cta-section">
-        <h2 style="font-family: 'Orbitron'; color: var(--gold);">READY TO JOIN US?</h2>
+        <h2 style="font-family: 'Orbitron'; color: var(--gold); font-size: 2.2rem; margin-bottom: 10px;">READY TO JOIN US?</h2>
+        <p style="color: #888; margin-bottom: 2.5rem; font-weight: bold; letter-spacing: 1px;">SHOW YOUR SKILL. JOIN THE LEGACY.</p>
         <a href="https://discord.gg/99uuMvMBX" class="join-btn">JOIN</a>
         <div class="social-box">
-            <a href="https://discord.gg/99uuMvMBX"><i class="fab fa-discord"></i></a>
-            <a href="https://www.tiktok.com/@4ktreybloods"><i class="fab fa-tiktok"></i></a>
+            <a href="https://discord.gg/99uuMvMBX" target="_blank"><i class="fab fa-discord"></i></a>
+            <a href="https://www.tiktok.com/@4ktreybloods" target="_blank"><i class="fab fa-tiktok"></i></a>
         </div>
     </section>
 
@@ -169,15 +163,14 @@
     </footer>
 
     <script>
-        function toggleMenu() { document.getElementById('mobileMenu').classList.toggle('active'); }
         const canvas = document.getElementById('particle-canvas');
         const ctx = canvas.getContext('2d');
         let particles = [];
         function init() {
             canvas.width = window.innerWidth; canvas.height = window.innerHeight;
             particles = [];
-            for (let i = 0; i < 100; i++) {
-                particles.push({ x: Math.random() * canvas.width, y: Math.random() * canvas.height, size: Math.random() * 2, speed: Math.random() * 0.5 + 0.2 });
+            for (let i = 0; i < 150; i++) {
+                particles.push({ x: Math.random() * canvas.width, y: Math.random() * canvas.height, size: Math.random() * 2.5, speed: Math.random() * 0.4 + 0.1 });
             }
         }
         function animate() {
