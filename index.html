@@ -12,38 +12,27 @@
             --gold: #FFD700;
             --red: #FF0000;
             --black: #000000;
-            --dark-grey: #111111;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
-        /* ANIMATED BACKGROUND */
         body {
-            background: linear-gradient(-45deg, #000000, #1a0000, #000000, #0a0a0a);
-            background-size: 400% 400%;
-            animation: gradientBG 15s ease infinite;
+            background-color: var(--black);
             color: white;
             font-family: 'Montserrat', sans-serif;
             overflow-x: hidden;
             padding-bottom: 70px;
         }
 
-        @keyframes gradientBG {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-
-        /* FADE IN ANIMATION */
-        .reveal {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: all 0.8s ease-out;
-        }
-
-        .reveal.active {
-            opacity: 1;
-            transform: translateY(0);
+        /* STAR PARTICLE CANVAS */
+        #particle-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            pointer-events: none;
         }
 
         /* LIVE TICKER */
@@ -55,6 +44,7 @@
             font-size: 0.75rem;
             overflow: hidden;
             white-space: nowrap;
+            z-index: 1001;
         }
 
         .ticker-content { display: inline-block; animation: ticker 30s linear infinite; }
@@ -73,40 +63,52 @@
         .desktop-links a:hover { color: var(--gold); text-shadow: 0 0 10px var(--gold); }
 
         /* HERO */
-        .hero { padding: 4rem 1.5rem; text-align: center; }
-        .main-logo { width: 220px; margin-bottom: 1.5rem; filter: drop-shadow(0 0 15px rgba(255, 215, 0, 0.3)); transition: 0.5s; }
-        .main-logo:hover { transform: scale(1.05) rotate(2deg); }
-        .hero-title { font-family: 'Orbitron'; font-size: clamp(2rem, 8vw, 4.5rem); font-weight: 900; line-height: 1.1; }
+        .hero { padding: 4rem 1.5rem; text-align: center; position: relative; }
+        .main-logo { width: 220px; margin-bottom: 1.5rem; filter: drop-shadow(0 0 15px rgba(255, 215, 0, 0.5)); transition: 0.5s; }
+        .hero-title { font-family: 'Orbitron'; font-size: clamp(2.5rem, 8vw, 4.5rem); font-weight: 900; line-height: 1.1; margin-bottom: 10px; }
+        .hero-subtitle { font-family: 'Orbitron'; color: #888; letter-spacing: 2px; font-style: italic; }
 
-        /* TEAMS GRID (COMPLETE ROSTER) */
-        .elite-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 15px; max-width: 1200px; margin: 0 auto 4rem; padding: 0 1.5rem; }
-        .team-card { background: rgba(10, 10, 10, 0.8); border: 1px solid #222; padding: 2rem 1.5rem; text-align: center; border-radius: 10px; position: relative; transition: 0.4s; }
-        .team-card:hover { border-color: var(--gold); transform: translateY(-10px); box-shadow: 0 0 20px rgba(255, 215, 0, 0.1); }
-        .tier-badge { position: absolute; top: 15px; left: 50%; transform: translateX(-50%); font-size: 0.6rem; padding: 4px 10px; border-radius: 20px; font-weight: 900; font-family: 'Orbitron'; }
+        /* TEAM GRID */
+        .elite-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 20px; max-width: 1200px; margin: 0 auto 4rem; padding: 0 1.5rem; }
+        .team-card { 
+            background: rgba(15, 15, 15, 0.8); 
+            border: 1px solid #333; 
+            padding: 2.5rem 1.5rem; 
+            text-align: center; 
+            border-radius: 15px; 
+            position: relative; 
+            transition: 0.4s;
+            backdrop-filter: blur(5px);
+        }
+        .team-card:hover { border-color: var(--gold); transform: scale(1.03); box-shadow: 0 0 30px rgba(255, 215, 0, 0.15); }
         
+        .tier-badge { position: absolute; top: 20px; left: 50%; transform: translateX(-50%); font-size: 0.6rem; padding: 4px 12px; border-radius: 20px; font-weight: 900; font-family: 'Orbitron'; letter-spacing: 1px; }
         .gold-bg { background: var(--gold); color: black; }
         .red-bg { background: var(--red); color: white; }
         .pink-bg { background: #FF69B4; color: white; }
         .purple-bg { background: #8A2BE2; color: white; }
-        .dev-bg { background: #555; color: white; }
 
-        /* READY TO JOIN SECTION */
-        .join-section { background: rgba(20, 20, 20, 0.6); border: 2px solid var(--gold); padding: 3rem; margin: 4rem auto; border-radius: 15px; text-align: center; max-width: 800px; }
-        .join-btn { background: var(--gold); color: black; padding: 15px 40px; text-decoration: none; font-weight: 900; font-family: 'Orbitron'; display: inline-block; margin-top: 20px; transition: 0.3s; }
-        .join-btn:hover { background: transparent; color: var(--gold); box-shadow: 0 0 15px var(--gold); }
+        /* STATS SECTION (Added for attraction) */
+        .stats-banner { display: flex; justify-content: center; gap: 40px; margin-top: 3rem; flex-wrap: wrap; }
+        .stat-item { text-align: center; }
+        .stat-val { display: block; font-family: 'Orbitron'; font-size: 2rem; color: var(--gold); font-weight: 900; }
+        .stat-lab { font-size: 0.7rem; color: #666; text-transform: uppercase; letter-spacing: 1px; }
 
-        /* SOCIALS (BOTTOM POSITION) */
-        .bottom-socials { display: flex; justify-content: center; gap: 30px; padding: 3rem 0; background: rgba(0,0,0,0.5); }
-        .bottom-socials a { color: white; font-size: 2.5rem; transition: 0.3s; }
-        .bottom-socials a:hover { color: var(--gold); transform: translateY(-5px); filter: drop-shadow(0 0 10px var(--gold)); }
+        /* SOCIALS & JOIN BUTTON */
+        .cta-section { background: rgba(10, 10, 10, 0.8); border: 2px solid var(--gold); padding: 3rem; margin: 4rem auto; border-radius: 20px; text-align: center; max-width: 800px; }
+        .join-btn { background: var(--gold); color: black; padding: 18px 45px; text-decoration: none; font-weight: 900; font-family: 'Orbitron'; display: inline-block; transition: 0.3s; margin-bottom: 2rem; }
+        .join-btn:hover { background: transparent; color: var(--gold); box-shadow: 0 0 20px var(--gold); }
+
+        .social-box { display: flex; justify-content: center; gap: 30px; }
+        .social-box a { color: white; font-size: 2.5rem; transition: 0.3s; }
+        .social-box a:hover { color: var(--gold); transform: translateY(-5px); filter: drop-shadow(0 0 10px var(--gold)); }
 
         .footer { text-align: center; padding: 2rem; border-top: 1px solid #222; font-family: 'Orbitron'; font-size: 0.7rem; color: #555; letter-spacing: 2px; }
-
-        /* MOBILE NAV */
-        @media (max-width: 850px) { .desktop-links { display: none; } }
     </style>
 </head>
 <body>
+
+    <canvas id="particle-canvas"></canvas>
 
     <div class="match-ticker">
         <div class="ticker-content">
@@ -131,79 +133,100 @@
         </div>
     </nav>
 
-    <section class="hero reveal">
+    <section class="hero">
         <img src="logo.png" alt="Blood Esports" class="main-logo">
         <h1 class="hero-title"><span style="color:var(--gold)">BLOOD</span> <span style="color:var(--red)">ESPORTS</span></h1>
-        <p style="font-family:'Orbitron'; color:#888; margin-top:10px;">"IT'S A PARADE INSIDE MY CITY YEAHHH"</p>
+        <p class="hero-subtitle">"IT'S A PARADE INSIDE MY CITY YEAHHH"</p>
+
+        <div class="stats-banner">
+            <div class="stat-item"><span class="stat-val">50+</span><span class="stat-lab">WINS</span></div>
+            <div class="stat-item"><span class="stat-val">#1</span><span class="stat-lab">RANKED</span></div>
+            <div class="stat-item"><span class="stat-val">260+</span><span class="stat-lab">MEMBERS</span></div>
+        </div>
     </section>
 
-    <div class="reveal" style="text-align: center; margin: 4rem 0 2.5rem;">
-        <h2 style="font-family: 'Orbitron'; font-size: 1.8rem; color: var(--gold); letter-spacing: 2px;">THE ROSTER</h2>
+    <div style="text-align: center; margin: 4rem 0 2.5rem;">
+        <h2 style="font-family: 'Orbitron'; font-size: 1.8rem; color: var(--gold); letter-spacing: 3px;">OUR TEAMS</h2>
+        <div style="width: 60px; height: 3px; background: var(--red); margin: 15px auto;"></div>
     </div>
 
-    <div class="elite-grid reveal">
+    <div class="elite-grid">
         <div class="team-card">
             <div class="tier-badge gold-bg">TIER 1</div>
             <i class="fas fa-crosshairs" style="font-size:2rem; color:var(--gold); margin:1rem 0;"></i>
             <h3 style="font-family:'Orbitron';">SHADOW HUNTERS</h3>
-            <p style="color:var(--gold); font-size:0.8rem;">4零丨</p>
+            <p style="color:var(--gold); font-size:0.8rem; margin-top:5px;">4零丨</p>
         </div>
         <div class="team-card">
             <div class="tier-badge red-bg">TIER 2</div>
             <i class="fas fa-bolt" style="font-size:2rem; color:var(--gold); margin:1rem 0;"></i>
             <h3 style="font-family:'Orbitron';">STORM TROOPERS</h3>
-            <p style="color:var(--gold); font-size:0.8rem;">4零丨</p>
+            <p style="color:var(--gold); font-size:0.8rem; margin-top:5px;">4零丨</p>
         </div>
         <div class="team-card">
             <div class="tier-badge pink-bg">ALL-FEMALE</div>
             <i class="fas fa-heart" style="font-size:2rem; color:var(--gold); margin:1rem 0;"></i>
             <h3 style="font-family:'Orbitron';">LADYBUGS</h3>
-            <p style="color:var(--gold); font-size:0.8rem;">4零丨</p>
+            <p style="color:var(--gold); font-size:0.8rem; margin-top:5px;">4零丨</p>
         </div>
         <div class="team-card">
             <div class="tier-badge purple-bg">MP SPECIALISTS</div>
             <i class="fas fa-gamepad" style="font-size:2rem; color:var(--gold); margin:1rem 0;"></i>
             <h3 style="font-family:'Orbitron';">4KT SYNDICATE</h3>
-            <p style="color:var(--gold); font-size:0.8rem;">4零丨</p>
-        </div>
-        <div class="team-card">
-            <div class="tier-badge dev-bg">DEVELOPMENT</div>
-            <i class="fas fa-dog" style="font-size:2rem; color:var(--gold); margin:1rem 0;"></i>
-            <h3 style="font-family:'Orbitron';">BLOOD HOUNDS</h3>
-            <p style="color:var(--gold); font-size:0.8rem;">T零丨</p>
+            <p style="color:var(--gold); font-size:0.8rem; margin-top:5px;">4零丨</p>
         </div>
     </div>
 
-    <section class="join-section reveal">
-        <h2 style="font-family: 'Orbitron'; color: var(--gold);">READY TO JOIN US?</h2>
-        <p style="color:#aaa; margin-top:10px;">Step into the kingdom and represent the elite. Tryouts are now open for all divisions.</p>
-        <a href="https://discord.gg/99uuMvMBX" class="join-btn">JOIN DISCORD</a>
+    <section class="cta-section">
+        <h2 style="font-family: 'Orbitron'; color: var(--gold); margin-bottom: 10px;">READY TO JOIN US?</h2>
+        <p style="color:#888; margin-bottom: 2rem;">Prove your skill and represent the elite. Tryouts are open for all divisions.</p>
+        <a href="https://discord.gg/99uuMvMBX" class="join-btn">ENTER THE KINGDOM</a>
+
+        <div class="social-box">
+            <a href="https://discord.gg/99uuMvMBX" target="_blank"><i class="fab fa-discord"></i></a>
+            <a href="https://www.tiktok.com/@4ktreybloods" target="_blank"><i class="fab fa-tiktok"></i></a>
+        </div>
     </section>
-
-    <div class="bottom-socials reveal">
-        <a href="https://discord.gg/99uuMvMBX" target="_blank"><i class="fab fa-discord"></i></a>
-        <a href="https://www.tiktok.com/@4ktreybloods" target="_blank"><i class="fab fa-tiktok"></i></a>
-    </div>
 
     <footer class="footer">
         ALL RIGHTS RESERVED BLOOD ESPORTS 2026
     </footer>
 
     <script>
-        // Simple Scroll Reveal Animation
-        function reveal() {
-            var reveals = document.querySelectorAll(".reveal");
-            for (var i = 0; i < reveals.length; i++) {
-                var windowHeight = window.innerHeight;
-                var elementTop = reveals[i].getBoundingClientRect().top;
-                var elementVisible = 150;
-                if (elementTop < windowHeight - elementVisible) {
-                    reveals[i].classList.add("active");
-                }
+        const canvas = document.getElementById('particle-canvas');
+        const ctx = canvas.getContext('2d');
+        let particles = [];
+
+        function init() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            particles = [];
+            for (let i = 0; i < 100; i++) {
+                particles.push({
+                    x: Math.random() * canvas.width,
+                    y: Math.random() * canvas.height,
+                    size: Math.random() * 2,
+                    speed: Math.random() * 0.5 + 0.2
+                });
             }
         }
-        window.addEventListener("scroll", reveal);
-        reveal(); // Initial check
+
+        function animate() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            ctx.fillStyle = '#FFD700';
+            particles.forEach(p => {
+                ctx.beginPath();
+                ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+                ctx.fill();
+                p.y -= p.speed;
+                if (p.y < 0) p.y = canvas.height;
+            });
+            requestAnimationFrame(animate);
+        }
+
+        window.addEventListener('resize', init);
+        init();
+        animate();
     </script>
 </body>
 </html>
