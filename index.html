@@ -22,6 +22,7 @@
             color: white;
             font-family: 'Montserrat', sans-serif;
             overflow-x: hidden;
+            padding-bottom: 70px; /* Space for mobile nav */
         }
 
         /* LIVE TICKER */
@@ -30,7 +31,7 @@
             border-bottom: 2px solid var(--gold);
             padding: 12px 0;
             font-family: 'Orbitron', sans-serif;
-            font-size: 0.8rem;
+            font-size: 0.75rem;
             overflow: hidden;
             white-space: nowrap;
         }
@@ -46,7 +47,7 @@
         @keyframes ticker { 0% { transform: translateX(100%); } 100% { transform: translateX(-100%); } }
         @keyframes blink { 50% { opacity: 0; } }
 
-        /* NAVIGATION */
+        /* DESKTOP NAVIGATION */
         .luxury-nav {
             background: var(--black);
             border-bottom: 2px solid var(--gold);
@@ -60,19 +61,31 @@
         }
 
         .nav-brand { display: flex; align-items: center; gap: 12px; text-decoration: none; }
-        .nav-logo-small { height: 45px; width: auto; }
-        .nav-title { font-family: 'Orbitron'; font-weight: 900; font-size: 1.2rem; letter-spacing: 1px; }
+        .nav-logo-small { height: 40px; width: auto; }
+        .nav-title { font-family: 'Orbitron'; font-weight: 900; font-size: 1.1rem; letter-spacing: 1px; }
 
-        .nav-links { display: flex; gap: 20px; }
-        .nav-links a { color: white; text-decoration: none; font-weight: 700; font-family: 'Orbitron'; font-size: 0.8rem; transition: 0.3s; }
-        .nav-links a:hover { color: var(--gold); }
+        .desktop-links { display: flex; gap: 20px; }
+        .desktop-links a { color: white; text-decoration: none; font-weight: 700; font-family: 'Orbitron'; font-size: 0.8rem; transition: 0.3s; }
+        .desktop-links a:hover { color: var(--gold); }
+
+        /* MOBILE BOTTOM NAVIGATION (Better for Phones) */
+        .mobile-nav {
+            display: none;
+            position: fixed; bottom: 0; left: 0; width: 100%;
+            background: #0a0a0a; border-top: 2px solid var(--gold);
+            padding: 12px 0; z-index: 2000;
+            justify-content: space-around; align-items: center;
+        }
+
+        .mobile-nav a { color: white; text-decoration: none; text-align: center; font-size: 0.65rem; font-family: 'Orbitron'; font-weight: 700; }
+        .mobile-nav i { display: block; font-size: 1.2rem; color: var(--gold); margin-bottom: 4px; }
 
         /* HERO SECTION */
-        .hero { padding: 4rem 1.5rem; text-align: center; max-width: 1100px; margin: 0 auto; }
-        .main-logo { width: 280px; height: auto; margin-bottom: 2rem; filter: drop-shadow(0 0 15px rgba(255, 215, 0, 0.3)); }
+        .hero { padding: 3rem 1.5rem; text-align: center; max-width: 1100px; margin: 0 auto; }
+        .main-logo { width: 220px; height: auto; margin-bottom: 1.5rem; filter: drop-shadow(0 0 15px rgba(255, 215, 0, 0.3)); }
 
         .hero-title {
-            font-family: 'Orbitron'; font-size: clamp(2.5rem, 8vw, 5rem); font-weight: 900;
+            font-family: 'Orbitron'; font-size: clamp(2rem, 8vw, 4.5rem); font-weight: 900;
             margin-bottom: 1rem; line-height: 1.1;
         }
 
@@ -80,15 +93,15 @@
         .text-red { color: var(--red); text-shadow: 0 0 20px rgba(255, 0, 0, 0.4); }
 
         .hero-subtitle {
-            font-size: clamp(0.9rem, 3vw, 1.5rem); font-style: italic; color: #888;
-            margin-bottom: 3rem; font-family: 'Orbitron';
+            font-size: clamp(0.8rem, 3vw, 1.3rem); font-style: italic; color: #888;
+            margin-bottom: 2.5rem; font-family: 'Orbitron';
         }
 
         .btn-primary {
-            background: var(--gold); color: black; padding: 18px 40px; 
+            background: var(--gold); color: black; padding: 16px 35px; 
             text-decoration: none; font-weight: 900; display: inline-block;
             font-family: 'Orbitron'; text-transform: uppercase; border: 2px solid var(--gold);
-            transition: 0.3s;
+            transition: 0.3s; font-size: 0.9rem;
         }
 
         .btn-primary:hover { background: transparent; color: var(--gold); box-shadow: 0 0 20px var(--gold); }
@@ -97,50 +110,48 @@
         .elite-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-            gap: 20px;
+            gap: 15px;
             padding-bottom: 4rem;
         }
 
         .team-card {
-            background: #0a0a0a;
-            border: 1px solid #222;
-            padding: 2.5rem 1.5rem;
-            text-align: center;
-            border-radius: 10px;
-            position: relative;
-            transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            background: #0a0a0a; border: 1px solid #222; padding: 2.5rem 1.5rem;
+            text-align: center; border-radius: 10px; position: relative; transition: 0.4s;
         }
 
-        .team-card:hover {
-            border-color: var(--gold);
-            transform: translateY(-10px);
-            box-shadow: 0 10px 30px rgba(255, 215, 0, 0.1);
-        }
-
-        .tier-badge {
-            position: absolute;
-            top: 15px;
-            left: 50%;
-            transform: translateX(-50%);
-            font-size: 0.65rem;
-            padding: 4px 12px;
-            border-radius: 20px;
-            font-weight: 900;
-            font-family: 'Orbitron';
-        }
+        .team-card:hover { border-color: var(--gold); transform: translateY(-8px); }
+        .tier-badge { position: absolute; top: 15px; left: 50%; transform: translateX(-50%); font-size: 0.6rem; padding: 4px 10px; border-radius: 20px; font-weight: 900; font-family: 'Orbitron'; }
 
         .gold-bg { background: var(--gold); color: black; }
         .red-bg { background: var(--red); color: white; }
         .pink-bg { background: #FF69B4; color: white; }
         .purple-bg { background: #8A2BE2; color: white; }
 
-        .team-icon { font-size: 2.5rem; color: var(--gold); margin: 1rem 0; }
-        .team-name { font-family: 'Orbitron'; font-size: 1.3rem; margin-bottom: 5px; letter-spacing: 1px; }
-        .team-tag { color: var(--gold); font-weight: bold; margin-bottom: 15px; font-size: 0.9rem; }
-        .team-desc { font-size: 0.85rem; color: #888; line-height: 1.5; }
+        .team-icon { font-size: 2.2rem; color: var(--gold); margin: 1rem 0; }
+        .team-name { font-family: 'Orbitron'; font-size: 1.2rem; margin-bottom: 5px; }
+        .team-tag { color: var(--gold); font-weight: bold; font-size: 0.8rem; margin-bottom: 10px; }
+        .team-desc { font-size: 0.8rem; color: #777; line-height: 1.4; }
 
+        /* FOOTER / COPYRIGHT */
+        .footer {
+            text-align: center;
+            padding: 3rem 1.5rem;
+            border-top: 1px solid #222;
+            background: #050505;
+        }
+
+        .footer-text { font-family: 'Orbitron'; font-size: 0.7rem; color: #555; letter-spacing: 2px; text-transform: uppercase; }
+
+        /* RESPONSIVE LOGIC */
         @media (max-width: 850px) {
-            .nav-links { display: none; }
+            .desktop-links { display: none; }
+            .mobile-nav { display: flex; }
+        }
+
+        @media (max-width: 480px) {
+            .main-logo { width: 180px; }
+            .hero-title { font-size: 2.2rem; }
+            .hero { padding: 2rem 1rem; }
         }
     </style>
 </head>
@@ -162,7 +173,7 @@
                     <span style="color:var(--gold)">BLOOD</span> <span style="color:var(--red)">ESPORTS</span>
                 </div>
             </div>
-            <div class="nav-links">
+            <div class="desktop-links">
                 <a href="index.html">HOME</a>
                 <a href="clans/4kt.html">4KT</a>
                 <a href="clans/otf.html">OTF</a>
@@ -170,6 +181,13 @@
             </div>
         </div>
     </nav>
+
+    <div class="mobile-nav">
+        <a href="index.html"><i class="fas fa-home"></i>HOME</a>
+        <a href="clans/4kt.html"><i class="fas fa-crown"></i>4KT</a>
+        <a href="clans/otf.html"><i class="fas fa-users"></i>OTF</a>
+        <a href="events.html"><i class="fas fa-calendar-alt"></i>EVENTS</a>
+    </div>
 
     <section class="hero">
         <img src="logo.png" alt="Blood Esports" class="main-logo">
@@ -180,8 +198,8 @@
         
         <a href="https://discord.gg/99uuMvMBX" class="btn-primary">ENTER THE KINGDOM</a>
 
-        <div style="text-align: center; margin: 5rem 0 3rem;">
-            <h2 style="font-family: 'Orbitron'; font-size: 1.8rem; color: var(--gold); letter-spacing: 2px;">COMPETITIVE EXCELLENCE</h2>
+        <div style="text-align: center; margin: 4rem 0 2.5rem;">
+            <h2 style="font-family: 'Orbitron'; font-size: 1.5rem; color: var(--gold); letter-spacing: 2px;">COMPETITIVE EXCELLENCE</h2>
         </div>
 
         <div class="elite-grid">
@@ -215,6 +233,10 @@
             </div>
         </div>
     </section>
+
+    <footer class="footer">
+        <p class="footer-text">ALL RIGHTS RESERVED BLOOD ESPORTS 2026</p>
+    </footer>
 
 </body>
 </html>
