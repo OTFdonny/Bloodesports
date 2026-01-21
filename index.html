@@ -21,8 +21,10 @@
             color: white;
             font-family: 'Montserrat', sans-serif;
             overflow-x: hidden;
+            padding-bottom: 70px;
         }
 
+        /* STAR PARTICLE CANVAS */
         #particle-canvas {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
@@ -54,9 +56,7 @@
         .desktop-links a:hover { color: var(--gold); text-shadow: 0 0 10px var(--gold); }
 
         /* MOBILE MENU ICON */
-        .menu-btn {
-            display: none; font-size: 1.5rem; color: var(--gold); cursor: pointer;
-        }
+        .menu-btn { display: none; font-size: 1.5rem; color: var(--gold); cursor: pointer; }
 
         .mobile-overlay {
             position: fixed; top: 0; right: -100%; width: 70%; height: 100%;
@@ -78,9 +78,9 @@
         .stat-val { display: block; font-family: 'Orbitron'; font-size: 2rem; color: var(--gold); font-weight: 900; }
         .stat-lab { font-size: 0.7rem; color: #666; text-transform: uppercase; letter-spacing: 1px; }
 
-        /* TEAMS */
+        /* OUR TEAMS SECTION */
         .elite-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 20px; max-width: 1250px; margin: 4rem auto; padding: 0 1.5rem; }
-        .team-card { background: rgba(15, 15, 15, 0.8); border: 1px solid #333; padding: 2.5rem 1.5rem; text-align: center; border-radius: 15px; position: relative; transition: 0.4s; }
+        .team-card { background: rgba(15, 15, 15, 0.8); border: 1px solid #333; padding: 2.5rem 1.5rem; text-align: center; border-radius: 15px; position: relative; transition: 0.4s; backdrop-filter: blur(5px); }
         .team-card:hover { border-color: var(--gold); transform: scale(1.03); }
         .tier-badge { position: absolute; top: 20px; left: 50%; transform: translateX(-50%); font-size: 0.6rem; padding: 4px 12px; border-radius: 20px; font-weight: 900; font-family: 'Orbitron'; }
         
@@ -90,7 +90,12 @@
         .join-btn:hover { background: transparent; color: var(--gold); box-shadow: 0 0 20px var(--gold); }
 
         .social-box { display: flex; justify-content: center; gap: 30px; margin-top: 2rem; }
-        .social-box a { color: white; font-size: 2.5rem; }
+        .social-box a { color: white; font-size: 2.5rem; transition: 0.3s; }
+        .social-box a:hover { color: var(--gold); transform: translateY(-5px); }
+
+        /* PROTECTED COPYRIGHT FOOTER */
+        .footer { text-align: center; padding: 3rem 1.5rem; border-top: 1px solid #222; background: #000000; }
+        .footer-text { font-family: 'Orbitron'; font-size: 0.75rem; color: #555; letter-spacing: 2px; text-transform: uppercase; }
 
         /* RESPONSIVE */
         @media (max-width: 850px) {
@@ -138,7 +143,7 @@
     </section>
 
     <div style="text-align: center; margin-top: 4rem;">
-        <h2 style="font-family: 'Orbitron'; font-size: 1.8rem; color: var(--gold);">OUR TEAMS</h2>
+        <h2 style="font-family: 'Orbitron'; font-size: 1.8rem; color: var(--gold); letter-spacing: 3px;">OUR TEAMS</h2>
         <div style="width: 60px; height: 3px; background: var(--red); margin: 15px auto;"></div>
     </div>
 
@@ -159,11 +164,12 @@
         </div>
     </section>
 
-    <script>
-        function toggleMenu() {
-            document.getElementById('mobileMenu').classList.toggle('active');
-        }
+    <footer class="footer">
+        <p class="footer-text">ALL RIGHTS RESERVED BLOOD ESPORTS 2026</p>
+    </footer>
 
+    <script>
+        function toggleMenu() { document.getElementById('mobileMenu').classList.toggle('active'); }
         const canvas = document.getElementById('particle-canvas');
         const ctx = canvas.getContext('2d');
         let particles = [];
