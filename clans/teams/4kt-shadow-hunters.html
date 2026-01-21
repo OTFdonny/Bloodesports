@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
     <style>
-        :root { --gold: #FFD700; --black: #080808; --gray: #222; }
+        :root { --gold: #FFD700; --black: #050505; --dark-gold: #b8860b; }
         
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
@@ -18,106 +18,127 @@
             overflow-x: hidden; 
         }
 
-        /* Stealth Background */
-        #bg {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1;
-            background: radial-gradient(circle at center, #1a1a00 0%, #000000 100%);
-        }
+        /* Matrix Gold Background */
+        canvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; opacity: 0.3; }
+
+        /* Animations */
+        @keyframes fadeInDown { from { opacity: 0; transform: translateY(-30px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes glow { 0% { text-shadow: 0 0 10px var(--dark-gold); } 50% { text-shadow: 0 0 25px var(--gold), 0 0 40px var(--gold); } 100% { text-shadow: 0 0 10px var(--dark-gold); } }
 
         /* Nav */
         .nav { 
-            background: rgba(0,0,0,0.95); 
+            background: rgba(0,0,0,0.8); 
+            backdrop-filter: blur(10px);
             padding: 1.2rem 2rem; 
-            border-bottom: 2px solid var(--gold); 
+            border-bottom: 1px solid var(--gold); 
             display: flex; justify-content: space-between; align-items: center; 
             position: sticky; top: 0; z-index: 1000; 
+            animation: fadeInDown 0.8s ease-out;
         }
-        .nav-logo { font-family: 'Orbitron'; color: var(--gold); text-decoration: none; font-weight: 900; letter-spacing: 2px; }
+        .nav-logo { 
+            font-family: 'Orbitron'; color: var(--gold); text-decoration: none; font-weight: 900; letter-spacing: 2px; 
+            transition: 0.3s; cursor: pointer;
+        }
+        .nav-logo:hover { text-shadow: 0 0 15px var(--gold); }
+        
+        .back-btn {
+            font-family: 'Orbitron'; font-size: 0.8rem; color: white; text-decoration: none;
+            border: 1px solid var(--gold); padding: 8px 20px; border-radius: 20px;
+            transition: 0.3s;
+        }
+        .back-btn:hover { background: var(--gold); color: black; box-shadow: 0 0 15px var(--gold); }
 
         /* Hero */
-        .hero { text-align: center; padding: 6rem 1rem 3rem; }
+        .hero { text-align: center; padding: 6rem 1rem 3rem; animation: fadeInDown 1s ease-out; }
         .hero h1 { 
-            font-family: 'Orbitron'; 
-            color: var(--gold); 
+            font-family: 'Orbitron'; color: var(--gold); 
             font-size: clamp(2.5rem, 8vw, 4.5rem); 
-            text-shadow: 0 0 25px rgba(255, 215, 0, 0.4);
+            animation: glow 3s infinite;
             margin-bottom: 10px;
         }
         .clan-tag {
-            font-size: 1.5rem;
-            color: white;
-            font-family: 'Orbitron';
-            letter-spacing: 5px;
-            opacity: 0.8;
+            font-size: 2rem; color: white; font-family: 'Orbitron'; letter-spacing: 5px; opacity: 0.9;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
         }
 
         /* Roster Grid */
-        .container { max-width: 1100px; margin: 0 auto; padding: 2rem; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 2rem; }
         
         .roster-title {
-            text-align: center;
-            font-family: 'Orbitron';
-            color: white;
-            margin-bottom: 2rem;
-            border-bottom: 1px solid var(--gold);
-            display: inline-block;
-            padding-bottom: 10px;
+            text-align: center; font-family: 'Orbitron'; color: white; margin-bottom: 3rem;
+            position: relative; display: inline-block; animation: fadeInUp 1.2s ease-out;
         }
+        .roster-title::after { content: ''; display: block; width: 100%; height: 3px; background: var(--gold); margin-top: 10px; box-shadow: 0 0 10px var(--gold); }
 
         .roster-grid { 
             display: grid; 
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); 
-            gap: 25px; 
+            gap: 30px; 
+            perspective: 1000px;
         }
 
+        /* Super Cool Cards */
         .player-card { 
-            background: rgba(20, 20, 20, 0.8); 
-            padding: 2rem; 
-            border-radius: 15px; 
+            background: rgba(255, 255, 255, 0.02); 
+            padding: 2.5rem; 
+            border-radius: 20px; 
             text-align: center; 
             border: 1px solid rgba(255, 215, 0, 0.1); 
-            transition: 0.3s; 
+            transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); 
             position: relative;
             overflow: hidden;
+            animation: fadeInUp 0.8s ease-out backwards;
+            backdrop-filter: blur(5px);
         }
+
+        /* Stagger Animation for cards */
+        .player-card:nth-child(1) { animation-delay: 0.1s; }
+        .player-card:nth-child(2) { animation-delay: 0.2s; }
+        .player-card:nth-child(3) { animation-delay: 0.3s; }
+        .player-card:nth-child(4) { animation-delay: 0.4s; }
+        .player-card:nth-child(5) { animation-delay: 0.5s; }
+        .player-card:nth-child(6) { animation-delay: 0.6s; }
 
         .player-card:hover { 
             border-color: var(--gold); 
-            transform: translateY(-5px); 
-            box-shadow: 0 0 30px rgba(255, 215, 0, 0.15);
-            background: rgba(30, 30, 30, 0.9);
+            transform: translateY(-15px) scale(1.03); 
+            box-shadow: 0 0 40px rgba(255, 215, 0, 0.2);
+            background: rgba(255, 215, 0, 0.05);
         }
 
-        .flag { font-size: 2.5rem; margin-bottom: 15px; display: block; }
+        /* Shine Effect */
+        .player-card::before {
+            content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 215, 0, 0.1), transparent);
+            transition: 0.5s;
+        }
+        .player-card:hover::before { left: 100%; }
+
+        .flag { font-size: 3rem; margin-bottom: 15px; display: inline-block; filter: drop-shadow(0 0 10px rgba(0,0,0,0.5)); transition: 0.3s; }
+        .player-card:hover .flag { transform: scale(1.2) rotate(5deg); }
         
         .player-name { 
-            font-family: 'Orbitron'; 
-            font-size: 1.4rem; 
-            font-weight: 700; 
-            color: white;
-            margin-bottom: 5px;
+            font-family: 'Orbitron'; font-size: 1.5rem; font-weight: 700; color: white; margin-bottom: 8px;
+            text-transform: uppercase; letter-spacing: 1px;
         }
 
         .player-role { 
-            color: var(--gold); 
-            font-size: 0.8rem; 
-            letter-spacing: 2px; 
-            text-transform: uppercase; 
+            color: var(--gold); font-size: 0.85rem; letter-spacing: 3px; text-transform: uppercase; font-weight: 700;
         }
 
         /* Footer */
-        footer { text-align: center; padding: 4rem; color: #555; font-size: 0.8rem; font-family: 'Orbitron'; }
+        footer { text-align: center; padding: 4rem; color: #666; font-size: 0.8rem; font-family: 'Orbitron'; animation: fadeInUp 2s ease-out; }
     </style>
 </head>
 <body>
 
-    <div id="bg"></div>
+    <canvas id="matrix"></canvas>
 
     <nav class="nav">
-        <a href="../index.html" class="nav-logo">SHADOW HUNTERS</a>
-        <div style="font-family:'Orbitron'; font-size: 0.8rem;">
-            <a href="../../index.html" style="color:white; text-decoration:none;">HOME</a>
-        </div>
+        <a href="#" class="nav-logo">SHADOW HUNTERS</a>
+        
+        <a href="../4kt.html" class="back-btn"><i class="fas fa-arrow-left"></i> RETURN TO 4KT</a>
     </nav>
 
     <header class="hero">
@@ -131,7 +152,6 @@
         </div>
 
         <div class="roster-grid">
-            
             <div class="player-card">
                 <span class="flag">🇳🇬</span>
                 <div class="player-name">4零丨Mazi</div>
@@ -167,7 +187,6 @@
                 <div class="player-name">4零丨Beetle</div>
                 <div class="player-role">Operative</div>
             </div>
-
         </div>
     </div>
 
@@ -175,5 +194,53 @@
         <p>© 2026 BLOOD ESPORTS | SHADOW DIVISION</p>
     </footer>
 
+    <script>
+        // Matrix Rain Animation
+        const canvas = document.getElementById('matrix');
+        const ctx = canvas.getContext('2d');
+
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        const katakana = 'アァカサタナハマヤャラワガザダバパイィキシチニヒミリヰギジヂビピウゥクスツヌフムユュルグズブヅプエェケセテネヘメレヱゲゼデベペオォコソトノホモヨョロヲゴゾドボポ4KT';
+        const latin = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        const nums = '0123456789';
+        const alphabet = katakana + latin + nums;
+
+        const fontSize = 16;
+        const columns = canvas.width/fontSize;
+
+        const rainDrops = [];
+
+        for( let x = 0; x < columns; x++ ) {
+            rainDrops[x] = 1;
+        }
+
+        const draw = () => {
+            ctx.fillStyle = 'rgba(5, 5, 5, 0.05)';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            ctx.fillStyle = '#FFD700'; // Gold Color
+            ctx.font = fontSize + 'px monospace';
+
+            for(let i = 0; i < rainDrops.length; i++) {
+                const text = alphabet.charAt(Math.floor(Math.random() * alphabet.length));
+                ctx.fillText(text, i*fontSize, rainDrops[i]*fontSize);
+
+                if(rainDrops[i]*fontSize > canvas.height && Math.random() > 0.975){
+                    rainDrops[i] = 0;
+                }
+                rainDrops[i]++;
+            }
+        };
+
+        setInterval(draw, 30);
+
+        // Resize Fix
+        window.addEventListener('resize', () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        });
+    </script>
 </body>
 </html>
