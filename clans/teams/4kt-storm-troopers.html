@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>4KT Storm Troopers - Blood Esports</title>
+    <link rel="stylesheet" href="../assets/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Storm Troopers Under Construction Styles */
+        .storm-construction-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, rgba(10, 10, 10, 0.98), rgba(20, 20, 20, 0.95));
+            z-index: 999;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 2rem;
+        }
+        
+        .storm-icon-large {
+            font-size: 6rem;
+            color: var(--red);
+            margin-bottom: 2rem;
+            animation: storm-pulse 1.5s infinite alternate;
+        }
+        
+        @keyframes storm-pulse {
+            0% { transform: scale(1); color: var(--red); }
+            100% { transform: scale(1.1); color: #ff6b6b; }
+        }
+        
+        .storm-title {
+            font-size: 3.5rem;
+            color: var(--red);
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            text-shadow: 0 0 20px rgba(255, 0, 0, 0.5);
+        }
+        
+        .storm-subtitle {
+            font-size: 1.8rem;
+            color: var(--gold);
+            margin-bottom: 2rem;
+            font-family: 'Orbitron', sans-serif;
+        }
+        
+        .storm-message {
+            max-width: 600px;
+            color: #aaa;
+            font-size: 1.1rem;
+            line-height: 1.6;
+            margin-bottom: 3rem;
+        }
+        
+        .storm-progress {
+            width: 100%;
+            max-width: 500px;
+            margin: 2rem 0;
+        }
+        
+        .storm-progress-label {
+            color: var(--red);
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+        
+        .storm-progress-bar-outer {
+            height: 10px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 5px;
+            overflow: hidden;
+        }
+        
+        .storm-progress-bar-inner {
+            height: 100%;
+            background: linear-gradient(90deg, var(--red), #ff6b6b);
+            border-radius: 5px;
+            width: 60%;
+            animation: storm-progress-load 3s ease-out;
+        }
+        
+        @keyframes storm-progress-load {
+            0% { width: 0%; }
+            100% { width: 60%; }
+        }
+        
+        .storm-actions {
+            display: flex;
+            gap: 1.5rem;
+            margin-top: 2rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        
+        /* Storm Content (Blurred/Under Construction) */
+        .storm-content {
+            filter: blur(5px);
+            opacity: 0.3;
+            pointer-events: none;
+        }
+        
+        .storm-coming-soon-badge {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: linear-gradient(45deg, var(--red), var(--red-dark));
+            color: white;
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            z-index: 100;
+            animation: storm-bounce 2s infinite;
+        }
+        
+        @keyframes storm-bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-5px); }
+        }
+        
+        .storm-team-info {
+            background: linear-gradient(45deg, rgba(255, 0, 0, 0.05), rgba(139, 0, 0, 0.05));
+            border: 2px solid var(--red);
+            border-radius: 20px;
+            padding: 2.5rem;
+            margin: 2rem auto;
+            max-width: 600px;
+            text-align: center;
+        }
+        
+        .storm-team-tag {
+            font-size: 3rem;
+            font-family: 'SimHei', 'Microsoft YaHei', sans-serif;
+            color: var(--red);
+            margin: 1rem 0;
+            text-shadow: 0 0 20px rgba(255, 0, 0, 0.5);
+        }
+        
+        .storm-team-description {
+            color: #ccc;
+            font-size: 1.1rem;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+        
+        .placeholder-grid-storm {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+        
+        .placeholder-card-storm {
+            background: rgba(255, 0, 0, 0.05);
+            border: 2px dashed rgba(255, 0, 0, 0.3);
+            border-radius: 15px;
+            padding: 2rem;
+            text-align: center;
+            position: relative;
+        }
+        
+        .placeholder-card-storm .placeholder-icon {
+            font-size: 2.5rem;
+            color: rgba(255, 0, 0, 0.3);
+            margin-bottom: 1rem;
+        }
+        
+        .placeholder-card-storm .placeholder-text {
+            color: rgba(170, 170, 170, 0.5);
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+    <!-- Animated Background -->
+    <div class="luxury-bg">
+        <div class="gold-particle" id="particles"></div>
+    </div>
+    
+    <!-- Navigation -->
+    <nav class="luxury-nav">
+        <div class="diamond-nav">
+            <div class="nav-left">
+                <div class="logo-display">
+                    <span class="logo-gold">BLOOD</span>
+                    <span class="logo-red">ESPORTS</span>
+                    <div class="logo-badge">STORM TROOPERS</div>
+                </div>
+            </div>
+            <div class="nav-center">
+                <a href="../index.html" class="nav-link">HOME</a>
+                <a href="../clans/4kt.html" class="nav-link">4KT CLAN</a>
+                <a href="../clans/otf.html" class="nav-link">OTF CLAN</a>
+                <a href="4kt-storm-troopers.html" class="nav-link active">STORM TROOPERS</a>
+            </div>
+            <div class="nav-right">
+                <a href="https://discord.gg/99uuMvMBX" target="_blank" class="btn-discord">
+                    <i class="fab fa-discord"></i> DISCORD
+                </a>
+            </div>
+        </div>
+    </nav>
+    
+    <!-- Under Construction Overlay -->
+    <div class="storm-construction-overlay">
+        <div class="storm-icon-large">
+            <i class="fas fa-bolt"></i>
+        </div>
+        <h1 class="storm-title">COMING SOON</h1>
+        <p class="storm-subtitle">4KT STORM TROOPERS</p>
+        <p class="storm-message">
+            The Storm Troopers are undergoing strategic restructuring. 
+            This aggressive Tier 2 team is being rebuilt with new talent and tactics 
+            to dominate the battlefield with relentless speed and overwhelming force.
+        </p>
+        
+        <div class="storm-progress">
+            <div class="storm-progress-label">Team Formation Progress</div>
+            <div class="storm-progress-bar-outer">
+                <div class="storm-progress-bar-inner"></div>
+            </div>
+            <div class="progress-percentage" style="color: var(--red); margin-top: 0.5rem; font-weight: 600;">60% Complete</div>
+        </div>
+        
+        <div class="storm-actions">
+            <a href="https://discord.gg/99uuMvMBX" target="_blank" class="btn-discord">
+                <i class="fab fa-discord"></i> JOIN DISCORD FOR UPDATES
+            </a>
+            <a href="../clans/4kt.html" class="btn-secondary">
+                <i class="fas fa-crown"></i> VISIT 4KT CLAN
+            </a>
+            <a href="../index.html" class="btn-primary">
+                <i class="fas fa-home"></i> BACK TO HOME
+            </a>
+        </div>
+    </div>
+    
+    <!-- Main Content (Blurred/Under Construction) -->
+    <div class="container storm-content">
+        <!-- Coming Soon Badge -->
+        <div class="storm-coming-soon-badge">
+            <i class="fas fa-bolt"></i> UNDER CONSTRUCTION
+        </div>
+        
+        <!-- Team Header -->
+        <header class="team-header">
+            <div class="team-badge-large">
+                <i class="fas fa-bolt"></i>
+            </div>
+            <h1 class="team-title">4KT STORM TROOPERS</h1>
+            <p class="team-tagline">"Overwhelming Force"</p>
+            <div class="clan-motto">TIER 2 AGGRESSIVE TEAM</div>
+            
+            <!-- Storm Troopers Tag Display -->
+            <div class="storm-team-tag">4零丨</div>
+            
+            <div class="team-meta">
+                <div class="meta-item">
+                    <i class="fas fa-hashtag"></i>
+                    <span>TEAM TAG: 4零丨</span>
+                </div>
+                <div class="meta-item">
+                    <i class="fas fa-users"></i>
+                    <span>TIER 2 TEAM</span>
+                </div>
+                <div class="meta-item">
+                    <i class="fas fa-bolt"></i>
+                    <span>AGGRESSIVE PLAYSTYLE</span>
+                </div>
+            </div>
+        </header>
+        
+        <!-- Team Description -->
+        <div class="storm-team-info">
+            <h3>ABOUT STORM TROOPERS</h3>
+            <p class="storm-team-description">
+                The Storm Troopers are 4KT's aggressive Tier 2 team, specializing in fast-paced, 
+                overwhelming gameplay. Known for their relentless aggression and ability to 
+                pressure opponents into submission, they're being reformed with new strategies 
+                and recruits.
+            </p>
+        </div>
+        
+        <!-- Roster Placeholder -->
+        <section class="section-luxury">
+            <h2 class="section-title">TEAM ROSTER</h2>
+            <div class="placeholder-grid-storm">
+                <div class="placeholder-card-storm">
+                    <div class="placeholder-icon">
+                        <i class="fas fa-user-plus"></i>
+                    </div>
+                    <div class="placeholder-text">Roster Being Formed</div>
+                </div>
+                <div class="placeholder-card-storm">
+                    <div class="placeholder-icon">
+                        <i class="fas fa-user-plus"></i>
+                    </div>
+                    <div class="placeholder-text">Tryouts in Progress</div>
+                </div>
+                <div class="placeholder-card-storm">
+                    <div class="placeholder-icon">
+                        <i class="fas fa-user-plus"></i>
+                    </div>
+                    <div class="placeholder-text">New Recruits Coming</div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Team Playstyle -->
+        <section class="section-luxury">
+            <h2 class="section-title">PLAYSTYLE & STRATEGY</h2>
+            <div class="placeholder-grid-storm">
+                <div class="placeholder-card-storm">
+                    <div class="placeholder-icon">
+                        <i class="fas fa-running"></i>
+                    </div>
+                    <h3 style="color: rgba(255, 0, 0, 0.5);">AGGRESSIVE PUSH</h3>
+                    <div class="placeholder-text">Constant pressure tactics</div>
+                </div>
+                <div class="placeholder-card-storm">
+                    <div class="placeholder-icon">
+                        <i class="fas fa-tachometer-alt"></i>
+                    </div>
+                    <h3 style="color: rgba(255, 0, 0, 0.5);">FAST-PACED</h3>
+                    <div class="placeholder-text">High-speed gameplay</div>
+                </div>
+                <div class="placeholder-card-storm">
+                    <div class="placeholder-icon">
+                        <i class="fas fa-fist-raised"></i>
+                    </div>
+                    <h3 style="color: rgba(255, 0, 0, 0.5);">OVERWHELMING</h3>
+                    <div class="placeholder-text">Force opponents into errors</div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Minimal Footer -->
+        <footer class="minimal-footer">
+            <div class="clan-name-footer">4KT STORM TROOPERS</div>
+            <div class="clan-tag-display">4零丨</div>
+            <p class="copyright">© 2026 BLOOD ESPORTS | STORM TROOPERS - UNDER CONSTRUCTION</p>
+        </footer>
+    </div>
+    
+    <script src="../assets/script.js"></script>
+    <script>
+        // Optional: Remove overlay after 10 seconds for preview (remove in production)
+        setTimeout(() => {
+            document.querySelector('.storm-construction-overlay').style.display = 'none';
+            document.querySelector('.storm-content').style.filter = 'none';
+            document.querySelector('.storm-content').style.opacity = '1';
+            document.querySelector('.storm-content').style.pointerEvents = 'all';
+        }, 10000);
+    </script>
+</body>
+</html>
