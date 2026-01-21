@@ -13,7 +13,7 @@
             --red: #FF0000;
             --black: #000000;
             --glass: rgba(255, 255, 255, 0.05);
-            --neon-glow: 0 0 20px rgba(255, 215, 0, 0.3);
+            --neon-glow: 0 0 25px rgba(255, 215, 0, 0.4);
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -28,12 +28,39 @@
 
         #particle-canvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; pointer-events: none; }
 
+        /* ANIMATIONS */
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(40px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
+            100% { transform: translateY(0px); }
+        }
+
+        @keyframes pulseGlow {
+            0% { text-shadow: 0 0 10px var(--gold); }
+            50% { text-shadow: 0 0 30px var(--gold), 0 0 10px white; }
+            100% { text-shadow: 0 0 10px var(--gold); }
+        }
+
+        .animate-up { opacity: 0; animation: fadeInUp 1s ease-out forwards; }
+        .delay-1 { animation-delay: 0.2s; }
+        .delay-2 { animation-delay: 0.4s; }
+        .delay-3 { animation-delay: 0.6s; }
+
         /* NAVIGATION */
         .luxury-nav { background: rgba(0,0,0,0.95); border-bottom: 2px solid var(--gold); padding: 1rem 2rem; position: sticky; top: 0; z-index: 1000; }
         .nav-container { max-width: 1400px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
-        .nav-brand { display: flex; align-items: center; gap: 12px; }
+        
+        /* Updated to link to Home */
+        .nav-brand { display: flex; align-items: center; gap: 12px; text-decoration: none; transition: 0.3s; }
+        .nav-brand:hover { transform: scale(1.05); }
+        
         .nav-logo-small { height: 40px; width: auto; }
-        .nav-title { font-family: 'Orbitron'; font-weight: 900; font-size: 1.1rem; letter-spacing: 1px; }
+        .nav-title { font-family: 'Orbitron'; font-weight: 900; font-size: 1.1rem; letter-spacing: 1px; color: white; }
 
         .desktop-links { display: flex; gap: 20px; }
         .desktop-links a { color: white; text-decoration: none; font-weight: 700; font-family: 'Orbitron'; font-size: 0.8rem; transition: 0.3s; }
@@ -58,25 +85,43 @@
         .dock-item i { display: block; font-size: 1.2rem; color: var(--gold); margin-bottom: 4px; }
 
         /* CONTENT STYLING */
-        .about-section { padding: 6rem 1.5rem; max-width: 1000px; margin: 0 auto; text-align: center; }
-        .about-title { font-family: 'Orbitron'; font-size: clamp(2.5rem, 8vw, 5rem); font-weight: 900; color: var(--gold); text-shadow: var(--neon-glow); margin-bottom: 30px; }
+        .about-section { padding: 6rem 1.5rem; max-width: 1100px; margin: 0 auto; text-align: center; }
+        .about-title { 
+            font-family: 'Orbitron'; font-size: clamp(2.5rem, 8vw, 5rem); font-weight: 900; 
+            color: var(--gold); text-shadow: var(--neon-glow); margin-bottom: 30px;
+            animation: pulseGlow 3s infinite;
+        }
         .deep-writeup { color: #ccc; font-size: 1.1rem; line-height: 1.8; margin-bottom: 4rem; text-align: justify; }
 
+        /* HALL OF FAME / RANKINGS */
+        .trophy-section { margin-bottom: 5rem; }
+        .trophy-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; margin-top: 2rem; }
+        .trophy-card {
+            background: linear-gradient(145deg, rgba(20,20,20,0.8), rgba(0,0,0,0.9));
+            border: 1px solid var(--gold); padding: 2rem; border-radius: 15px;
+            transition: 0.3s; position: relative; overflow: hidden;
+        }
+        .trophy-card:hover { transform: translateY(-10px); box-shadow: 0 0 40px rgba(255, 215, 0, 0.2); }
+        .trophy-icon { font-size: 3.5rem; color: var(--gold); margin-bottom: 15px; animation: float 3s ease-in-out infinite; filter: drop-shadow(0 0 10px var(--gold)); }
+        
+        /* TEAM DEEP DIVE */
         .team-deep-dive { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; margin-bottom: 5rem; }
         .team-info-card { background: var(--glass); border: 1px solid #333; padding: 2.5rem; border-radius: 20px; text-align: left; transition: 0.4s; backdrop-filter: blur(10px); }
-        .team-info-card:hover { border-color: var(--gold); box-shadow: var(--neon-glow); }
+        .team-info-card:hover { border-color: var(--gold); box-shadow: var(--neon-glow); transform: scale(1.02); }
         .team-info-card h3 { font-family: 'Orbitron'; color: var(--gold); margin-bottom: 10px; }
         .team-info-card span { color: var(--red); font-family: 'Orbitron'; font-size: 0.7rem; font-weight: 900; letter-spacing: 2px; display: block; margin-bottom: 15px; }
 
         /* LEADERSHIP */
         .leader-flex { display: flex; justify-content: center; gap: 40px; flex-wrap: wrap; margin-top: 3rem; }
         .leader-card { width: 350px; background: rgba(15,15,15,0.9); border-left: 4px solid var(--gold); padding: 2.5rem; border-radius: 0 15px 15px 0; text-align: left; transition: 0.3s; }
+        .leader-card:hover { background: rgba(25,25,25,1); box-shadow: -10px 0 20px rgba(255, 215, 0, 0.1); }
         .leader-name { font-family: 'Orbitron'; font-size: 2rem; color: white; margin: 10px 0; }
 
         /* FOOTER */
-        .footer { text-align: center; padding: 4rem 1.5rem; border-top: 1px solid #222; background: #000000; }
+        .footer { text-align: center; padding: 4rem 1.5rem; border-top: 1px solid #222; background: #000000; margin-top: 4rem; }
         .footer-text { font-family: 'Orbitron'; font-size: 0.75rem; color: #555; letter-spacing: 3px; text-transform: uppercase; margin-bottom: 15px; }
-        .legal-links a { color: #888; text-decoration: none; font-size: 0.7rem; font-family: 'Orbitron'; margin: 0 10px; }
+        .legal-links a { color: #888; text-decoration: none; font-size: 0.7rem; font-family: 'Orbitron'; margin: 0 10px; transition: 0.3s; }
+        .legal-links a:hover { color: var(--gold); }
 
         @media (max-width: 850px) { .desktop-links { display: none; } .mobile-dock { display: flex; } }
     </style>
@@ -87,10 +132,10 @@
 
     <nav class="luxury-nav">
         <div class="nav-container">
-            <div class="nav-brand">
+            <a href="index.html" class="nav-brand">
                 <img src="logo.png" alt="Logo" class="nav-logo-small">
                 <div class="nav-title"><span style="color:var(--gold)">BLOOD</span> <span style="color:var(--red)">ESPORTS</span></div>
-            </div>
+            </a>
             <div class="desktop-links">
                 <a href="clans/4kt.html">4KT</a>
                 <a href="clans/otf.html">OTF</a>
@@ -107,14 +152,36 @@
     </div>
 
     <section class="about-section">
-        <h1 class="about-title">THE KINGDOM</h1>
-        <div class="deep-writeup">
+        <h1 class="about-title animate-up">THE CLANS</h1>
+        
+        <div class="deep-writeup animate-up delay-1">
             Established in 2022, Blood Esports emerged as a direct response to the call for professional-grade mobile competition. With a foundation built on iron discipline and a 100+ member strong community, we have carved our name into the CODM elite. We believe that victory isn't just about the final score; it's about the hours of strategic preparation, the mental fortitude of our players, and the unbreakable bond of our family.
         </div>
 
-        <h2 style="font-family: 'Orbitron'; color: var(--gold); margin-bottom: 2rem; letter-spacing: 4px;">TEAM ANALYSIS</h2>
+        <div class="trophy-section animate-up delay-2">
+            <h2 style="font-family: 'Orbitron'; color: var(--gold); letter-spacing: 4px; margin-bottom: 2rem;">HALL OF FAME</h2>
+            <div class="trophy-grid">
+                <div class="trophy-card">
+                    <i class="fas fa-trophy trophy-icon"></i>
+                    <h3 style="font-family:'Orbitron'; color:white;">#1 AFRICAN RANKING</h3>
+                    <p style="color:#aaa; font-size:0.9rem;">Recognized as the premier competitive force in the region.</p>
+                </div>
+                <div class="trophy-card">
+                    <i class="fas fa-medal trophy-icon" style="animation-delay: 0.5s;"></i>
+                    <h3 style="font-family:'Orbitron'; color:white;">BER TIER 2 CHAMPIONS</h3>
+                    <p style="color:#aaa; font-size:0.9rem;">Blood Esports Ranking - Undisputed Tier 2 Victors.</p>
+                </div>
+                <div class="trophy-card">
+                    <i class="fas fa-crown trophy-icon" style="animation-delay: 1s;"></i>
+                    <h3 style="font-family:'Orbitron'; color:white;">2X OGR RANKED</h3>
+                    <p style="color:#aaa; font-size:0.9rem;">Onward Gaming Rankings - Consistent Top Performance.</p>
+                </div>
+            </div>
+        </div>
+
+        <h2 class="animate-up delay-2" style="font-family: 'Orbitron'; color: var(--gold); margin-bottom: 2rem; letter-spacing: 4px;">TEAM ANALYSIS</h2>
         
-        <div class="team-deep-dive">
+        <div class="team-deep-dive animate-up delay-3">
             <div class="team-info-card">
                 <span>TIER 1 ELITE</span>
                 <h3>SHADOW HUNTERS</h3>
@@ -142,8 +209,8 @@
             </div>
         </div>
 
-        <h2 style="font-family:'Orbitron'; color: var(--gold); margin-bottom: 2rem;">COMMANDERS</h2>
-        <div class="leader-flex">
+        <h2 class="animate-up delay-3" style="font-family:'Orbitron'; color: var(--gold); margin-bottom: 2rem;">COMMANDERS</h2>
+        <div class="leader-flex animate-up delay-3">
             <div class="leader-card">
                 <div style="font-family:'Orbitron'; color:var(--gold); font-size:0.7rem; letter-spacing:2px;">FOUNDER</div>
                 <div class="leader-name">CHOCO</div>
