@@ -30,6 +30,7 @@
             --black-matte: #1A1A1A;
             --black-luxury: #0F0F0F;
             --gray-diamond: #2A2A2A;
+            --glass: rgba(255, 255, 255, 0.05);
         }
 
         /* Reset and Base */
@@ -47,31 +48,26 @@
             min-height: 100vh;
         }
 
-        /* Animated Background */
+        /* Animated Background - Enhanced */
         .luxury-bg {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -2;
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -2;
             background: 
-                radial-gradient(circle at 20% 30%, rgba(255, 215, 0, 0.03) 0%, transparent 50%),
-                radial-gradient(circle at 80% 70%, rgba(155, 48, 255, 0.03) 0%, transparent 50%),
+                radial-gradient(circle at 20% 30%, rgba(255, 215, 0, 0.05) 0%, transparent 50%),
+                radial-gradient(circle at 80% 70%, rgba(155, 48, 255, 0.05) 0%, transparent 50%),
                 linear-gradient(45deg, var(--black) 0%, var(--black-luxury) 100%);
+            animation: bgShift 15s ease-in-out infinite alternate;
         }
+        @keyframes bgShift { 0% { background-position: 0% 50%; } 100% { background-position: 100% 50%; } }
 
         .gold-particle {
-            position: absolute;
-            width: 100%;
-            height: 100%;
+            position: absolute; width: 100%; height: 100%;
             background-image: 
                 radial-gradient(2px 2px at 20% 30%, var(--gold) 50%, transparent 100%),
                 radial-gradient(2px 2px at 40% 70%, var(--purple) 50%, transparent 100%),
                 radial-gradient(2px 2px at 60% 20%, var(--gold) 50%, transparent 100%);
             animation: float 20s infinite linear;
+            opacity: 0.6;
         }
-
         @keyframes float {
             0% { transform: translateY(0) rotate(0deg); }
             100% { transform: translateY(-1000px) rotate(360deg); }
@@ -82,841 +78,276 @@
             background: rgba(10, 10, 10, 0.95);
             backdrop-filter: blur(20px);
             border-bottom: 2px solid var(--purple);
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            position: sticky; top: 0; z-index: 1000;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8);
+            transition: 0.3s;
         }
+        .luxury-nav:hover { border-bottom-color: var(--gold); }
 
         .diamond-nav {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 1rem 2rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
+            max-width: 1400px; margin: 0 auto; padding: 1rem 2rem;
+            display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap;
         }
 
         .logo-display {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            font-size: 1.8rem;
-            font-weight: 900;
-            text-transform: uppercase;
-            letter-spacing: 2px;
+            display: flex; align-items: center; gap: 10px;
+            font-size: 1.8rem; font-weight: 900; text-transform: uppercase; letter-spacing: 2px;
+            animation: glowText 3s infinite alternate;
         }
+        @keyframes glowText { from { text-shadow: 0 0 10px var(--purple); } to { text-shadow: 0 0 20px var(--gold); } }
 
-        .logo-gold {
-            color: var(--gold);
-            text-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
-        }
-
-        .logo-red {
-            color: var(--red);
-            text-shadow: 0 0 20px rgba(255, 0, 0, 0.5);
-        }
-
+        .logo-gold { color: var(--gold); }
+        .logo-red { color: var(--red); }
         .logo-badge {
-            background: var(--purple);
-            color: white;
-            font-size: 0.7rem;
-            padding: 3px 8px;
-            border-radius: 4px;
-            margin-left: 10px;
-            font-weight: bold;
+            background: var(--purple); color: white; font-size: 0.7rem; padding: 3px 8px;
+            border-radius: 4px; margin-left: 10px; font-weight: bold;
+            box-shadow: 0 0 10px var(--purple);
         }
 
-        .nav-center {
-            display: flex;
-            gap: 2rem;
-            flex-wrap: wrap;
-        }
-
+        .nav-center { display: flex; gap: 2rem; flex-wrap: wrap; }
         .nav-link {
-            color: white;
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 0.9rem;
-            padding: 10px 15px;
-            border-radius: 8px;
-            transition: all 0.3s ease;
-            display: flex;
-            align-items: center;
-            gap: 8px;
+            color: white; text-decoration: none; font-weight: 600; font-size: 0.9rem;
+            padding: 10px 15px; border-radius: 8px; transition: all 0.3s ease;
+            display: flex; align-items: center; gap: 8px;
+            border: 1px solid transparent;
         }
-
         .nav-link:hover, .nav-link.active {
-            background: linear-gradient(45deg, rgba(155, 48, 255, 0.1), rgba(255, 0, 0, 0.1));
+            background: rgba(155, 48, 255, 0.15);
             color: var(--gold);
-            box-shadow: 0 5px 15px rgba(155, 48, 255, 0.2);
+            border-color: var(--purple);
+            box-shadow: 0 0 15px rgba(155, 48, 255, 0.4);
+            transform: translateY(-2px);
         }
 
         .btn-discord {
-            background: linear-gradient(45deg, #5865F2, #7289DA);
-            color: white;
-            padding: 10px 20px;
-            border-radius: 8px;
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 0.9rem;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            transition: all 0.3s ease;
+            background: linear-gradient(45deg, #5865F2, #7289DA); color: white;
+            padding: 10px 20px; border-radius: 8px; text-decoration: none;
+            font-weight: 600; font-size: 0.9rem; display: flex; align-items: center; gap: 8px;
+            transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(88, 101, 242, 0.3);
         }
-
         .btn-discord:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 25px rgba(88, 101, 242, 0.5);
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 8px 25px rgba(88, 101, 242, 0.6);
         }
 
         /* Container */
-        .container {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 2rem;
-            position: relative;
-            z-index: 1;
-        }
+        .container { max-width: 1400px; margin: 0 auto; padding: 2rem; position: relative; z-index: 1; }
 
-        /* Page Header */
-        .page-header {
-            text-align: center;
-            padding: 3rem 0;
-            position: relative;
+        /* Page Header - Glitch Effect */
+        .page-header { text-align: center; padding: 4rem 0; position: relative; }
+        .page-badge { 
+            font-size: 4rem; color: var(--purple); margin-bottom: 1rem; 
+            animation: pulseIcon 2s infinite; 
         }
-
-        .page-badge {
-            font-size: 4rem;
-            color: var(--purple);
-            margin-bottom: 1rem;
-        }
+        @keyframes pulseIcon { 0% { transform: scale(1); opacity: 0.8; } 50% { transform: scale(1.1); opacity: 1; } 100% { transform: scale(1); opacity: 0.8; } }
 
         .page-title {
-            font-size: 3.5rem;
-            font-weight: 900;
-            text-transform: uppercase;
-            margin-bottom: 0.5rem;
-            background: linear-gradient(45deg, var(--purple), var(--gold));
-            -webkit-background-clip: text;
-            background-clip: text;
-            -webkit-text-fill-color: transparent;
+            font-size: 4rem; font-weight: 900; text-transform: uppercase; margin-bottom: 0.5rem;
+            background: linear-gradient(45deg, var(--purple), var(--gold), var(--red));
+            -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 30px rgba(155, 48, 255, 0.3);
+            position: relative; display: inline-block;
+        }
+        /* Glitch Animation */
+        .page-title::before, .page-title::after {
+            content: 'EVENTS CALENDAR'; position: absolute; left: 0; top: 0; width: 100%; height: 100%;
+            background: var(--black); overflow: hidden; clip: rect(0, 900px, 0, 0); 
+        }
+        .page-title::before {
+            left: 2px; text-shadow: -1px 0 red; animation: glitch-anim-1 2s infinite linear alternate-reverse;
+        }
+        .page-title::after {
+            left: -2px; text-shadow: -1px 0 blue; animation: glitch-anim-2 3s infinite linear alternate-reverse;
+        }
+        @keyframes glitch-anim-1 {
+            0% { clip: rect(20px, 9999px, 15px, 0); } 20% { clip: rect(60px, 9999px, 10px, 0); }
+            40% { clip: rect(80px, 9999px, 5px, 0); } 60% { clip: rect(10px, 9999px, 90px, 0); }
+            80% { clip: rect(50px, 9999px, 30px, 0); } 100% { clip: rect(70px, 9999px, 40px, 0); }
+        }
+        @keyframes glitch-anim-2 {
+            0% { clip: rect(10px, 9999px, 80px, 0); } 20% { clip: rect(30px, 9999px, 10px, 0); }
+            40% { clip: rect(90px, 9999px, 50px, 0); } 60% { clip: rect(15px, 9999px, 20px, 0); }
+            80% { clip: rect(60px, 9999px, 70px, 0); } 100% { clip: rect(40px, 9999px, 60px, 0); }
         }
 
-        .page-subtitle {
-            font-size: 1.5rem;
-            color: var(--gold);
-            font-style: italic;
-            margin-bottom: 1rem;
+        .page-subtitle { font-size: 1.5rem; color: var(--gold); font-style: italic; margin-bottom: 2rem; letter-spacing: 3px; }
+
+        /* Filters - 3D Buttons */
+        .event-filters { display: flex; gap: 1rem; margin: 2rem 0; flex-wrap: wrap; justify-content: center; }
+        .filter-btn {
+            padding: 12px 30px; border-radius: 30px; background: rgba(30, 30, 30, 0.8);
+            color: white; border: 1px solid rgba(255, 255, 255, 0.1); cursor: pointer;
+            font-weight: 700; font-family: 'Orbitron', sans-serif; letter-spacing: 1px;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+        }
+        .filter-btn:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(155, 48, 255, 0.3); border-color: var(--purple); color: var(--purple); }
+        .filter-btn.active {
+            background: linear-gradient(135deg, var(--purple), var(--purple-dark));
+            color: white; border-color: var(--gold);
+            box-shadow: 0 0 25px rgba(155, 48, 255, 0.6);
         }
 
-        /* Calendar Timeline */
-        .calendar-timeline {
-            margin: 3rem 0;
-            position: relative;
-        }
-
-        .timeline-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 2rem;
-            flex-wrap: wrap;
-            gap: 1rem;
-        }
-
-        .timeline-title {
-            color: var(--gold);
-            font-size: 1.8rem;
-            font-weight: 700;
-        }
-
-        .timeline-period {
-            color: var(--purple);
-            font-size: 1.3rem;
-            font-weight: 600;
-        }
-
-        .timeline-container {
-            position: relative;
-            padding: 2rem 0;
-        }
-
-        .timeline-line {
-            position: absolute;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 4px;
-            height: 100%;
-            background: linear-gradient(to bottom, var(--purple), var(--gold));
-            border-radius: 2px;
-        }
-
-        .timeline-item {
-            display: flex;
-            align-items: center;
-            margin-bottom: 3rem;
-            position: relative;
-        }
-
-        .timeline-item:nth-child(odd) {
-            justify-content: flex-start;
-        }
-
-        .timeline-item:nth-child(even) {
-            justify-content: flex-end;
-        }
-
-        .timeline-dot {
-            position: absolute;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 20px;
-            height: 20px;
-            background: var(--gold);
-            border: 3px solid var(--purple);
-            border-radius: 50%;
-            z-index: 2;
-        }
-
-        .timeline-content {
-            width: 45%;
-            background: linear-gradient(145deg, rgba(40, 40, 40, 0.9), rgba(20, 20, 20, 0.95));
-            border: 2px solid rgba(155, 48, 255, 0.3);
-            border-radius: 15px;
-            padding: 1.5rem;
-            position: relative;
-        }
-
-        .timeline-item:nth-child(odd) .timeline-content {
-            margin-right: auto;
-            margin-left: 0;
-        }
-
-        .timeline-item:nth-child(even) .timeline-content {
-            margin-left: auto;
-            margin-right: 0;
-        }
-
-        .timeline-date {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            color: var(--gold);
-            font-weight: 700;
-            font-size: 1.1rem;
-            background: rgba(10, 10, 10, 0.9);
-            padding: 8px 15px;
-            border-radius: 20px;
-            border: 2px solid var(--purple);
-        }
-
-        .timeline-item:nth-child(odd) .timeline-date {
-            right: -100px;
-        }
-
-        .timeline-item:nth-child(even) .timeline-date {
-            left: -100px;
-        }
-
-        /* Event Status Badges */
-        .status-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            padding: 8px 20px;
-            border-radius: 20px;
-            font-weight: 600;
-            font-size: 0.9rem;
-            margin: 0 5px 10px;
-        }
-
-        .status-live {
-            background: linear-gradient(45deg, var(--red), var(--red-dark));
-            color: white;
-            animation: pulse 2s infinite;
-        }
-
-        .status-upcoming {
-            background: linear-gradient(45deg, var(--blue), var(--blue-dark));
-            color: white;
-        }
-
-        .status-past {
-            background: linear-gradient(45deg, var(--gray-diamond), #555);
-            color: white;
-        }
-
-        .status-clan {
-            background: linear-gradient(45deg, var(--purple), var(--purple-dark));
-            color: white;
-        }
-
-        .status-community {
-            background: linear-gradient(45deg, var(--orange), var(--orange-dark));
-            color: white;
-        }
-
-        .status-tournament {
-            background: linear-gradient(45deg, var(--teal), var(--teal-dark));
-            color: white;
-        }
-
-        .status-special {
-            background: linear-gradient(45deg, var(--pink), var(--pink-dark));
-            color: white;
-        }
-
-        @keyframes pulse {
-            0% { box-shadow: 0 0 0 0 rgba(255, 0, 0, 0.7); }
-            70% { box-shadow: 0 0 0 10px rgba(255, 0, 0, 0); }
-            100% { box-shadow: 0 0 0 0 rgba(255, 0, 0, 0); }
-        }
-
-        /* Section Luxury */
+        /* Luxury Section - Glassmorphism & Borders */
         .section-luxury {
-            background-color: rgba(20, 20, 20, 0.8);
-            border-radius: 15px;
-            padding: 2rem;
-            margin-bottom: 2rem;
-            border: 1px solid rgba(155, 48, 255, 0.2);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-            backdrop-filter: blur(10px);
+            background: rgba(20, 20, 20, 0.6); border-radius: 20px; padding: 3rem; margin-bottom: 3rem;
+            border: 1px solid rgba(155, 48, 255, 0.1); box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(15px); position: relative; overflow: hidden;
+            transition: 0.5s;
+        }
+        .section-luxury:hover { border-color: rgba(255, 215, 0, 0.3); box-shadow: 0 20px 60px rgba(155, 48, 255, 0.15); }
+        .section-luxury::before {
+            content: ''; position: absolute; top: 0; left: 0; width: 4px; height: 100%;
+            background: linear-gradient(to bottom, var(--purple), var(--gold));
         }
 
         .section-title {
-            color: var(--purple);
-            font-size: 2rem;
-            margin-bottom: 1.5rem;
-            padding-bottom: 0.5rem;
-            border-bottom: 2px solid rgba(155, 48, 255, 0.3);
-            display: inline-block;
+            color: var(--purple); font-size: 2.2rem; margin-bottom: 2rem; padding-bottom: 0.5rem;
+            border-bottom: 2px solid rgba(155, 48, 255, 0.3); display: inline-flex; align-items: center; gap: 15px;
+            text-shadow: 0 0 15px rgba(155, 48, 255, 0.4);
         }
 
-        /* Countdown Timer */
-        .countdown-container {
-            background: linear-gradient(45deg, rgba(155, 48, 255, 0.1), rgba(255, 215, 0, 0.1));
-            border: 2px solid rgba(155, 48, 255, 0.2);
-            border-radius: 15px;
-            padding: 1.5rem;
-            margin: 1.5rem 0;
-        }
-
-        .countdown-title {
-            color: var(--gold);
-            font-size: 1.3rem;
-            margin-bottom: 1rem;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .countdown-timer {
-            display: flex;
-            justify-content: center;
-            gap: 1rem;
-            margin: 1.5rem 0;
-        }
-
-        .countdown-box {
-            background: rgba(0, 0, 0, 0.5);
-            border: 2px solid var(--purple);
-            border-radius: 10px;
-            padding: 1.5rem;
-            min-width: 100px;
-            text-align: center;
-        }
-
-        .countdown-number {
-            font-size: 2.5rem;
-            font-weight: 900;
-            color: var(--gold);
-            font-family: 'Orbitron', sans-serif;
-        }
-
-        .countdown-label {
-            font-size: 0.9rem;
-            color: #aaa;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-top: 0.5rem;
-        }
-
-        /* Event Cards */
-        .events-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 1.5rem;
-            margin-top: 1.5rem;
-        }
-
-        .event-card {
-            background: linear-gradient(145deg, rgba(40, 40, 40, 0.8), rgba(20, 20, 20, 0.9));
-            border-radius: 15px;
-            padding: 1.5rem;
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-            border: 2px solid transparent;
-        }
-
-        .event-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 25px rgba(155, 48, 255, 0.2);
-        }
-
-        .event-clan {
-            border-color: rgba(155, 48, 255, 0.3);
-        }
-
-        .event-clan:hover {
-            border-color: var(--purple);
-        }
-
-        .event-community {
-            border-color: rgba(255, 165, 0, 0.3);
-        }
-
-        .event-community:hover {
-            border-color: var(--orange);
-        }
-
-        .event-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 4px;
-        }
-
-        .event-clan::before {
-            background: linear-gradient(90deg, var(--purple), var(--purple-dark));
-        }
-
-        .event-community::before {
-            background: linear-gradient(90deg, var(--orange), var(--orange-dark));
-        }
-
-        .event-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            margin-bottom: 1rem;
-            padding-bottom: 0.5rem;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .event-title {
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: white;
-            margin-bottom: 0.5rem;
-        }
-
-        .event-game {
-            color: var(--gold);
-            font-weight: 600;
-            margin-bottom: 1rem;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .event-prize {
-            background: linear-gradient(45deg, rgba(255, 215, 0, 0.1), rgba(255, 215, 0, 0.05));
-            border: 1px solid rgba(255, 215, 0, 0.3);
-            border-radius: 8px;
-            padding: 0.8rem;
-            margin: 1rem 0;
-        }
-
-        .prize-label {
-            color: var(--gold);
-            font-weight: 600;
-            font-size: 0.9rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-bottom: 0.3rem;
-        }
-
-        .prize-amount {
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: white;
-        }
-
-        .event-details {
-            margin: 1rem 0;
-        }
-
-        .detail-row {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            margin-bottom: 0.8rem;
-            color: #ccc;
-        }
-
-        .detail-label {
-            color: var(--gold);
-            font-weight: 600;
-            min-width: 100px;
-        }
-
-        .event-teams {
-            margin-top: 1rem;
-        }
-
-        .teams-title {
-            color: var(--gold);
-            font-weight: 600;
-            margin-bottom: 0.5rem;
-            font-size: 1rem;
-        }
-
-        .team-list {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.5rem;
-        }
-
-        .team-badge {
-            background: rgba(155, 48, 255, 0.2);
-            color: var(--gold);
-            padding: 4px 12px;
-            border-radius: 15px;
-            font-size: 0.8rem;
-            font-weight: 600;
-        }
-
-        /* Event Filters */
-        .event-filters {
-            display: flex;
-            gap: 1rem;
-            margin: 2rem 0;
-            flex-wrap: wrap;
-            justify-content: center;
-        }
-
-        .filter-btn {
-            padding: 10px 25px;
-            border-radius: 25px;
-            background: rgba(255, 255, 255, 0.1);
-            color: white;
-            border: 2px solid transparent;
-            cursor: pointer;
-            font-weight: 600;
-            transition: all 0.3s ease;
-        }
-
-        .filter-btn:hover, .filter-btn.active {
-            background: linear-gradient(45deg, var(--purple), var(--purple-dark));
-            color: white;
-            border-color: var(--purple);
-        }
-
-        /* Buttons */
-        .btn-primary, .btn-secondary {
-            padding: 12px 25px;
-            border-radius: 10px;
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 1rem;
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            transition: all 0.3s ease;
-            border: none;
-            cursor: pointer;
-        }
-
-        .btn-primary {
-            background: linear-gradient(45deg, var(--purple), var(--purple-dark));
-            color: white;
-        }
-
-        .btn-secondary {
-            background: linear-gradient(45deg, var(--gold), var(--gold-dark));
-            color: var(--black);
-        }
-
-        .btn-primary:hover, .btn-secondary:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
-        }
-
-        /* Footer */
-        .minimal-footer {
-            text-align: center;
-            padding: 3rem 0;
-            border-top: 1px solid rgba(155, 48, 255, 0.2);
-            margin-top: 3rem;
-        }
-
-        .clan-tag-display {
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: var(--purple);
-            margin: 1rem 0;
-        }
-
-        .clan-name-footer {
-            font-size: 1.2rem;
-            color: var(--gold);
-            margin-bottom: 1rem;
-        }
-
-        .copyright {
-            color: #666;
-            font-size: 0.9rem;
-            letter-spacing: 1px;
-        }
-
-        /* Daily Events */
-        .daily-events {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 1rem;
-            margin: 1.5rem 0;
-        }
-
-        .daily-event {
-            background: rgba(30, 30, 30, 0.7);
-            border-radius: 10px;
-            padding: 1rem;
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-        }
-
-        .daily-time {
-            color: var(--gold);
-            font-weight: 700;
-            font-size: 1.1rem;
-            min-width: 80px;
-        }
-
-        /* Calendar View */
-        .calendar-view {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 1.5rem;
-            margin: 2rem 0;
-        }
-
+        /* Calendar Cards - Holographic Effect */
+        .calendar-view { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; margin: 2rem 0; }
         .month-card {
-            background: linear-gradient(145deg, rgba(40, 40, 40, 0.8), rgba(20, 20, 20, 0.9));
-            border: 2px solid rgba(155, 48, 255, 0.3);
-            border-radius: 15px;
-            padding: 1.5rem;
+            background: linear-gradient(145deg, rgba(30, 30, 30, 0.9), rgba(10, 10, 10, 0.95));
+            border: 1px solid rgba(255, 255, 255, 0.05); border-radius: 20px; padding: 2rem;
+            position: relative; overflow: hidden; transition: 0.4s;
         }
+        .month-card:hover { transform: translateY(-10px) scale(1.02); border-color: var(--gold); box-shadow: 0 15px 40px rgba(0,0,0,0.5); }
+        .month-card::after {
+            content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255,255,255,0.05), transparent);
+            transform: rotate(45deg); transition: 0.5s; opacity: 0; pointer-events: none;
+        }
+        .month-card:hover::after { opacity: 1; transform: rotate(45deg) translate(50%, 50%); }
 
         .month-title {
-            color: var(--gold);
-            font-size: 1.5rem;
-            font-weight: 700;
-            margin-bottom: 1rem;
-            text-align: center;
-            padding-bottom: 0.5rem;
-            border-bottom: 1px solid rgba(255, 215, 0, 0.3);
+            color: var(--gold); font-size: 1.8rem; font-weight: 800; margin-bottom: 1.5rem; text-align: center;
+            border-bottom: 1px solid rgba(255, 215, 0, 0.2); padding-bottom: 1rem;
         }
-
-        .month-events {
-            list-style: none;
-        }
-
+        .month-events { list-style: none; }
         .month-event {
-            padding: 0.8rem 0;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 1rem 0; border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            display: flex; justify-content: space-between; align-items: center;
         }
+        .month-event:last-child { border-bottom: none; }
+        .event-date { color: var(--purple); font-weight: 700; font-size: 0.9rem; background: rgba(155, 48, 255, 0.1); padding: 4px 10px; border-radius: 8px; }
+        .event-name { color: white; font-weight: 500; text-align: right; }
 
-        .month-event:last-child {
-            border-bottom: none;
+        /* Timeline - Enhanced */
+        .timeline-container { position: relative; padding: 2rem 0; }
+        .timeline-line {
+            position: absolute; left: 50%; transform: translateX(-50%); width: 4px; height: 100%;
+            background: linear-gradient(to bottom, var(--purple), var(--gold), var(--red));
+            border-radius: 2px; box-shadow: 0 0 15px var(--purple);
         }
-
-        .event-date {
-            color: var(--purple);
-            font-weight: 600;
-            font-size: 0.9rem;
+        .timeline-item { display: flex; align-items: center; margin-bottom: 4rem; position: relative; opacity: 0; transform: translateY(50px); transition: 0.8s ease-out; }
+        .timeline-item.visible { opacity: 1; transform: translateY(0); }
+        
+        .timeline-item:nth-child(odd) { justify-content: flex-start; }
+        .timeline-item:nth-child(even) { justify-content: flex-end; }
+        
+        .timeline-dot {
+            position: absolute; left: 50%; transform: translateX(-50%); width: 25px; height: 25px;
+            background: var(--black); border: 4px solid var(--gold); border-radius: 50%; z-index: 2;
+            box-shadow: 0 0 20px var(--gold); transition: 0.3s;
         }
+        .timeline-item:hover .timeline-dot { transform: translateX(-50%) scale(1.3); background: var(--gold); }
 
-        .event-name {
-            color: white;
-            font-weight: 500;
-            margin-top: 0.3rem;
+        .timeline-content {
+            width: 45%; background: rgba(25, 25, 25, 0.95);
+            border: 1px solid rgba(155, 48, 255, 0.3); border-radius: 20px; padding: 2rem;
+            position: relative; transition: 0.4s;
         }
-
-        /* RESPONSIVE DESIGN */
-        @media (max-width: 1024px) {
-            .page-title {
-                font-size: 3rem;
-            }
-            
-            .section-title {
-                font-size: 1.8rem;
-            }
-            
-            .timeline-content {
-                width: 40%;
-            }
-            
-            .timeline-item:nth-child(odd) .timeline-date {
-                right: -80px;
-            }
-            
-            .timeline-item:nth-child(even) .timeline-date {
-                left: -80px;
-            }
-            
-            .events-grid {
-                grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            }
-            
-            .countdown-box {
-                min-width: 80px;
-                padding: 1rem;
-            }
-            
-            .countdown-number {
-                font-size: 2rem;
-            }
+        .timeline-item:hover .timeline-content {
+            transform: scale(1.03); border-color: var(--gold); box-shadow: 0 10px 40px rgba(155, 48, 255, 0.2);
         }
+        .timeline-date {
+            position: absolute; top: 50%; transform: translateY(-50%);
+            color: var(--black); background: var(--gold); font-weight: 800; font-size: 1.1rem;
+            padding: 10px 20px; border-radius: 30px; border: 2px solid var(--gold);
+            box-shadow: 0 0 15px var(--gold); z-index: 5;
+        }
+        .timeline-item:nth-child(odd) .timeline-date { right: -120px; }
+        .timeline-item:nth-child(even) .timeline-date { left: -120px; }
 
+        /* Status Badges - Pulsing */
+        .status-badge {
+            display: inline-flex; align-items: center; gap: 8px; padding: 6px 15px; border-radius: 20px;
+            font-weight: 700; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px;
+            box-shadow: 0 0 15px rgba(0,0,0,0.5);
+        }
+        .status-live { background: #ff0000; color: white; animation: livePulse 1.5s infinite; }
+        @keyframes livePulse { 0% { box-shadow: 0 0 0 0 rgba(255, 0, 0, 0.7); } 70% { box-shadow: 0 0 0 10px rgba(255, 0, 0, 0); } 100% { box-shadow: 0 0 0 0 rgba(255, 0, 0, 0); } }
+        .status-upcoming { background: var(--blue); }
+        .status-clan { background: var(--purple); }
+        .status-community { background: var(--orange); }
+
+        /* Countdown - Cyberpunk Style */
+        .countdown-container {
+            background: rgba(0, 0, 0, 0.8); border: 1px solid var(--green); border-radius: 20px;
+            padding: 2rem; margin: 2rem 0; text-align: center; position: relative; overflow: hidden;
+        }
+        .countdown-container::before {
+            content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 2px;
+            background: var(--green); animation: scanline 2s linear infinite;
+        }
+        @keyframes scanline { 0% { top: 0%; } 100% { top: 100%; } }
+
+        .countdown-timer { display: flex; justify-content: center; gap: 1.5rem; margin: 2rem 0; flex-wrap: wrap; }
+        .countdown-box {
+            background: rgba(10, 20, 10, 0.9); border: 1px solid var(--green); border-radius: 15px;
+            padding: 1.5rem; min-width: 110px; box-shadow: 0 0 15px rgba(0, 255, 0, 0.1);
+        }
+        .countdown-number { font-size: 3rem; font-weight: 900; color: var(--green); text-shadow: 0 0 10px var(--green); font-family: 'Orbitron'; }
+        .countdown-label { font-size: 0.9rem; color: #aaa; text-transform: uppercase; margin-top: 5px; }
+
+        /* Event Cards */
+        .event-card {
+            background: rgba(30, 30, 30, 0.6); border-radius: 20px; padding: 2rem; border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: 0.4s; position: relative; overflow: hidden;
+        }
+        .event-card:hover { transform: translateY(-10px); background: rgba(40, 40, 40, 0.8); border-color: var(--purple); }
+        .event-title { font-size: 1.6rem; font-weight: 800; margin-bottom: 0.5rem; color: white; }
+        .event-game { color: var(--gold); font-weight: 600; display: flex; align-items: center; gap: 8px; margin-bottom: 1.5rem; }
+
+        /* Buttons */
+        .btn-primary {
+            background: linear-gradient(45deg, var(--purple), var(--purple-dark)); color: white;
+            padding: 14px 30px; border-radius: 30px; text-decoration: none; font-weight: 700;
+            display: inline-flex; align-items: center; gap: 10px; border: none; cursor: pointer;
+            box-shadow: 0 5px 20px rgba(155, 48, 255, 0.3); transition: 0.3s;
+        }
+        .btn-primary:hover { transform: translateY(-3px) scale(1.05); box-shadow: 0 10px 30px rgba(155, 48, 255, 0.6); }
+
+        /* Footer */
+        .minimal-footer { text-align: center; padding: 4rem 0; border-top: 1px solid rgba(255, 255, 255, 0.1); margin-top: 4rem; opacity: 0.7; }
+
+        /* Responsive */
         @media (max-width: 768px) {
-            .diamond-nav {
-                flex-direction: column;
-                gap: 1rem;
-                text-align: center;
-            }
-            
-            .nav-center {
-                width: 100%;
-                justify-content: center;
-            }
-            
-            .page-title {
-                font-size: 2.5rem;
-            }
-            
-            .page-subtitle {
-                font-size: 1.2rem;
-            }
-            
-            .timeline-line {
-                left: 30px;
-            }
-            
-            .timeline-item {
-                justify-content: flex-start !important;
-                padding-left: 60px;
-            }
-            
-            .timeline-content {
-                width: 100%;
-            }
-            
-            .timeline-date {
-                position: relative;
-                left: 0 !important;
-                right: auto !important;
-                top: auto;
-                transform: none;
-                margin-bottom: 1rem;
-                display: inline-block;
-            }
-            
-            .timeline-dot {
-                left: 23px;
-            }
-            
-            .countdown-timer {
-                flex-wrap: wrap;
-            }
-            
-            .countdown-box {
-                flex: 1;
-                min-width: 70px;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .container {
-                padding: 1rem;
-            }
-            
-            .page-title {
-                font-size: 2rem;
-            }
-            
-            .page-subtitle {
-                font-size: 1rem;
-            }
-            
-            .section-luxury {
-                padding: 1.5rem;
-            }
-            
-            .event-card {
-                padding: 1rem;
-            }
-            
-            .event-title {
-                font-size: 1.3rem;
-            }
-            
-            .countdown-box {
-                min-width: 60px;
-                padding: 0.8rem;
-            }
-            
-            .countdown-number {
-                font-size: 1.5rem;
-            }
-            
-            .daily-events {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        @media (max-width: 320px) {
-            .logo-display {
-                font-size: 1.4rem;
-            }
-            
-            .nav-link {
-                padding: 8px 12px;
-                font-size: 0.8rem;
-            }
-            
-            .page-title {
-                font-size: 1.8rem;
-            }
-            
-            .btn-primary, .btn-secondary {
-                padding: 10px 20px;
-                font-size: 0.9rem;
-            }
+            .timeline-line { left: 20px; }
+            .timeline-item { flex-direction: column; align-items: flex-start; padding-left: 50px; }
+            .timeline-dot { left: 8px; transform: none; }
+            .timeline-content { width: 100%; margin: 0 !important; }
+            .timeline-date { position: static; transform: none; display: inline-block; margin-bottom: 1rem; }
+            .page-title { font-size: 2.5rem; }
+            .nav-center { display: none; }
         }
     </style>
 </head>
 <body>
-    <!-- Animated Background -->
+
     <div class="luxury-bg">
-        <div class="gold-particle" id="particles"></div>
+        <div class="gold-particle"></div>
     </div>
     
-    <!-- Navigation - Updated: Removed SYNDICATE link -->
     <nav class="luxury-nav">
         <div class="diamond-nav">
-            <div class="nav-left">
-                <div class="logo-display">
-                    <span class="logo-gold">BLOOD</span>
-                    <span class="logo-red">ESPORTS</span>
-                    <div class="logo-badge">EVENTS</div>
-                </div>
+            <div class="logo-display">
+                <span class="logo-gold">BLOOD</span>
+                <span class="logo-red">ESPORTS</span>
+                <div class="logo-badge">EVENTS</div>
             </div>
             <div class="nav-center">
                 <a href="../index.html" class="nav-link">HOME</a>
@@ -924,708 +355,184 @@
                 <a href="../clans/otf.html" class="nav-link">OTF CLAN</a>
                 <a href="events.html" class="nav-link active">EVENTS</a>
             </div>
-            <div class="nav-right">
-                <a href="https://discord.gg/99uuMvMBX" target="_blank" class="btn-discord">
-                    <i class="fab fa-discord"></i> DISCORD
-                </a>
-            </div>
+            <a href="https://discord.gg/99uuMvMBX" target="_blank" class="btn-discord">
+                <i class="fab fa-discord"></i> DISCORD
+            </a>
         </div>
     </nav>
     
     <div class="container">
-        <!-- Page Header -->
         <header class="page-header">
-            <div class="page-badge">
-                <i class="fas fa-calendar-alt"></i>
-            </div>
+            <div class="page-badge"><i class="fas fa-calendar-alt"></i></div>
             <h1 class="page-title">EVENTS CALENDAR</h1>
             <p class="page-subtitle">JANUARY - MARCH 2026 SCHEDULE</p>
+            
             <div class="event-filters">
-                <button class="filter-btn active" onclick="filterEvents('all')">All Events</button>
-                <button class="filter-btn" onclick="filterEvents('clan')">Clan Events</button>
-                <button class="filter-btn" onclick="filterEvents('community')">Community Events</button>
-                <button class="filter-btn" onclick="filterEvents('live')">Live Now</button>
+                <button class="filter-btn active" onclick="filterEvents('all')">ALL EVENTS</button>
+                <button class="filter-btn" onclick="filterEvents('clan')">CLAN OPS</button>
+                <button class="filter-btn" onclick="filterEvents('community')">COMMUNITY</button>
+                <button class="filter-btn" onclick="filterEvents('live')">LIVE NOW</button>
             </div>
         </header>
         
-        <!-- Quick Calendar View -->
-        <section class="section-luxury">
-            <h2 class="section-title">
-                <i class="fas fa-calendar"></i>
-                QUICK VIEW CALENDAR
-            </h2>
-            <div class="calendar-view">
-                <div class="month-card">
-                    <div class="month-title">JANUARY 2026</div>
-                    <ul class="month-events">
-                        <li class="month-event">
-                            <div class="event-date">Daily</div>
-                            <div class="event-name">Scrims (6pm & 9:45pm WAT)</div>
-                        </li>
-                        <li class="month-event">
-                            <div class="event-date">Jan 19-31</div>
-                            <div class="event-name">African Battle Royale Community</div>
-                        </li>
-                        <li class="month-event">
-                            <div class="event-date">Jan 21</div>
-                            <div class="event-name">Clanmaster's Birthday</div>
-                        </li>
-                        <li class="month-event">
-                            <div class="event-date">Every Friday</div>
-                            <div class="event-name">Clan Training</div>
-                        </li>
-                    </ul>
-                </div>
-                
-                <div class="month-card">
-                    <div class="month-title">FEBRUARY 2026</div>
-                    <ul class="month-events">
-                        <li class="month-event">
-                            <div class="event-date">Feb 2-10</div>
-                            <div class="event-name">Alpha Gaming Ranking (AGR)</div>
-                        </li>
-                        <li class="month-event">
-                            <div class="event-date">Feb 17-20</div>
-                            <div class="event-name">Major Gaming League (MGL)</div>
-                        </li>
-                        <li class="month-event">
-                            <div class="event-date">Feb 21-28</div>
-                            <div class="event-name">Elite Champion Series (ECS)</div>
-                        </li>
-                    </ul>
-                </div>
-                
-                <div class="month-card">
-                    <div class="month-title">MARCH 2026</div>
-                    <ul class="month-events">
-                        <li class="month-event">
-                            <div class="event-date">Mar 1-4</div>
-                            <div class="event-name">Alpha Scrims Event</div>
-                        </li>
-                        <li class="month-event">
-                            <div class="event-date">Ongoing</div>
-                            <div class="event-name">Daily MP Scrims & Training</div>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </section>
-        
-        <!-- Daily Scrims Section - Updated Focus -->
-        <section class="section-luxury" data-category="clan">
-            <h2 class="section-title">
-                <span class="status-badge status-clan">
-                    <i class="fas fa-users"></i> DAILY SCHEDULE
-                </span>
-            </h2>
-            <div class="daily-events">
-                <div class="daily-event">
-                    <div class="daily-time">18:00 WAT</div>
-                    <div>
-                        <div class="event-title">Evening Scrims Session</div>
-                        <p style="color: #ccc; font-size: 0.9rem;">Competitive Team Practice • All Members Welcome</p>
-                    </div>
-                </div>
-                <div class="daily-event">
-                    <div class="daily-time">21:45 WAT</div>
-                    <div>
-                        <div class="event-title">Advanced Night Scrims</div>
-                        <p style="color: #ccc; font-size: 0.9rem;">Competitive Team Practice • By Invitation</p>
-                    </div>
-                </div>
-            </div>
-            <p style="color: #ccc; margin-top: 1rem; display: flex; align-items: center; gap: 8px;">
-                <i class="fas fa-clock"></i> All times in West Africa Time (WAT) • Subject to change based on tournament schedules
-            </p>
-        </section>
-        
-        <!-- Clan Events Timeline -->
-        <section class="section-luxury" data-category="clan">
-            <h2 class="section-title">
-                <span class="status-badge status-clan">
-                    <i class="fas fa-crown"></i> CLAN EVENTS
-                </span>
-            </h2>
-            
-            <div class="calendar-timeline">
-                <div class="timeline-container">
-                    <div class="timeline-line"></div>
-                    
-                    <!-- Daily Scrims -->
-                    <div class="timeline-item">
-                        <div class="timeline-dot"></div>
-                        <div class="timeline-date">DAILY</div>
-                        <div class="timeline-content">
-                            <h3 class="event-title">Daily Scrim Sessions</h3>
-                            <div class="event-game">
-                                <i class="fas fa-crosshairs"></i>
-                                Competitive Team Practice
-                            </div>
-                            <div class="event-details">
-                                <div class="detail-row">
-                                    <span class="detail-label">First Session:</span>
-                                    <span>18:00 WAT (6:00 PM)</span>
-                                </div>
-                                <div class="detail-row">
-                                    <span class="detail-label">Second Session:</span>
-                                    <span>21:45 WAT (9:45 PM)</span>
-                                </div>
-                                <div class="detail-row">
-                                    <span class="detail-label">Focus:</span>
-                                    <span>Competitive Team Practice</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- January 21: Clanmaster's Birthday -->
-                    <div class="timeline-item">
-                        <div class="timeline-dot"></div>
-                        <div class="timeline-date">JAN 21</div>
-                        <div class="timeline-content">
-                            <h3 class="event-title">Clanmaster's Birthday Celebration</h3>
-                            <div class="event-game">
-                                <i class="fas fa-birthday-cake"></i>
-                                Special Clan Event
-                            </div>
-                            <div class="event-prize">
-                                <div class="prize-label">Special Features</div>
-                                <div class="prize-amount">Celebration & Giveaways</div>
-                            </div>
-                            <div class="event-details">
-                                <div class="detail-row">
-                                    <span class="detail-label">Activities:</span>
-                                    <span>Custom Matches, 1v1 Tournaments, Giveaways</span>
-                                </div>
-                                <div class="detail-row">
-                                    <span class="detail-label">Duration:</span>
-                                    <span>All Day Event</span>
-                                </div>
-                                <div class="detail-row">
-                                    <span class="detail-label">Special:</span>
-                                    <span>Exclusive In-Game Items</span>
-                                </div>
-                            </div>
-                            <!-- Calendar link for birthday event -->
-                            <button class="btn-primary" style="width: 100%; margin-top: 1rem;" onclick="window.open('https://calendar.google.com/calendar/render?action=TEMPLATE&dates=20260121T000000Z%2F20260121T235959Z&text=Blood%20Esports%20Clanmaster%27s%20Birthday&details=Join%20the%20celebration%21%20Custom%20matches%2C%201v1%20tournaments%2C%20and%20giveaways.', '_blank')">
-                                <i class="fas fa-calendar-plus"></i> ADD TO CALENDAR
-                            </button>
-                        </div>
-                    </div>
-                    
-                    <!-- Every Friday: Clan Training - Updated -->
-                    <div class="timeline-item">
-                        <div class="timeline-dot"></div>
-                        <div class="timeline-date">EVERY FRI</div>
-                        <div class="timeline-content">
-                            <h3 class="event-title">Weekly Clan Training</h3>
-                            <div class="event-game">
-                                <i class="fas fa-graduation-cap"></i>
-                                Battle Royale Strategy & Skill Development
-                            </div>
-                            <div class="event-details">
-                                <div class="detail-row">
-                                    <span class="detail-label">Time:</span>
-                                    <span>20:00 WAT Weekly</span>
-                                </div>
-                                <div class="detail-row">
-                                    <span class="detail-label">Focus:</span>
-                                    <span>BR Strategy & Team Coordination</span>
-                                </div>
-                                <!-- Updated: Clan Admins -->
-                                <div class="detail-row">
-                                    <span class="detail-label">Instructors:</span>
-                                    <span>Blood Esports Clan Admins</span>
-                                </div>
-                                <div class="detail-row">
-                                    <span class="detail-label">For:</span>
-                                    <span>Battle Royale Players</span>
-                                </div>
-                            </div>
-                            <!-- Calendar link for weekly training -->
-                            <button class="btn-primary" style="width: 100%; margin-top: 1rem;" onclick="window.open('https://calendar.google.com/calendar/render?action=TEMPLATE&text=Blood%20Esports%20Weekly%20Clan%20Training&details=Battle%20Royale%20Strategy%20%26%20Skill%20Development%20with%20Clan%20Admins&location=Discord&trp=true&sprop=website:bloodesports.com&sprop=name:Blood%20Esports', '_blank')">
-                                <i class="fas fa-calendar-plus"></i> SET WEEKLY REMINDER
-                            </button>
-                        </div>
-                    </div>
-                    
-                </div>
-            </div>
-        </section>
-        
-        <!-- Community Events -->
-        <section class="section-luxury" data-category="community">
-            <h2 class="section-title">
-                <span class="status-badge status-community">
-                    <i class="fas fa-globe"></i> COMMUNITY EVENTS
-                </span>
-            </h2>
-            
-            <!-- MP Events Card - Updated for 4KT Syndicate only -->
-            <div class="event-card event-community">
-                <div class="event-header">
-                    <div>
-                        <div class="event-title">Multiplayer Events</div>
-                        <div class="event-game">
-                            <i class="fas fa-crosshairs"></i>
-                            4KT Syndicate Exclusive
-                        </div>
-                    </div>
-                    <span class="status-badge status-upcoming">4KT SYNDICATE</span>
-                </div>
-                
-                <div class="event-details">
-                    <div class="detail-row">
-                        <span class="detail-label">Team:</span>
-                        <span>4KT Syndicate Only</span>
-                    </div>
-                    <div class="detail-row">
-                        <span class="detail-label">Scrims:</span>
-                        <span>Spontaneous • Multiple Daily</span>
-                    </div>
-                    <div class="detail-row">
-                        <span class="detail-label">Tournaments:</span>
-                        <span>Weekly MP Events</span>
-                    </div>
-                    <div class="detail-row">
-                        <span class="detail-label">Training:</span>
-                        <span>MP Strategy Workshops</span>
-                    </div>
-                </div>
-                
-                <div class="team-list">
-                    <span class="team-badge">MP Specialists</span>
-                    <span class="team-badge">4零丨 Tag</span>
-                    <span class="team-badge">Tournament Focus</span>
-                </div>
-                
-                <a href="https://discord.gg/99uuMvMBX" target="_blank" class="btn-primary" style="width: 100%; margin-top: 1rem; text-align: center;">
-                    <i class="fab fa-discord"></i> CHECK SYNDICATE SCHEDULE
-                </a>
-            </div>
-            
-            <div class="calendar-timeline" style="margin-top: 3rem;">
-                <div class="timeline-container">
-                    <div class="timeline-line" style="background: linear-gradient(to bottom, var(--orange), var(--orange-dark));"></div>
-                    
-                    <!-- Jan 19-31: ABC - Updated: Only Shadow Hunters participating -->
-                    <div class="timeline-item">
-                        <div class="timeline-dot" style="background: var(--orange); border-color: var(--orange-dark);"></div>
-                        <div class="timeline-date">JAN 19-31</div>
-                        <div class="timeline-content">
-                            <h3 class="event-title">AFRICAN BATTLE ROYALE COMMUNITY</h3>
-                            <div class="event-game">
-                                <i class="fas fa-globe-africa"></i>
-                                ABC Tournament Series
-                            </div>
-                            <div class="event-prize">
-                                <div class="prize-label">Tournament Focus</div>
-                                <div class="prize-amount">Battle Royale & MP</div>
-                            </div>
-                            <div class="event-details">
-                                <div class="detail-row">
-                                    <span class="detail-label">Duration:</span>
-                                    <span>13 Days Tournament</span>
-                                </div>
-                                <div class="detail-row">
-                                    <span class="detail-label">Status:</span>
-                                    <span style="color: var(--green);">Day 1 - Started Today</span>
-                                </div>
-                                <!-- Updated: Only Shadow Hunters participating -->
-                                <div class="detail-row">
-                                    <span class="detail-label">Blood Esports:</span>
-                                    <span>4KT Shadow Hunters ONLY</span>
-                                </div>
-                                <div class="detail-row">
-                                    <span class="detail-label">Note:</span>
-                                    <span>Other teams are NOT participating</span>
-                                </div>
-                            </div>
-                            <div class="countdown-timer" style="margin: 1rem 0;">
-                                <div class="countdown-box" style="border-color: var(--orange);">
-                                    <div class="countdown-number">13</div>
-                                    <div class="countdown-label">Days Total</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- Feb 2-10: AGR -->
-                    <div class="timeline-item">
-                        <div class="timeline-dot" style="background: var(--orange); border-color: var(--orange-dark);"></div>
-                        <div class="timeline-date">FEB 2-10</div>
-                        <div class="timeline-content">
-                            <h3 class="event-title">ALPHA GAMING RANKING</h3>
-                            <div class="event-game">
-                                <i class="fas fa-chart-line"></i>
-                                AGR Competitive Circuit
-                            </div>
-                            <div class="event-prize">
-                                <div class="prize-label">Format</div>
-                                <div class="prize-amount">Points Ranking System</div>
-                            </div>
-                            <div class="event-details">
-                                <div class="detail-row">
-                                    <span class="detail-label">Type:</span>
-                                    <span>Ranking Tournament Series</span>
-                                </div>
-                                <div class="detail-row">
-                                    <span class="detail-label">Duration:</span>
-                                    <span>9 Days of Competition</span>
-                                </div>
-                                <div class="detail-row">
-                                    <span class="detail-label">Focus:</span>
-                                    <span>Season Ranking Points</span>
-                                </div>
-                            </div>
-                            <!-- Calendar link for AGR -->
-                            <button class="btn-primary" style="width: 100%; margin-top: 1rem;" onclick="window.open('https://calendar.google.com/calendar/render?action=TEMPLATE&dates=20260202T000000Z%2F20260210T235959Z&text=Alpha%20Gaming%20Ranking%20(AGR)&details=AGR%20Competitive%20Circuit%20-%209%20Days%20of%20Competition&location=Online&trp=true', '_blank')">
-                                <i class="fas fa-calendar-plus"></i> SET REMINDER
-                            </button>
-                        </div>
-                    </div>
-                    
-                    <!-- Feb 17-20: MGL -->
-                    <div class="timeline-item">
-                        <div class="timeline-dot" style="background: var(--orange); border-color: var(--orange-dark);"></div>
-                        <div class="timeline-date">FEB 17-20</div>
-                        <div class="timeline-content">
-                            <h3 class="event-title">MAJOR GAMING LEAGUE</h3>
-                            <div class="event-game">
-                                <i class="fas fa-trophy"></i>
-                                MGL Championship
-                            </div>
-                            <div class="event-prize">
-                                <div class="prize-label">Event Tier</div>
-                                <div class="prize-amount">Major Tournament</div>
-                            </div>
-                            <div class="event-details">
-                                <div class="detail-row">
-                                    <span class="detail-label">Duration:</span>
-                                    <span>4 Days Championship</span>
-                                </div>
-                                <div class="detail-row">
-                                    <span class="detail-label">Format:</span>
-                                    <span>Double Elimination Bracket</span>
-                                </div>
-                                <div class="detail-row">
-                                    <span class="detail-label">Prize:</span>
-                                    <span>Championship Title & Cash</span>
-                                </div>
-                            </div>
-                            <div class="countdown-timer" style="margin: 1rem 0;">
-                                <div class="countdown-box" style="border-color: var(--orange);">
-                                    <div class="countdown-number">28</div>
-                                    <div class="countdown-label">Days Until</div>
-                                </div>
-                            </div>
-                            <!-- Calendar link for MGL -->
-                            <button class="btn-primary" style="width: 100%; margin-top: 1rem;" onclick="window.open('https://calendar.google.com/calendar/render?action=TEMPLATE&dates=20260217T000000Z%2F20260220T235959Z&text=Major%20Gaming%20League%20(MGL)&details=MGL%20Championship%20-%204%20Day%20Tournament&location=Online&trp=true', '_blank')">
-                                <i class="fas fa-calendar-plus"></i> SET REMINDER
-                            </button>
-                        </div>
-                    </div>
-                    
-                    <!-- Feb 21-28: ECS -->
-                    <div class="timeline-item">
-                        <div class="timeline-dot" style="background: var(--orange); border-color: var(--orange-dark);"></div>
-                        <div class="timeline-date">FEB 21-28</div>
-                        <div class="timeline-content">
-                            <h3 class="event-title">ELITE CHAMPION SERIES</h3>
-                            <div class="event-game">
-                                <i class="fas fa-crown"></i>
-                                ECS Championship
-                            </div>
-                            <div class="event-prize">
-                                <div class="prize-label">Series Type</div>
-                                <div class="prize-amount">Elite Tournament</div>
-                            </div>
-                            <div class="event-details">
-                                <div class="detail-row">
-                                    <span class="detail-label">Duration:</span>
-                                    <span>8 Day Tournament</span>
-                                </div>
-                                <div class="detail-row">
-                                    <span class="detail-label">Format:</span>
-                                    <span>Round Robin + Playoffs</span>
-                                </div>
-                                <div class="detail-row">
-                                    <span class="detail-label">Prize:</span>
-                                    <span>Championship Title</span>
-                                </div>
-                            </div>
-                            <!-- Calendar link for ECS -->
-                            <button class="btn-primary" style="width: 100%; margin-top: 1rem;" onclick="window.open('https://calendar.google.com/calendar/render?action=TEMPLATE&dates=20260221T000000Z%2F20260228T235959Z&text=Elite%20Champion%20Series%20(ECS)&details=ECS%20Championship%20-%208%20Day%20Tournament&location=Online&trp=true', '_blank')">
-                                <i class="fas fa-calendar-plus"></i> SET REMINDER
-                            </button>
-                        </div>
-                    </div>
-                    
-                    <!-- Mar 1-4: Alpha Scrims -->
-                    <div class="timeline-item">
-                        <div class="timeline-dot" style="background: var(--orange); border-color: var(--orange-dark);"></div>
-                        <div class="timeline-date">MAR 1-4</div>
-                        <div class="timeline-content">
-                            <h3 class="event-title">ALPHA SCRIMS EVENT</h3>
-                            <div class="event-game">
-                                <i class="fas fa-gamepad"></i>
-                                Intensive Scrimmage Series
-                            </div>
-                            <div class="event-prize">
-                                <div class="prize-label">Focus</div>
-                                <div class="prize-amount">Practice & Preparation</div>
-                            </div>
-                            <div class="event-details">
-                                <div class="detail-row">
-                                    <span class="detail-label">Duration:</span>
-                                    <span>4 Days Intensive Scrims</span>
-                                </div>
-                                <div class="detail-row">
-                                    <span class="detail-label">Purpose:</span>
-                                    <span>Post-Tournament Training</span>
-                                </div>
-                                <div class="detail-row">
-                                    <span class="detail-label">Focus:</span>
-                                    <span>New Strategies & Team Synergy</span>
-                                </div>
-                            </div>
-                            <!-- Calendar link for Alpha Scrims -->
-                            <button class="btn-primary" style="width: 100%; margin-top: 1rem;" onclick="window.open('https://calendar.google.com/calendar/render?action=TEMPLATE&dates=20260301T000000Z%2F20260304T235959Z&text=Alpha%20Scrims%20Event&details=Intensive%20Scrimmage%20Series%20-%204%20Days&location=Online&trp=true', '_blank')">
-                                <i class="fas fa-calendar-plus"></i> SET REMINDER
-                            </button>
-                        </div>
-                    </div>
-                    
-                </div>
-            </div>
-        </section>
-        
-        <!-- Live Events Section - Updated -->
         <section class="section-luxury" data-category="live">
-            <h2 class="section-title">
-                <span class="status-badge status-live">
-                    <i class="fas fa-circle"></i> LIVE & UPCOMING NOW
-                </span>
-            </h2>
+            <h2 class="section-title"><span class="status-badge status-live"><i class="fas fa-broadcast-tower"></i> LIVE ACTION</span></h2>
             
             <div class="countdown-container">
-                <h2 class="countdown-title">
-                    <i class="fas fa-rocket"></i>
-                    AFRICAN BATTLE ROYALE COMMUNITY - DAY 1
-                </h2>
+                <h3 style="color:var(--green); font-family:'Orbitron'; font-size:1.5rem; margin-bottom:1rem;">TOURNAMENT COUNTDOWN: ABC DAY 1</h3>
                 <div class="countdown-timer" id="majorCountdown">
-                    <div class="countdown-box">
-                        <div class="countdown-number" id="days">00</div>
-                        <div class="countdown-label">Days</div>
-                    </div>
-                    <div class="countdown-box">
-                        <div class="countdown-number" id="hours">00</div>
-                        <div class="countdown-label">Hours</div>
-                    </div>
-                    <div class="countdown-box">
-                        <div class="countdown-number" id="minutes">00</div>
-                        <div class="countdown-label">Minutes</div>
-                    </div>
-                    <div class="countdown-box">
-                        <div class="countdown-number" id="seconds">00</div>
-                        <div class="countdown-label">Seconds</div>
-                    </div>
+                    <div class="countdown-box"><div class="countdown-number" id="days">00</div><div class="countdown-label">DAYS</div></div>
+                    <div class="countdown-box"><div class="countdown-number" id="hours">00</div><div class="countdown-label">HOURS</div></div>
+                    <div class="countdown-box"><div class="countdown-number" id="minutes">00</div><div class="countdown-label">MINS</div></div>
+                    <div class="countdown-box"><div class="countdown-number" id="seconds">00</div><div class="countdown-label">SECS</div></div>
                 </div>
-                <h3 class="event-title" style="text-align: center; margin-top: 1rem;">
-                    4KT Shadow Hunters Only • Day 1 of 13
-                </h3>
-                <p style="text-align: center; color: var(--green); margin-top: 0.5rem;">
-                    <i class="fas fa-play-circle"></i> ACTIVE NOW • Other teams are NOT participating
-                </p>
+                <p style="color:#aaa;">4KT Shadow Hunters Only • <span style="color:var(--green);">ACTIVE NOW</span></p>
             </div>
-            
-            <div class="events-grid">
-                <!-- Live Now Card - Updated -->
-                <div class="event-card event-live">
-                    <div class="event-header">
+
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px;">
+                <div class="event-card">
+                    <div style="display:flex; justify-content:space-between; align-items:flex-start;">
                         <div>
-                            <div class="event-title">LIVE: Evening Scrims</div>
-                            <div class="event-game">
-                                <i class="fas fa-crosshairs"></i>
-                                Competitive Team Practice
-                            </div>
+                            <h3 class="event-title">DAILY EVENING SCRIMS</h3>
+                            <div class="event-game"><i class="fas fa-crosshairs"></i> TEAM PRACTICE</div>
                         </div>
-                        <span class="status-badge status-live">LIVE NOW</span>
+                        <span class="status-badge status-live">LIVE</span>
                     </div>
-                    
-                    <div class="event-details">
-                        <div class="detail-row">
-                            <span class="detail-label">Time:</span>
-                            <span>18:00 WAT Daily</span>
-                        </div>
-                        <div class="detail-row">
-                            <span class="detail-label">Focus:</span>
-                            <span>Competitive Team Practice</span>
-                        </div>
-                        <div class="detail-row">
-                            <span class="detail-label">For:</span>
-                            <span>All Blood Esports Members</span>
-                        </div>
-                    </div>
-                    
-                    <!-- Calendar link for evening scrims -->
-                    <button class="btn-primary" style="width: 100%; margin-top: 1rem;" onclick="window.open('https://calendar.google.com/calendar/render?action=TEMPLATE&text=Blood%20Esports%20Evening%20Scrims&details=Competitive%20Team%20Practice%20-%2018:00%20WAT%20Daily&trp=true&recur=RRULE:FREQ=DAILY', '_blank')">
-                        <i class="fas fa-calendar-plus"></i> SET DAILY REMINDER
-                    </button>
+                    <p style="color:#ccc; margin-bottom:1rem;">Competitive practice session. All members welcome.</p>
+                    <button class="btn-primary" style="width:100%"><i class="fas fa-calendar-check"></i> JOIN SESSION</button>
                 </div>
                 
-                <!-- Next Up Card - Updated -->
-                <div class="event-card event-upcoming">
-                    <div class="event-header">
+                <div class="event-card">
+                    <div style="display:flex; justify-content:space-between; align-items:flex-start;">
                         <div>
-                            <div class="event-title">UP NEXT: Night Scrims</div>
-                            <div class="event-game">
-                                <i class="fas fa-moon"></i>
-                                Competitive Team Practice
-                            </div>
+                            <h3 class="event-title">NIGHT OPS</h3>
+                            <div class="event-game"><i class="fas fa-moon"></i> ELITE PRACTICE</div>
                         </div>
                         <span class="status-badge status-upcoming">21:45 WAT</span>
                     </div>
-                    
-                    <div class="event-details">
-                        <div class="detail-row">
-                            <span class="detail-label">Time:</span>
-                            <span>21:45 WAT (9:45 PM)</span>
-                        </div>
-                        <div class="detail-row">
-                            <span class="detail-label">Focus:</span>
-                            <span>Competitive Team Practice</span>
-                        </div>
-                        <div class="detail-row">
-                            <span class="detail-label">For:</span>
-                            <span>By Invitation Only</span>
-                        </div>
-                    </div>
-                    
-                    <!-- Calendar link for night scrims -->
-                    <button class="btn-primary" style="width: 100%; margin-top: 1rem;" onclick="window.open('https://calendar.google.com/calendar/render?action=TEMPLATE&text=Blood%20Esports%20Night%20Scrims&details=Advanced%20Competitive%20Practice%20-%2021:45%20WAT%20Daily&trp=true&recur=RRULE:FREQ=DAILY', '_blank')">
-                        <i class="fas fa-calendar-plus"></i> SET DAILY REMINDER
-                    </button>
+                    <p style="color:#ccc; margin-bottom:1rem;">Advanced tactical training. Invite only.</p>
+                    <button class="btn-primary" style="background:var(--gray-diamond); width:100%"><i class="fas fa-bell"></i> SET REMINDER</button>
                 </div>
             </div>
         </section>
-        
-        <!-- Footer -->
+
+        <section class="section-luxury">
+            <h2 class="section-title"><i class="fas fa-layer-group"></i> MONTHLY OVERVIEW</h2>
+            <div class="calendar-view">
+                <div class="month-card">
+                    <div class="month-title">JANUARY</div>
+                    <ul class="month-events">
+                        <li class="month-event"><span class="event-date">DAILY</span> <span class="event-name">Scrims (6pm & 9pm)</span></li>
+                        <li class="month-event"><span class="event-date">19-31</span> <span class="event-name">ABC Tournament</span></li>
+                        <li class="month-event"><span class="event-date">21</span> <span class="event-name" style="color:var(--gold);">Clanmaster B-Day</span></li>
+                        <li class="month-event"><span class="event-date">FRI</span> <span class="event-name">Training</span></li>
+                    </ul>
+                </div>
+                <div class="month-card">
+                    <div class="month-title">FEBRUARY</div>
+                    <ul class="month-events">
+                        <li class="month-event"><span class="event-date">2-10</span> <span class="event-name">AGR Circuit</span></li>
+                        <li class="month-event"><span class="event-date">17-20</span> <span class="event-name">MGL Majors</span></li>
+                        <li class="month-event"><span class="event-date">21-28</span> <span class="event-name">ECS Elite Series</span></li>
+                    </ul>
+                </div>
+                <div class="month-card">
+                    <div class="month-title">MARCH</div>
+                    <ul class="month-events">
+                        <li class="month-event"><span class="event-date">1-4</span> <span class="event-name">Alpha Scrims</span></li>
+                        <li class="month-event"><span class="event-date">TBA</span> <span class="event-name">Spring Season</span></li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section class="section-luxury" data-category="clan">
+            <h2 class="section-title"><i class="fas fa-stream"></i> EVENT TIMELINE</h2>
+            <div class="timeline-container">
+                <div class="timeline-line"></div>
+
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-date">JAN 21</div>
+                    <div class="timeline-content">
+                        <span class="status-badge status-special" style="margin-bottom:10px;">SPECIAL EVENT</span>
+                        <h3 class="event-title">CLANMASTER'S BIRTHDAY</h3>
+                        <p style="color:#ccc; margin-bottom:1rem;">A day of celebration, custom lobbies, and giveaways.</p>
+                        <div style="display:flex; gap:10px;">
+                            <span class="status-badge" style="background:rgba(255,255,255,0.1);">🎉 PARTY</span>
+                            <span class="status-badge" style="background:rgba(255,255,255,0.1);">🎁 PRIZES</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-date">FEB 02</div>
+                    <div class="timeline-content">
+                        <span class="status-badge status-community" style="margin-bottom:10px;">TOURNAMENT</span>
+                        <h3 class="event-title">AGR COMPETITIVE CIRCUIT</h3>
+                        <p style="color:#ccc; margin-bottom:1rem;">9 Days of high-intensity ranked matches.</p>
+                        <button class="btn-primary" style="font-size:0.8rem; padding:8px 20px;">VIEW DETAILS</button>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-date">FEB 17</div>
+                    <div class="timeline-content">
+                        <span class="status-badge status-clan" style="margin-bottom:10px;">MAJOR</span>
+                        <h3 class="event-title">MGL CHAMPIONSHIP</h3>
+                        <p style="color:#ccc; margin-bottom:1rem;">The biggest tournament of the quarter. Double elimination.</p>
+                        <div style="color:var(--gold); font-weight:700;"><i class="fas fa-trophy"></i> PRIZE POOL ACTIVE</div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
         <footer class="minimal-footer">
-            <div class="clan-name-footer">BLOOD ESPORTS EVENTS</div>
-            <div class="clan-tag-display">JANUARY - MARCH 2026 CALENDAR</div>
-            <p class="copyright">© 2026 BLOOD ESPORTS | ALL EVENTS SUBJECT TO CHANGE • JOIN DISCORD FOR UPDATES</p>
-            <a href="https://discord.gg/99uuMvMBX" target="_blank" class="btn-discord" style="margin-top: 1rem;">
-                <i class="fab fa-discord"></i> GET REAL-TIME UPDATES
-            </a>
+            <div class="clan-tag-display">BLOOD ESPORTS</div>
+            <p class="copyright">© 2026 BLOOD ESPORTS | EVENT SCHEDULE SUBJECT TO CHANGE</p>
         </footer>
     </div>
     
     <script>
-        // Countdown Timer for ABC Day 1
+        // Countdown
         function updateCountdown() {
-            // Set target for end of ABC tournament (Jan 31, 2026)
-            const targetDate = new Date('January 31, 2026 23:59:59 WAT').getTime();
+            const targetDate = new Date('January 31, 2026 23:59:59').getTime();
             const now = new Date().getTime();
             const timeLeft = targetDate - now;
-            
+
             if (timeLeft > 0) {
-                const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
-                const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-                const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
-                const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
-                
-                document.getElementById('days').textContent = days.toString().padStart(2, '0');
-                document.getElementById('hours').textContent = hours.toString().padStart(2, '0');
-                document.getElementById('minutes').textContent = minutes.toString().padStart(2, '0');
-                document.getElementById('seconds').textContent = seconds.toString().padStart(2, '0');
-            } else {
-                // If event has passed, show 00:00:00
-                document.getElementById('days').textContent = '00';
-                document.getElementById('hours').textContent = '00';
-                document.getElementById('minutes').textContent = '00';
-                document.getElementById('seconds').textContent = '00';
+                document.getElementById('days').innerText = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
+                document.getElementById('hours').innerText = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                document.getElementById('minutes').innerText = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+                document.getElementById('seconds').innerText = Math.floor((timeLeft % (1000 * 60)) / 1000);
             }
         }
-        
-        // Event Filtering
-        function filterEvents(category) {
-            // Update active filter button
-            document.querySelectorAll('.filter-btn').forEach(btn => {
-                btn.classList.remove('active');
-            });
+        setInterval(updateCountdown, 1000);
+
+        // Filter Function
+        function filterEvents(cat) {
+            document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
             event.target.classList.add('active');
             
-            // Show/hide sections based on category
             const sections = document.querySelectorAll('.section-luxury');
-            sections.forEach(section => {
-                if (category === 'all') {
-                    section.style.display = 'block';
-                } else {
-                    const sectionCategory = section.getAttribute('data-category');
-                    if (sectionCategory === category) {
-                        section.style.display = 'block';
-                    } else {
-                        section.style.display = 'none';
-                    }
-                }
-            });
-            
-            // Special handling for live events
-            if (category === 'live') {
-                document.querySelector('[data-category="clan"]').style.display = 'none';
-                document.querySelector('[data-category="community"]').style.display = 'none';
-                document.querySelector('[data-category="live"]').style.display = 'block';
-            }
-        }
-        
-        // Initialize countdown timer
-        updateCountdown();
-        setInterval(updateCountdown, 1000);
-        
-        // Add click event listeners to filter buttons
-        document.querySelectorAll('.filter-btn').forEach(btn => {
-            btn.addEventListener('click', function() {
-                const category = this.getAttribute('onclick').match(/'([^']+)'/)[1];
-                filterEvents(category);
-            });
-        });
-        
-        // Add animation to timeline dots on scroll
-        document.addEventListener('DOMContentLoaded', function() {
-            const timelineItems = document.querySelectorAll('.timeline-item');
-            
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.style.opacity = '1';
-                        entry.target.style.transform = 'translateY(0)';
-                    }
-                });
-            }, { threshold: 0.1 });
-            
-            timelineItems.forEach(item => {
-                item.style.opacity = '0';
-                item.style.transform = 'translateY(20px)';
-                item.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
-                observer.observe(item);
-            });
-        });
-        
-        // Simple live status update
-        function updateLiveStatus() {
-            const liveBadges = document.querySelectorAll('.status-live');
-            liveBadges.forEach(badge => {
-                // Toggle subtle animation
-                if (badge.style.animationPlayState === 'paused') {
-                    badge.style.animationPlayState = 'running';
-                } else {
-                    badge.style.animationPlayState = 'paused';
-                }
+            sections.forEach(sec => {
+                if(cat === 'all') sec.style.display = 'block';
+                else if(sec.getAttribute('data-category') === cat || cat === 'live' && sec.getAttribute('data-category') === 'live') sec.style.display = 'block';
+                else sec.style.display = 'none';
             });
         }
-        
-        setInterval(updateLiveStatus, 2000);
+
+        // Scroll Animation
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) entry.target.classList.add('visible');
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.timeline-item').forEach(item => observer.observe(item));
     </script>
 </body>
 </html>
