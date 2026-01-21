@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ABOUT | BLOOD ESPORTS</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --gold: #FFD700;
+            --red: #FF0000;
+            --black: #000000;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            background: linear-gradient(-45deg, #000000, #1a0000, #000000, #0a0a0a);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
+            color: white;
+            font-family: 'Montserrat', sans-serif;
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* NAVIGATION */
+        .luxury-nav { background: rgba(0,0,0,0.9); border-bottom: 2px solid var(--gold); padding: 1rem 2rem; position: sticky; top: 0; z-index: 1000; }
+        .nav-container { max-width: 1400px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
+        .nav-brand { display: flex; align-items: center; gap: 12px; }
+        .nav-logo-small { height: 40px; width: auto; }
+        .nav-title { font-family: 'Orbitron'; font-weight: 900; font-size: 1.1rem; letter-spacing: 1px; }
+        .desktop-links a { color: white; text-decoration: none; font-weight: 700; font-family: 'Orbitron'; font-size: 0.8rem; margin-left: 20px; }
+        .desktop-links a:hover { color: var(--gold); }
+
+        /* CONTENT SECTION */
+        .about-hero { padding: 6rem 1.5rem; text-align: center; max-width: 900px; margin: 0 auto; }
+        .about-hero h1 { font-family: 'Orbitron'; font-size: 3.5rem; color: var(--gold); margin-bottom: 20px; }
+        .about-hero p { color: #ccc; font-size: 1.1rem; margin-bottom: 30px; }
+
+        .vision-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; max-width: 1200px; margin: 0 auto 5rem; padding: 0 1.5rem; }
+        .vision-card { background: rgba(255, 255, 255, 0.05); border: 1px solid #333; padding: 3rem; border-radius: 15px; text-align: center; transition: 0.3s; }
+        .vision-card:hover { border-color: var(--red); transform: translateY(-10px); }
+        .vision-card i { font-size: 3rem; color: var(--red); margin-bottom: 20px; }
+        .vision-card h3 { font-family: 'Orbitron'; margin-bottom: 15px; color: var(--gold); }
+
+        /* LEADERSHIP SECTION */
+        .leadership { padding: 5rem 1.5rem; background: rgba(0,0,0,0.5); text-align: center; }
+        .leader-container { display: flex; flex-wrap: wrap; justify-content: center; gap: 40px; margin-top: 3rem; }
+        .leader-card { max-width: 350px; background: #0a0a0a; border: 1px solid var(--gold); padding: 2.5rem; border-radius: 10px; }
+        .leader-role { color: var(--gold); font-family: 'Orbitron'; font-size: 0.8rem; letter-spacing: 2px; margin-bottom: 10px; }
+        .leader-name { font-family: 'Orbitron'; font-size: 1.8rem; margin-bottom: 15px; }
+        .leader-bio { color: #888; font-size: 0.9rem; }
+
+        .footer { text-align: center; padding: 3rem; border-top: 1px solid #222; font-family: 'Orbitron'; font-size: 0.7rem; color: #555; letter-spacing: 2px; }
+    </style>
+</head>
+<body>
+
+    <nav class="luxury-nav">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <img src="logo.png" alt="Logo" class="nav-logo-small">
+                <div class="nav-title"><span style="color:var(--gold)">BLOOD</span> <span style="color:var(--red)">ESPORTS</span></div>
+            </div>
+            <div class="desktop-links">
+                <a href="index.html">HOME</a>
+                <a href="clans/4kt.html">4KT</a>
+                <a href="clans/otf.html">OTF</a>
+                <a href="events.html">EVENTS</a>
+            </div>
+        </div>
+    </nav>
+
+    <header class="about-hero">
+        <h1>OUR STORY</h1>
+        <p>Founded in 2022, Blood Esports was built on a simple vision: to revolutionize the mobile esports scene through elite skill development and strategic dominance. We are more than just a team; we are a kingdom of competitors pushing the boundaries of Call of Duty Mobile.</p>
+    </header>
+
+    <div class="vision-grid">
+        <div class="vision-card">
+            <i class="fas fa-trophy"></i>
+            <h3>DOMINANCE</h3>
+            <p>We strive for nothing less than #1. Our 4KT division represents the pinnacle of competitive excellence.</p>
+        </div>
+        <div class="vision-card">
+            <i class="fas fa-users"></i>
+            <h3>FAMILY</h3>
+            <p>Through OTF, we build a community where talent is nurtured and strategy is shared to build the future of the org.</p>
+        </div>
+    </div>
+
+    <section class="leadership">
+        <h2 style="font-family:'Orbitron'; font-size: 2rem;">LEADERSHIP</h2>
+        <div class="leader-container">
+            <div class="leader-card">
+                <div class="leader-role">FOUNDER & CLAN MASTER</div>
+                <div class="leader-name">CHOCO</div>
+                <p class="leader-bio">The strategic mastermind and visionary behind Blood Esports. Choco drives the tactical planning and leadership that defines our competitive success.</p>
+            </div>
+            <div class="leader-card">
+                <div class="leader-role">CLAN MANAGER</div>
+                <div class="leader-name">DANNY</div>
+                <p class="leader-bio">The operations director ensuring peak performance across all divisions. Danny masters the logistics and team coordination that keeps us running.</p>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        ALL RIGHTS RESERVED BLOOD ESPORTS 2026
+    </footer>
+
+</body>
+</html>
