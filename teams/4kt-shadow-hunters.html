@@ -3,328 +3,221 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>4KT Shadow Hunters - Blood Esports</title>
-    <link rel="stylesheet" href="../assets/style.css">
+    <title>SHADOW HUNTERS | BLOOD ESPORTS</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --gold: #FFD700;
+            --red: #FF0000;
+            --black: #000000;
+            --glass: rgba(255, 255, 255, 0.05);
+            --neon-glow: 0 0 25px rgba(255, 215, 0, 0.4);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            background-color: var(--black);
+            color: white;
+            font-family: 'Montserrat', sans-serif;
+            overflow-x: hidden;
+            padding-bottom: 120px;
+        }
+
+        #particle-canvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; pointer-events: none; }
+
+        /* NAVIGATION - BRAND ACTS AS HOME */
+        .luxury-nav { background: rgba(0,0,0,0.95); border-bottom: 2px solid var(--gold); padding: 1rem 2rem; position: sticky; top: 0; z-index: 1000; }
+        .nav-container { max-width: 1400px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
+        .nav-brand { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+        .nav-logo-small { height: 40px; width: auto; }
+        .nav-title { font-family: 'Orbitron'; font-weight: 900; font-size: 1.1rem; letter-spacing: 1px; }
+
+        .desktop-links a { color: white; text-decoration: none; font-weight: 700; font-family: 'Orbitron'; font-size: 0.8rem; margin-left: 20px; transition: 0.3s; }
+        .desktop-links a:hover { color: var(--gold); text-shadow: var(--neon-glow); }
+
+        /* TEAM HEADER */
+        .team-hero { padding: 6rem 1.5rem; text-align: center; }
+        .team-badge-large { font-size: 4rem; color: var(--gold); margin-bottom: 1rem; filter: drop-shadow(0 0 15px var(--gold)); }
+        .team-title { font-family: 'Orbitron'; font-size: clamp(2rem, 8vw, 4rem); font-weight: 900; text-shadow: var(--neon-glow); }
+        .team-tagline { font-family: 'Orbitron'; color: var(--gold); letter-spacing: 5px; margin: 15px 0; font-size: 1.2rem; }
+
+        /* PLAYER GRID */
+        .player-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px; max-width: 1300px; margin: 4rem auto; padding: 0 1.5rem; }
+        .player-card { background: var(--glass); border: 1px solid #333; padding: 2.5rem 1.5rem; border-radius: 20px; text-align: center; transition: 0.4s; backdrop-filter: blur(15px); position: relative; }
+        .player-card:hover { border-color: var(--gold); transform: translateY(-10px); box-shadow: 0 0 30px rgba(255, 215, 0, 0.15); }
+        .player-flag { position: absolute; top: 15px; right: 20px; font-size: 1.5rem; }
+        .player-role { color: var(--red); font-family: 'Orbitron'; font-size: 0.7rem; font-weight: 900; letter-spacing: 2px; margin-bottom: 10px; display: block; }
+        .player-name { font-family: 'Orbitron'; font-size: 1.6rem; color: white; margin-bottom: 20px; }
+        
+        .stat-bar { display: flex; justify-content: center; gap: 25px; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 15px; }
+        .stat-item { text-align: center; }
+        .stat-val { display: block; font-family: 'Orbitron'; color: var(--gold); font-size: 1.2rem; }
+        .stat-lab { font-size: 0.6rem; color: #666; text-transform: uppercase; letter-spacing: 1px; }
+
+        /* TROPHY SUMMARY */
+        .trophy-summary { padding: 4rem 1.5rem; text-align: center; background: rgba(10,10,10,0.8); border-top: 1px solid var(--gold); border-bottom: 1px solid var(--gold); margin: 4rem 0; }
+        .trophy-flex { display: flex; justify-content: center; gap: 40px; flex-wrap: wrap; max-width: 1200px; margin: 3rem auto; }
+        .trophy-box { text-align: center; background: var(--glass); padding: 2rem; border-radius: 15px; min-width: 250px; border: 1px solid rgba(255,215,0,0.1); }
+        .trophy-box i { font-size: 2.5rem; margin-bottom: 15px; filter: drop-shadow(0 0 10px currentColor); }
+        .trophy-num { display: block; font-family: 'Orbitron'; font-size: 2.5rem; font-weight: 900; }
+        .trophy-label { font-size: 0.8rem; color: #888; text-transform: uppercase; letter-spacing: 2px; }
+
+        /* FOOTER */
+        .footer { text-align: center; padding: 4rem 1.5rem; border-top: 1px solid #222; background: #000000; }
+        .footer-text { font-family: 'Orbitron'; font-size: 0.75rem; color: #555; letter-spacing: 3px; text-transform: uppercase; }
+
+        @media (max-width: 850px) { .desktop-links { display: none; } }
+    </style>
 </head>
 <body>
-    <!-- Animated Background -->
-    <div class="luxury-bg">
-        <div class="gold-particle" id="particles"></div>
-    </div>
-    
-    <!-- Navigation -->
+
+    <canvas id="particle-canvas"></canvas>
+
     <nav class="luxury-nav">
-        <div class="diamond-nav">
-            <div class="nav-left">
-                <div class="logo-display">
-                    <span class="logo-gold">BLOOD</span>
-                    <span class="logo-red">ESPORTS</span>
-                    <div class="logo-badge">SHADOW HUNTERS</div>
-                </div>
-            </div>
-            <div class="nav-center">
-                <a href="../index.html" class="nav-link">HOME</a>
-                <a href="../clans/4kt.html" class="nav-link">4KT CLAN</a>
-                <a href="../clans/otf.html" class="nav-link">OTF CLAN</a>
-                <a href="4kt-shadow-hunters.html" class="nav-link active">SHADOW HUNTERS</a>
-            </div>
-            <div class="nav-right">
-                <a href="https://discord.gg/99uuMvMBX" target="_blank" class="btn-discord">
-                    <i class="fab fa-discord"></i> DISCORD
-                </a>
+        <div class="nav-container">
+            <a href="../index.html" class="nav-brand">
+                <img src="../logo.png" alt="Logo" class="nav-logo-small">
+                <div class="nav-title"><span style="color:var(--gold)">BLOOD</span> <span style="color:var(--red)">ESPORTS</span></div>
+            </a>
+            <div class="desktop-links">
+                <a href="../clans/4kt.html">4KT CLAN</a>
+                <a href="../clans/otf.html">OTF CLAN</a>
+                <a href="../events.html">EVENTS</a>
             </div>
         </div>
     </nav>
-    
-    <div class="container">
-        <!-- Team Header -->
-        <header class="team-header">
-            <div class="team-badge-large">
-                <i class="fas fa-crosshairs"></i>
-            </div>
-            <h1 class="team-title">4KT SHADOW HUNTERS</h1>
-            <p class="team-tagline">"Precision in the Darkness"</p>
-            <div class="team-meta">
-                <div class="meta-item">
-                    <i class="fas fa-hashtag"></i>
-                    <span>TEAM TAG: 4零丨</span>
-                </div>
-                <div class="meta-item">
-                    <i class="fas fa-users"></i>
-                    <span>7 PLAYERS</span>
-                </div>
-                <div class="meta-item">
-                    <i class="fas fa-trophy"></i>
-                    <span>TIER 1 CHAMPIONS</span>
-                </div>
-            </div>
-        </header>
-        
-        <!-- Team Description -->
-        <section class="section-luxury">
-            <h2 class="section-title">ELITE CODM TEAM</h2>
-            <div class="content-card">
-                <p>The Shadow Hunters are Blood Esports' premier Call of Duty Mobile team. Known for their tactical precision and flawless teamwork, they dominate both ranked and tournament play across Africa and beyond.</p>
-                <p>With multiple Tier 1 tournament victories, this team has established itself as one of Africa's most formidable CODM squads.</p>
-            </div>
-        </section>
-        
-        <!-- Roster Section -->
-        <section class="section-luxury">
-            <h2 class="section-title">TEAM ROSTER</h2>
-            <div class="roster-grid">
-                <!-- Player 1 -->
-                <div class="player-card">
-                    <div class="player-flag">🇳🇬</div>
-                    <div class="player-name">4零丨Mazi</div>
-                    <div class="player-role">Wildcard</div>
-                    <div class="player-stats">
-                        <div class="player-stat">
-                            <span class="stat-value">4.8</span>
-                            <span class="stat-label">KD</span>
-                        </div>
-                        <div class="player-stat">
-                            <span class="stat-value">85%</span>
-                            <span class="stat-label">WR</span>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Player 2 -->
-                <div class="player-card">
-                    <div class="player-flag">🇨🇦</div>
-                    <div class="player-name">4零丨Choco</div>
-                    <div class="player-role">Clan Master & Tactician</div>
-                    <div class="player-stats">
-                        <div class="player-stat">
-                            <span class="stat-value">5.2</span>
-                            <span class="stat-label">KD</span>
-                        </div>
-                        <div class="player-stat">
-                            <span class="stat-value">90%</span>
-                            <span class="stat-label">WR</span>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Player 3 -->
-                <div class="player-card">
-                    <div class="player-flag">🇳🇬</div>
-                    <div class="player-name">4零丨Virus</div>
-                    <div class="player-role">Sniper & Support</div>
-                    <div class="player-stats">
-                        <div class="player-stat">
-                            <span class="stat-value">4.5</span>
-                            <span class="stat-label">KD</span>
-                        </div>
-                        <div class="player-stat">
-                            <span class="stat-value">82%</span>
-                            <span class="stat-label">WR</span>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Player 4 -->
-                <div class="player-card">
-                    <div class="player-flag">🇬🇭</div>
-                    <div class="player-name">4零丨Melly</div>
-                    <div class="player-role">Entry Fragger</div>
-                    <div class="player-stats">
-                        <div class="player-stat">
-                            <span class="stat-value">4.9</span>
-                            <span class="stat-label">KD</span>
-                        </div>
-                        <div class="player-stat">
-                            <span class="stat-value">87%</span>
-                            <span class="stat-label">WR</span>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Player 5 -->
-                <div class="player-card">
-                    <div class="player-flag">🇬🇭</div>
-                    <div class="player-name">4零丨Flowstate</div>
-                    <div class="player-role">Support</div>
-                    <div class="player-stats">
-                        <div class="player-stat">
-                            <span class="stat-value">4.7</span>
-                            <span class="stat-label">KD</span>
-                        </div>
-                        <div class="player-stat">
-                            <span class="stat-value">84%</span>
-                            <span class="stat-label">WR</span>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Player 6 -->
-                <div class="player-card">
-                    <div class="player-flag">🇺🇬</div>
-                    <div class="player-name">4零丨Beetle</div>
-                    <div class="player-role">IGL</div>
-                    <div class="player-stats">
-                        <div class="player-stat">
-                            <span class="stat-value">4.2</span>
-                            <span class="stat-label">KD</span>
-                        </div>
-                        <div class="player-stat">
-                            <span class="stat-value">88%</span>
-                            <span class="stat-label">WR</span>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Player 7 -->
-                <div class="player-card">
-                    <div class="player-flag">🇳🇬</div>
-                    <div class="player-name">4零丨Sage</div>
-                    <div class="player-role">Strategist & Support</div>
-                    <div class="player-stats">
-                        <div class="player-stat">
-                            <span class="stat-value">4.4</span>
-                            <span class="stat-label">KD</span>
-                        </div>
-                        <div class="player-stat">
-                            <span class="stat-value">86%</span>
-                            <span class="stat-label">WR</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-        
-        <!-- Team Achievements -->
-        <section class="section-luxury">
-            <h2 class="section-title">CHAMPIONSHIP ACHIEVEMENTS</h2>
-            <div class="achievements-grid">
-                <!-- Gold Trophy Achievements -->
-                <div class="achievement-card gold">
-                    <div class="achievement-badge">
-                        <i class="fas fa-trophy"></i>
-                        <span class="trophy-count">3x</span>
-                    </div>
-                    <div class="achievement-content">
-                        <h3>Tier 1 Champions</h3>
-                        <p class="achievement-league">Blood Esports Rankings (BER)</p>
-                        <p class="achievement-desc">Undefeated dominance in our own ranking system</p>
-                    </div>
-                </div>
-                
-                <div class="achievement-card gold">
-                    <div class="achievement-badge">
-                        <i class="fas fa-trophy"></i>
-                        <span class="trophy-count">2x</span>
-                    </div>
-                    <div class="achievement-content">
-                        <h3>Tier 1 Champions</h3>
-                        <p class="achievement-league">African Battle Royale Community (ABC)</p>
-                        <p class="achievement-desc">Top performers in continental competition</p>
-                    </div>
-                </div>
-                
-                <!-- Silver Trophy Achievements -->
-                <div class="achievement-card silver">
-                    <div class="achievement-badge">
-                        <i class="fas fa-medal"></i>
-                        <span class="trophy-count">2x</span>
-                    </div>
-                    <div class="achievement-content">
-                        <h3>Tier 1 Runner-up</h3>
-                        <p class="achievement-league">Onwards Gaming Rankings (OGR)</p>
-                        <p class="achievement-desc">Top 2 finishes in premier gaming circuit</p>
-                    </div>
-                </div>
-                
-                <!-- Special Tournament Wins -->
-                <div class="achievement-card special">
-                    <div class="achievement-badge">
-                        <i class="fas fa-crown"></i>
-                    </div>
-                    <div class="achievement-content">
-                        <h3>Amari Night's Cup Champions</h3>
-                        <p class="achievement-league">Invitational Tournament</p>
-                        <p class="achievement-desc">Victory in prestigious invitational event</p>
-                    </div>
-                </div>
-                
-                <div class="achievement-card special">
-                    <div class="achievement-badge">
-                        <i class="fas fa-star"></i>
-                    </div>
-                    <div class="achievement-content">
-                        <h3>NKL League Champions</h3>
-                        <p class="achievement-league">Seasonal League</p>
-                        <p class="achievement-desc">Season-long consistency and dominance</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-        
-        <!-- Total Trophy Count -->
-        <section class="section-luxury trophy-summary">
-            <div class="trophy-stats">
-                <div class="trophy-stat">
-                    <div class="trophy-icon gold">
-                        <i class="fas fa-trophy"></i>
-                    </div>
-                    <div class="trophy-info">
-                        <div class="trophy-count">5</div>
-                        <div class="trophy-label">Tier 1 Championships</div>
-                    </div>
-                </div>
-                <div class="trophy-stat">
-                    <div class="trophy-icon silver">
-                        <i class="fas fa-medal"></i>
-                    </div>
-                    <div class="trophy-info">
-                        <div class="trophy-count">2</div>
-                        <div class="trophy-label">Tier 1 Runner-ups</div>
-                    </div>
-                </div>
-                <div class="trophy-stat">
-                    <div class="trophy-icon special">
-                        <i class="fas fa-crown"></i>
-                    </div>
-                    <div class="trophy-info">
-                        <div class="trophy-count">2</div>
-                        <div class="trophy-label">Special Tournament Wins</div>
-                    </div>
-                </div>
-            </div>
-        </section>
-        
-        <!-- CTA -->
-        <section class="cta-luxury">
-            <h2>FOLLOW THE CHAMPIONS</h2>
-            <p>Join Africa's most decorated CODM team community</p>
-            <div class="cta-buttons">
-                <a href="https://discord.gg/99uuMvMBX" target="_blank" class="btn-discord">
-                    <i class="fab fa-discord"></i> JOIN DISCORD
-                </a>
-                <a href="../clans/4kt.html" class="btn-secondary">
-                    <i class="fas fa-crown"></i> 4KT CLAN PAGE
-                </a>
-            </div>
-        </section>
-    </div>
-    
-    <!-- Footer -->
-    <footer class="luxury-footer">
-        <div class="footer-content">
-            <div class="footer-brand">
-                <div class="footer-logo">BLOOD ESPORTS</div>
-                <p class="footer-tag">4KT SHADOW HUNTERS</p>
-                <p>Team Tag: 4零丨 | Multiple Tier 1 Champions</p>
+
+    <header class="team-hero">
+        <div class="team-badge-large"><i class="fas fa-crosshairs"></i></div>
+        <h1 class="team-title">4KT SHADOW HUNTERS</h1>
+        <div class="team-tagline">4零丨 PRECISION IN THE DARKNESS</div>
+        <div style="color: #888; font-weight: bold; letter-spacing: 2px; margin-top: 10px;">TIER 1 CHAMPIONS</div>
+    </header>
+
+    <div class="player-grid">
+        <div class="player-card">
+            <span class="player-flag">🇳🇬</span>
+            <span class="player-role">WILDCARD</span>
+            <div class="player-name">4零丨Mazi</div>
+            <div class="stat-bar">
+                <div class="stat-item"><span class="stat-val">4.8</span><span class="stat-lab">KD</span></div>
+                <div class="stat-item"><span class="stat-val">85%</span><span class="stat-lab">WR</span></div>
             </div>
         </div>
-        <div class="footer-bottom">
-            <p class="copyright">© 2026 BLOOD ESPORTS | SHADOW HUNTERS - TIER 1 CHAMPIONS</p>
+
+        <div class="player-card">
+            <span class="player-flag">🇨🇦</span>
+            <span class="player-role">CLAN MASTER & TACTICIAN</span>
+            <div class="player-name">4零丨Choco</div>
+            <div class="stat-bar">
+                <div class="stat-item"><span class="stat-val">5.2</span><span class="stat-lab">KD</span></div>
+                <div class="stat-item"><span class="stat-val">90%</span><span class="stat-lab">WR</span></div>
+            </div>
+        </div>
+
+        <div class="player-card">
+            <span class="player-flag">🇳🇬</span>
+            <span class="player-role">SNIPER & SUPPORT</span>
+            <div class="player-name">4零丨Virus</div>
+            <div class="stat-bar">
+                <div class="stat-item"><span class="stat-val">4.5</span><span class="stat-lab">KD</span></div>
+                <div class="stat-item"><span class="stat-val">82%</span><span class="stat-lab">WR</span></div>
+            </div>
+        </div>
+
+        <div class="player-card">
+            <span class="player-flag">🇬🇭</span>
+            <span class="player-role">ENTRY FRAGGER</span>
+            <div class="player-name">4零丨Melly</div>
+            <div class="stat-bar">
+                <div class="stat-item"><span class="stat-val">4.9</span><span class="stat-lab">KD</span></div>
+                <div class="stat-item"><span class="stat-val">87%</span><span class="stat-lab">WR</span></div>
+            </div>
+        </div>
+
+        <div class="player-card">
+            <span class="player-flag">🇬🇭</span>
+            <span class="player-role">SUPPORT</span>
+            <div class="player-name">4零丨Flowstate</div>
+            <div class="stat-bar">
+                <div class="stat-item"><span class="stat-val">4.7</span><span class="stat-lab">KD</span></div>
+                <div class="stat-item"><span class="stat-val">84%</span><span class="stat-lab">WR</span></div>
+            </div>
+        </div>
+
+        <div class="player-card">
+            <span class="player-flag">🇺🇬</span>
+            <span class="player-role">IGL</span>
+            <div class="player-name">4零丨Beetle</div>
+            <div class="stat-bar">
+                <div class="stat-item"><span class="stat-val">4.2</span><span class="stat-lab">KD</span></div>
+                <div class="stat-item"><span class="stat-val">88%</span><span class="stat-lab">WR</span></div>
+            </div>
+        </div>
+
+        <div class="player-card">
+            <span class="player-flag">🇳🇬</span>
+            <span class="player-role">STRATEGIST & SUPPORT</span>
+            <div class="player-name">4零丨Sage</div>
+            <div class="stat-bar">
+                <div class="stat-item"><span class="stat-val">4.4</span><span class="stat-lab">KD</span></div>
+                <div class="stat-item"><span class="stat-val">86%</span><span class="stat-lab">WR</span></div>
+            </div>
+        </div>
+    </div>
+
+    <section class="trophy-summary">
+        <h2 style="font-family:'Orbitron'; color:var(--gold); letter-spacing:4px; margin-bottom:1rem;">CHAMPIONSHIP HISTORY</h2>
+        <div class="trophy-flex">
+            <div class="trophy-box" style="color:var(--gold);">
+                <i class="fas fa-trophy"></i>
+                <span class="trophy-num">5</span>
+                <span class="trophy-label">Tier 1 Championships</span>
+            </div>
+            <div class="trophy-box" style="color: #C0C0C0;">
+                <i class="fas fa-medal"></i>
+                <span class="trophy-num">2</span>
+                <span class="trophy-label">Tier 1 Runner-Ups</span>
+            </div>
+            <div class="trophy-box" style="color: #E5E4E2;">
+                <i class="fas fa-crown"></i>
+                <span class="trophy-num">2</span>
+                <span class="trophy-label">Special Tournament Wins</span>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <p class="footer-text">© 2026 BLOOD ESPORTS | 4KT SHADOW HUNTERS - TIER 1 CHAMPIONS</p>
+        <div style="margin-top: 10px;">
+            <a href="../terms.html" style="color:#555; text-decoration:none; font-family:'Orbitron'; font-size:0.7rem; margin:0 10px;">TERMS</a>
+            <a href="../privacy.html" style="color:#555; text-decoration:none; font-family:'Orbitron'; font-size:0.7rem; margin:0 10px;">PRIVACY</a>
         </div>
     </footer>
-    
-    <script src="../assets/script.js"></script>
+
+    <script>
+        const canvas = document.getElementById('particle-canvas');
+        const ctx = canvas.getContext('2d');
+        let particles = [];
+        function init() {
+            canvas.width = window.innerWidth; canvas.height = window.innerHeight;
+            particles = [];
+            for (let i = 0; i < 150; i++) {
+                particles.push({ x: Math.random() * canvas.width, y: Math.random() * canvas.height, size: Math.random() * 2.5, speed: Math.random() * 0.4 + 0.1 });
+            }
+        }
+        function animate() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height); ctx.fillStyle = '#FFD700';
+            particles.forEach(p => {
+                ctx.beginPath(); ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2); ctx.fill();
+                p.y -= p.speed; if (p.y < 0) p.y = canvas.height;
+            });
+            requestAnimationFrame(animate);
+        }
+        window.addEventListener('resize', init); init(); animate();
+    </script>
 </body>
 </html>
