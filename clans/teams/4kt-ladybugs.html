@@ -11,10 +11,10 @@
             --gold: #FFD700;
             --pink: #FF69B4;
             --deep-pink: #C71585;
-            --blue-butterfly: #00F3FF; /* Electric Blue */
+            --red: #FF0000;
             --black: #050505;
             --glass: rgba(255, 255, 255, 0.03);
-            --neon-glow: 0 0 20px rgba(255, 105, 180, 0.6);
+            /* REMOVED NEON GLOW VARIABLE */
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -52,14 +52,14 @@
             font-family: 'Orbitron'; font-weight: 900; color: white; text-decoration: none; font-size: 1.2rem; 
             transition: 0.3s; cursor: pointer;
         }
-        .nav-logo:hover { text-shadow: var(--neon-glow); color: var(--pink); }
+        .nav-logo:hover { color: var(--pink); }
 
         .back-btn {
             font-family: 'Orbitron'; font-size: 0.8rem; color: white; text-decoration: none;
             border: 1px solid var(--pink); padding: 8px 20px; border-radius: 20px;
             transition: 0.3s;
         }
-        .back-btn:hover { background: var(--pink); color: white; box-shadow: var(--neon-glow); }
+        .back-btn:hover { background: var(--pink); color: white; }
 
         /* Hero Section */
         .hero { text-align: center; padding: 4rem 1rem 3rem; animation: fadeInDown 1s ease-out; }
@@ -92,7 +92,7 @@
             position: relative; display: inline-block; animation: fadeInUp 1.2s ease-out;
             font-size: 1.8rem;
         }
-        .section-title::after { content: ''; display: block; width: 100%; height: 3px; background: var(--pink); margin-top: 10px; box-shadow: var(--neon-glow); }
+        .section-title::after { content: ''; display: block; width: 100%; height: 3px; background: var(--pink); margin-top: 10px; }
 
         /* ROSTER GRID */
         .roster-grid {
@@ -122,7 +122,6 @@
         .player-card:hover { 
             border-color: var(--pink); 
             transform: translateY(-15px) scale(1.03); 
-            box-shadow: 0 0 35px rgba(255, 105, 180, 0.3);
             background: rgba(255, 105, 180, 0.05);
         }
 
@@ -155,7 +154,7 @@
             animation: fadeInUp 0.8s ease-out backwards;
             transition: 0.3s;
         }
-        .award-card:hover { transform: translateY(-5px); box-shadow: var(--neon-glow); background: rgba(255, 105, 180, 0.1); }
+        .award-card:hover { transform: translateY(-5px); background: rgba(255, 105, 180, 0.1); }
         .award-card:nth-child(1) { animation-delay: 0.5s; }
         .award-card:nth-child(2) { animation-delay: 0.7s; }
 
@@ -168,10 +167,10 @@
         .btn-discord {
             display: inline-block; background: var(--pink); color: white; padding: 1rem 3rem;
             border-radius: 50px; text-decoration: none; font-family: 'Orbitron'; font-weight: 900;
-            margin-top: 3rem; transition: 0.3s; box-shadow: 0 0 15px var(--pink);
+            margin-top: 3rem; transition: 0.3s;
             animation: fadeInUp 1.5s ease-out;
         }
-        .btn-discord:hover { background: white; color: var(--pink); transform: scale(1.1); box-shadow: 0 0 30px var(--pink); }
+        .btn-discord:hover { background: white; color: var(--pink); transform: scale(1.1); }
 
         footer { text-align: center; padding: 4rem 1rem; opacity: 0.8; font-size: 0.8rem; font-family: 'Orbitron'; animation: fadeInUp 2s ease-out; color: var(--pink); letter-spacing: 1px; }
 
@@ -246,7 +245,7 @@
     </div>
 
     <script>
-        // --- UPDATED ANIMATION: BLUE BUTTERFLIES ONLY ---
+        // --- UPDATED ANIMATION: DRAWN GOLD BUTTERFLIES (NO FONT, NO NEON) ---
         const canvas = document.getElementById('bg-canvas');
         const ctx = canvas.getContext('2d');
 
@@ -255,26 +254,25 @@
 
         const particles = [];
         
-        class Particle {
+        class Butterfly {
             constructor() {
                 this.x = Math.random() * canvas.width;
                 this.y = Math.random() * canvas.height - canvas.height;
-                this.size = Math.random() * 18 + 12; 
+                this.size = Math.random() * 0.5 + 0.3; // Scale factor for drawing
                 this.speedY = Math.random() * 1.5 + 0.5;
                 this.speedX = Math.random() * 2 - 1;
                 this.angle = Math.random() * 360;
-                this.spin = Math.random() * 2 - 1;
+                this.spin = (Math.random() - 0.5) * 0.05;
                 this.opacity = Math.random() * 0.5 + 0.4;
-                this.color = '#00F3FF'; // Electric Blue
             }
 
             update() {
                 this.y += this.speedY;
-                this.x += this.speedX + Math.sin(this.y / 50); // Sway effect
+                this.x += this.speedX + Math.sin(this.y / 50) * 0.5;
                 this.angle += this.spin;
 
-                if (this.y > canvas.height + this.size) {
-                    this.y = -this.size;
+                if (this.y > canvas.height + 50) {
+                    this.y = -50;
                     this.x = Math.random() * canvas.width;
                 }
             }
@@ -282,26 +280,32 @@
             draw() {
                 ctx.save();
                 ctx.translate(this.x, this.y);
-                ctx.rotate(this.angle * Math.PI / 180);
-                ctx.globalAlpha = this.opacity;
-                ctx.fillStyle = this.color;
+                ctx.rotate(this.angle);
+                ctx.scale(this.size, this.size);
                 
-                // Add a Blue glow for "beautiful wings" effect
-                ctx.shadowBlur = 15;
-                ctx.shadowColor = '#00F3FF';
+                // NO NEON - Solid Gold
+                ctx.fillStyle = `rgba(255, 215, 0, ${this.opacity})`; // Gold
+
+                // DRAW BUTTERFLY SHAPE MANUALLY
+                ctx.beginPath();
+                // Right Top Wing
+                ctx.ellipse(10, -10, 15, 10, Math.PI / 4, 0, Math.PI * 2);
+                // Right Bottom Wing
+                ctx.ellipse(10, 10, 10, 8, -Math.PI / 4, 0, Math.PI * 2);
+                // Left Top Wing
+                ctx.ellipse(-10, -10, 15, 10, -Math.PI / 4, 0, Math.PI * 2);
+                // Left Bottom Wing
+                ctx.ellipse(-10, 10, 10, 8, Math.PI / 4, 0, Math.PI * 2);
                 
-                // Use Font Awesome Butterfly Unicode
-                ctx.font = `900 ${this.size}px "Font Awesome 6 Free"`;
-                ctx.fillText('\uf49d', 0 - this.size/2, 0 + this.size/2);
-                
+                ctx.fill();
                 ctx.restore();
             }
         }
 
         function init() {
             particles.length = 0;
-            for (let i = 0; i < 40; i++) { 
-                particles.push(new Particle());
+            for (let i = 0; i < 40; i++) {
+                particles.push(new Butterfly());
             }
         }
 
