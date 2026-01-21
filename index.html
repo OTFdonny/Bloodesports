@@ -14,6 +14,7 @@
             --black: #000000;
             --glass: rgba(255, 255, 255, 0.05);
             --neon-glow: 0 0 20px rgba(255, 215, 0, 0.5);
+            --neon-red: 0 0 20px rgba(255, 0, 0, 0.5);
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -74,7 +75,6 @@
         /* OUR TEAMS SECTION */
         .elite-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 30px; max-width: 1250px; margin: 4rem auto; padding: 0 1.5rem; }
         
-        /* Updated to allow clickable blocks */
         .elite-grid a { text-decoration: none; color: inherit; display: block; }
 
         .team-card { background: var(--glass); border: 1px solid #333; padding: 3rem 1.5rem; text-align: center; border-radius: 15px; position: relative; transition: 0.4s; backdrop-filter: blur(10px); }
@@ -108,6 +108,70 @@
         .social-box { display: flex; justify-content: center; gap: 35px; margin-top: 2.5rem; }
         .social-box a { color: white; font-size: 2.8rem; transition: 0.3s; }
         .social-box a:hover { color: var(--gold); transform: scale(1.2); }
+
+        /* --- NEW: NEWSLETTER SECTION --- */
+        .newsletter-section {
+            background: linear-gradient(145deg, rgba(20,20,20,0.9), rgba(50,0,0,0.4));
+            border-top: 1px solid var(--red);
+            border-bottom: 1px solid var(--red);
+            padding: 4rem 1.5rem;
+            text-align: center;
+            margin: 4rem 0;
+        }
+        
+        .newsletter-container { max-width: 600px; margin: 0 auto; }
+        
+        .news-title {
+            font-family: 'Orbitron'; font-size: 2rem; color: var(--gold); margin-bottom: 10px;
+            text-transform: uppercase; letter-spacing: 2px;
+        }
+        
+        .news-desc { color: #ccc; margin-bottom: 2rem; font-size: 0.9rem; }
+        
+        .input-group {
+            display: flex; gap: 10px; flex-wrap: wrap; justify-content: center;
+        }
+        
+        .news-input {
+            flex: 1; padding: 15px; border-radius: 5px; border: 1px solid #333;
+            background: rgba(0,0,0,0.5); color: white; font-family: 'Montserrat';
+            min-width: 250px;
+        }
+        
+        .news-btn {
+            background: var(--red); color: white; padding: 15px 30px; border: none;
+            border-radius: 5px; font-family: 'Orbitron'; font-weight: bold; cursor: pointer;
+            transition: 0.3s;
+        }
+        .news-btn:hover { background: white; color: var(--red); box-shadow: var(--neon-red); }
+
+        /* --- NEW: CONTACT SECTION --- */
+        .contact-section {
+            text-align: center; padding: 4rem 1.5rem;
+            background: radial-gradient(circle at center, rgba(30,30,30,0.5), rgba(0,0,0,0.9));
+        }
+        
+        .contact-card {
+            background: var(--glass); border: 1px solid var(--gold);
+            max-width: 500px; margin: 0 auto; padding: 3rem; border-radius: 20px;
+            backdrop-filter: blur(10px); transition: 0.3s;
+        }
+        .contact-card:hover { box-shadow: var(--neon-glow); }
+        
+        .contact-icon { font-size: 3rem; color: var(--gold); margin-bottom: 1.5rem; }
+        
+        .email-link {
+            display: block; font-size: 1.2rem; color: white; text-decoration: none;
+            font-weight: bold; margin: 1rem 0; transition: 0.3s;
+        }
+        .email-link:hover { color: var(--gold); }
+        
+        .contact-btn {
+            display: inline-block; border: 1px solid var(--gold); color: var(--gold);
+            padding: 10px 25px; text-decoration: none; font-family: 'Orbitron'; font-size: 0.8rem;
+            margin-top: 1rem; transition: 0.3s;
+        }
+        .contact-btn:hover { background: var(--gold); color: black; }
 
         /* FOOTER */
         .footer { text-align: center; padding: 4rem 1.5rem; border-top: 1px solid #222; background: #000000; }
@@ -197,11 +261,13 @@
             </div>
         </a>
 
-        <div class="team-card">
-            <div class="tier-badge" style="background:#555; color:white;">DEVELOPMENT</div>
-            <h3 style="font-family:'Orbitron';">BLOOD HOUNDS</h3>
-            <div class="team-logo-container"><img src="hounds.png" alt="Blood Hounds" class="team-logo-img"></div>
-        </div>
+        <a href="clans/teams/otf-bloodhounds.html">
+            <div class="team-card">
+                <div class="tier-badge" style="background:#555; color:white;">DEVELOPMENT</div>
+                <h3 style="font-family:'Orbitron';">BLOOD HOUNDS</h3>
+                <div class="team-logo-container"><img src="hounds.png" alt="Blood Hounds" class="team-logo-img"></div>
+            </div>
+        </a>
     </div>
 
     <section class="cta-section">
@@ -211,6 +277,27 @@
         <div class="social-box">
             <a href="https://discord.gg/99uuMvMBX" target="_blank"><i class="fab fa-discord"></i></a>
             <a href="https://www.tiktok.com/@4ktreybloods" target="_blank"><i class="fab fa-tiktok"></i></a>
+        </div>
+    </section>
+
+    <section class="newsletter-section">
+        <div class="newsletter-container">
+            <h2 class="news-title">CODM INTEL</h2>
+            <p class="news-desc">SUBSCRIBE FOR TOURNAMENT ALERTS AND CLAN UPDATES.</p>
+            <form class="input-group">
+                <input type="email" placeholder="ENTER YOUR EMAIL" class="news-input" required>
+                <button type="submit" class="news-btn">JOIN BRIEFING</button>
+            </form>
+        </div>
+    </section>
+
+    <section class="contact-section">
+        <div class="contact-card">
+            <i class="fas fa-envelope-open-text contact-icon"></i>
+            <h2 style="font-family:'Orbitron'; color:white; margin-bottom:10px;">CONTACT HQ</h2>
+            <p style="color:#aaa; font-size:0.9rem;">FOR SCRIMS, PARTNERSHIPS, OR INQUIRIES</p>
+            <a href="mailto:bloodesports00@gmail.com" class="email-link">bloodesports00@gmail.com</a>
+            <a href="mailto:bloodesports00@gmail.com" class="contact-btn">SEND TRANSMISSION</a>
         </div>
     </section>
 
