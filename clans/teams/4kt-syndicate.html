@@ -160,6 +160,74 @@
         .card-igl .player-icon { color: white; }
         .card-igl .player-role { background: rgba(255,255,255,0.1); color: white; border-color: white; }
 
+        /* --- FEATURE BUTTONS STYLE --- */
+        .feature-nav {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin: 2rem 0 5rem;
+            padding: 0 1rem;
+        }
+
+        .feature-btn {
+            background: linear-gradient(145deg, rgba(20, 0, 30, 0.9), rgba(40, 0, 60, 0.9));
+            border: 1px solid var(--purple);
+            padding: 2rem;
+            min-width: 260px;
+            text-align: center;
+            text-decoration: none;
+            color: white;
+            border-radius: 12px;
+            transition: all 0.3s ease;
+            position: relative;
+            flex: 1;
+            max-width: 350px;
+            box-shadow: 0 0 15px rgba(155, 48, 255, 0.1);
+        }
+
+        .feature-btn i {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            color: var(--purple);
+            display: block;
+            transition: 0.3s;
+            filter: drop-shadow(0 0 5px var(--purple));
+        }
+
+        .feature-btn span {
+            font-family: 'Orbitron';
+            font-weight: 900;
+            font-size: 1.1rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            display: block;
+        }
+
+        .feature-btn small {
+            display: block;
+            margin-top: 8px;
+            font-size: 0.7rem;
+            color: #aaa;
+            font-family: 'Montserrat';
+        }
+
+        .feature-btn:hover {
+            transform: translateY(-5px);
+            background: var(--purple);
+            box-shadow: 0 0 30px rgba(155, 48, 255, 0.5);
+            border-color: white;
+        }
+
+        .feature-btn:hover i {
+            color: white;
+            filter: drop-shadow(0 0 10px white);
+            transform: scale(1.1);
+        }
+
+        .feature-btn:hover span { color: white; }
+        .feature-btn:hover small { color: #eee; }
+
         footer { text-align: center; padding: 4rem 1rem; color: #666; font-family: 'Orbitron'; font-size: 0.8rem; margin-top: 2rem; border-top: 1px solid #222; }
 
     </style>
@@ -258,6 +326,29 @@
                 <span class="discord-tag"><i class="fab fa-discord"></i> @mrnobody0245</span>
                 <div class="player-role">SUBSTITUTE</div>
             </div>
+
+        </div>
+
+        <div class="section-header"><span>OPERATIONS</span></div>
+        <div class="feature-nav">
+            
+            <a href="#" class="feature-btn">
+                <i class="fas fa-skull-crossbones"></i>
+                <span>MP KILL TABLE</span>
+                <small>SCRIMS & RANKINGS DATABASE</small>
+            </a>
+
+            <a href="#" class="feature-btn">
+                <i class="fas fa-trophy"></i>
+                <span>RESULTS CENTER</span>
+                <small>MATCH LOGS & HISTORY</small>
+            </a>
+
+            <a href="#" class="feature-btn">
+                <i class="fas fa-fist-raised"></i>
+                <span>CLAN VS CLAN</span>
+                <small>RIVALRY ARENA</small>
+            </a>
 
         </div>
 
