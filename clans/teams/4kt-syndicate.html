@@ -3,75 +3,436 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MP Kill Table - 4KT Syndicate</title>
+    <title>4KT Syndicate - MP Elite | Blood Esports</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet">
     <style>
-        :root { --purple: #9B30FF; --black: #050505; --gold: #FFD700; }
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { background-color: var(--black); color: white; font-family: 'Montserrat', sans-serif; overflow-x: hidden; }
-        canvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; }
-        
-        .nav-bar {
-            background: rgba(10, 0, 20, 0.95); border-bottom: 2px solid var(--purple); padding: 1rem 2rem;
-            display: flex; justify-content: space-between; align-items: center;
+        :root {
+            --purple: #9B30FF;
+            --neon-purple: 0 0 20px rgba(155, 48, 255, 0.6);
+            --dark-purple: #2a0033;
+            --black: #050505;
+            --glass: rgba(20, 0, 30, 0.8);
+            --gold: #FFD700;
         }
-        .nav-logo { font-family: 'Orbitron'; font-weight: 900; color: white; text-decoration: none; font-size: 1.2rem; }
-        
-        /* BACK BUTTON STYLE */
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            background-color: var(--black);
+            color: white;
+            font-family: 'Montserrat', sans-serif;
+            overflow-x: hidden;
+        }
+
+        /* NETWORK BACKGROUND */
+        canvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; }
+
+        /* ANIMATIONS */
+        @keyframes slideIn { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes glow { 0% { box-shadow: 0 0 5px var(--purple); } 50% { box-shadow: 0 0 20px var(--purple), 0 0 10px var(--purple); } 100% { box-shadow: 0 0 5px var(--purple); } }
+
+        /* NAVIGATION */
+        .nav-bar {
+            background: rgba(10, 0, 20, 0.95);
+            border-bottom: 2px solid var(--purple);
+            padding: 1rem 2rem;
+            position: sticky; top: 0; z-index: 1000;
+            display: flex; justify-content: space-between; align-items: center;
+            box-shadow: 0 0 30px rgba(155, 48, 255, 0.2);
+        }
+
+        .nav-logo { 
+            font-family: 'Orbitron'; font-weight: 900; color: white; text-decoration: none; font-size: 1.2rem; 
+            display: flex; align-items: center; gap: 10px; transition: 0.3s;
+        }
+        .nav-logo span { color: var(--purple); }
+        .nav-logo:hover { text-shadow: 0 0 10px var(--purple); }
+
         .back-btn {
             font-family: 'Orbitron'; font-size: 0.8rem; color: white; text-decoration: none;
-            border: 1px solid var(--purple); padding: 8px 20px; border-radius: 20px; transition: 0.3s;
+            border: 1px solid var(--purple); padding: 8px 20px; border-radius: 20px;
+            transition: 0.3s; background: rgba(155, 48, 255, 0.1);
         }
-        .back-btn:hover { background: var(--purple); box-shadow: 0 0 15px var(--purple); }
+        /* NOTE: The '../' ensures this button goes UP one folder level to find 4kt.html */
+        .back-btn:hover { background: var(--purple); color: white; box-shadow: 0 0 20px var(--purple); }
 
-        .container { max-width: 1000px; margin: 4rem auto; padding: 0 1rem; }
-        h1 { font-family: 'Orbitron'; text-align: center; font-size: 2.5rem; margin-bottom: 2rem; text-shadow: 0 0 20px var(--purple); }
-
-        .table-container {
-            background: rgba(20, 0, 30, 0.8); border: 1px solid var(--purple); border-radius: 15px; overflow: hidden;
-            box-shadow: 0 0 30px rgba(155, 48, 255, 0.2); backdrop-filter: blur(5px);
+        /* HERO SECTION */
+        .hero { text-align: center; padding: 6rem 1rem 4rem; position: relative; animation: slideIn 1s ease-out; }
+        
+        .hero-logo {
+            width: 160px; height: auto; margin-bottom: 1.5rem;
+            filter: drop-shadow(0 0 30px var(--purple));
+            animation: glow 3s infinite;
         }
-        table { width: 100%; border-collapse: collapse; }
-        th { background: rgba(155, 48, 255, 0.2); padding: 1.5rem; text-align: left; font-family: 'Orbitron'; color: var(--purple); letter-spacing: 1px; }
-        td { padding: 1.5rem; border-bottom: 1px solid rgba(155, 48, 255, 0.1); font-family: 'Montserrat'; }
-        .no-data { text-align: center; padding: 4rem; color: #666; font-style: italic; }
-        .no-data i { font-size: 3rem; margin-bottom: 1rem; color: #333; animation: pulse 2s infinite; }
-        @keyframes pulse { 0% { opacity: 0.3; } 50% { opacity: 0.7; } 100% { opacity: 0.3; } }
+
+        .hero h1 { 
+            font-family: 'Orbitron'; font-size: clamp(3rem, 10vw, 5.5rem); 
+            background: linear-gradient(to right, #fff, var(--purple)); 
+            -webkit-background-clip: text; color: transparent;
+            margin-bottom: 0.5rem; text-transform: uppercase; letter-spacing: 5px;
+            text-shadow: 0 0 30px rgba(155, 48, 255, 0.5);
+        }
+
+        .hero p { 
+            font-family: 'Orbitron'; color: #ccc; letter-spacing: 3px; font-size: 1.2rem; margin-bottom: 2rem;
+        }
+
+        /* CONTAINER */
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 1.5rem; }
+
+        /* SECTIONS */
+        .section-header {
+            text-align: center; margin: 4rem 0 2rem; border-bottom: 1px solid var(--purple);
+            line-height: 0.1em;
+        }
+        .section-header span { 
+            background: var(--black); padding: 0 20px; color: var(--purple); font-family: 'Orbitron'; 
+            font-size: 1.5rem; letter-spacing: 2px; font-weight: bold;
+        }
+
+        /* ROSTER GRID */
+        .roster-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            padding-bottom: 4rem;
+        }
+
+        .player-card {
+            background: linear-gradient(145deg, rgba(20, 0, 30, 0.8), rgba(10, 0, 20, 0.95));
+            border: 1px solid rgba(155, 48, 255, 0.3);
+            border-radius: 15px;
+            padding: 2.5rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            transition: 0.4s;
+            animation: slideIn 0.8s ease-out backwards;
+            backdrop-filter: blur(5px);
+        }
+
+        .player-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--purple);
+            box-shadow: 0 0 30px rgba(155, 48, 255, 0.3);
+        }
+
+        .player-card::before {
+            content: ''; position: absolute; top: 0; left: 0; width: 4px; height: 100%;
+            background: var(--purple); transition: 0.3s;
+        }
+        .player-card:hover::before { width: 100%; opacity: 0.1; }
+
+        /* Manager Card Special Style */
+        .card-manager {
+            border: 1px solid var(--gold);
+            background: linear-gradient(145deg, rgba(30, 20, 0, 0.8), rgba(20, 10, 0, 0.95));
+            max-width: 400px; margin: 0 auto 3rem;
+        }
+        .card-manager .player-icon { color: var(--gold); filter: drop-shadow(0 0 10px var(--gold)); }
+        .card-manager .player-role { color: var(--gold); border-color: var(--gold); background: rgba(255, 215, 0, 0.1); }
+        .card-manager:hover { border-color: var(--gold); box-shadow: 0 0 30px rgba(255, 215, 0, 0.3); }
+
+        .player-icon {
+            font-size: 3rem; color: var(--purple); margin-bottom: 1.5rem;
+            filter: drop-shadow(0 0 10px var(--purple));
+        }
+
+        .player-name {
+            font-family: 'Orbitron'; font-size: 1.5rem; font-weight: 900; color: white;
+            margin-bottom: 5px; text-transform: uppercase;
+        }
+
+        .discord-tag {
+            color: #aaa; font-size: 0.85rem; margin-bottom: 15px; display: block;
+            font-family: 'Montserrat'; font-style: italic;
+        }
+        .discord-tag i { margin-right: 5px; color: #5865F2; }
+
+        .player-role {
+            display: inline-block; background: rgba(155, 48, 255, 0.1); color: var(--purple);
+            padding: 5px 15px; border-radius: 20px; font-size: 0.75rem; font-family: 'Orbitron';
+            border: 1px solid var(--purple); letter-spacing: 1px; font-weight: bold;
+        }
+
+        /* IGL Special */
+        .card-igl { border-color: white; }
+        .card-igl .player-icon { color: white; }
+        .card-igl .player-role { background: rgba(255,255,255,0.1); color: white; border-color: white; }
+
+        /* --- FEATURE BUTTONS STYLE --- */
+        .feature-nav {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin: 2rem 0 5rem;
+            padding: 0 1rem;
+        }
+
+        .feature-btn {
+            background: linear-gradient(145deg, rgba(20, 0, 30, 0.9), rgba(40, 0, 60, 0.9));
+            border: 1px solid var(--purple);
+            padding: 2rem;
+            min-width: 260px;
+            text-align: center;
+            text-decoration: none;
+            color: white;
+            border-radius: 12px;
+            transition: all 0.3s ease;
+            position: relative;
+            flex: 1;
+            max-width: 350px;
+            box-shadow: 0 0 15px rgba(155, 48, 255, 0.1);
+        }
+
+        .feature-btn i {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            color: var(--purple);
+            display: block;
+            transition: 0.3s;
+            filter: drop-shadow(0 0 5px var(--purple));
+        }
+
+        .feature-btn span {
+            font-family: 'Orbitron';
+            font-weight: 900;
+            font-size: 1.1rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            display: block;
+        }
+
+        .feature-btn small {
+            display: block;
+            margin-top: 8px;
+            font-size: 0.7rem;
+            color: #aaa;
+            font-family: 'Montserrat';
+        }
+
+        .feature-btn:hover {
+            transform: translateY(-5px);
+            background: var(--purple);
+            box-shadow: 0 0 30px rgba(155, 48, 255, 0.5);
+            border-color: white;
+        }
+
+        .feature-btn:hover i {
+            color: white;
+            filter: drop-shadow(0 0 10px white);
+            transform: scale(1.1);
+        }
+
+        .feature-btn:hover span { color: white; }
+        .feature-btn:hover small { color: #eee; }
+
+        footer { text-align: center; padding: 4rem 1rem; color: #666; font-family: 'Orbitron'; font-size: 0.8rem; margin-top: 2rem; border-top: 1px solid #222; }
+
     </style>
 </head>
 <body>
+
     <canvas id="network-canvas"></canvas>
-    
+
     <nav class="nav-bar">
-        <a href="#" class="nav-logo">KILL TABLE</a>
-        
-        <a href="4kt-syndicate.html" class="back-btn"><i class="fas fa-arrow-left"></i> BACK TO ROSTER</a>
+        <a href="#" class="nav-logo"><i class="fas fa-skull"></i> <span>4零丨</span> SYNDICATE</a>
+        <a href="../4kt.html" class="back-btn"><i class="fas fa-arrow-left"></i> BACK TO 4KT</a>
     </nav>
 
     <div class="container">
-        <h1><i class="fas fa-skull"></i> ELITE STATS</h1>
-        <div class="table-container">
-            <table>
-                <thead>
-                    <tr><th>RANK</th><th>OPERATOR</th><th>KILLS</th><th>K/D RATIO</th></tr>
-                </thead>
-                <tbody id="stats-body"></tbody>
-            </table>
-            <div class="no-data">
-                <i class="fas fa-database"></i><p>AWAITING BATTLE DATA...</p><small>No scrim records found</small>
+        <header class="hero">
+            <img src="../../syndicate.png" alt="Syndicate Logo" class="hero-logo" onerror="this.style.display='none';"> 
+            <h1>SYNDICATE</h1>
+            <p>MULTIPLAYER SPECIALISTS</p>
+        </header>
+
+        <div class="section-header"><span>MANAGEMENT</span></div>
+        
+        <div class="player-card card-manager">
+            <div class="player-icon"><i class="fas fa-user-tie"></i></div>
+            <div class="player-name">KHALID</div>
+            <span class="discord-tag"><i class="fab fa-discord"></i> @iseoluwa98amk</span>
+            <div class="player-role">CLAN MANAGER</div>
+        </div>
+
+        <div class="section-header"><span>MAIN ROSTER</span></div>
+        <div class="roster-grid">
+            
+            <div class="player-card card-igl">
+                <div class="player-icon"><i class="fas fa-crown"></i></div>
+                <div class="player-name">4零丨POT NODDLES</div>
+                <span class="discord-tag"><i class="fab fa-discord"></i> @LouLou</span>
+                <div class="player-role">IGL / CAPTAIN</div>
+            </div>
+
+            <div class="player-card">
+                <div class="player-icon"><i class="fas fa-crosshairs"></i></div>
+                <div class="player-name">4零丨SIGMA GIRL</div>
+                <span class="discord-tag"><i class="fab fa-discord"></i> @its.maya7</span>
+                <div class="player-role">MAIN SLAYER</div>
+            </div>
+
+            <div class="player-card">
+                <div class="player-icon"><i class="fas fa-fire"></i></div>
+                <div class="player-name">4零丨HENNY</div>
+                <span class="discord-tag"><i class="fab fa-discord"></i> @hennyandice</span>
+                <div class="player-role">MAIN SLAYER</div>
+            </div>
+
+            <div class="player-card">
+                <div class="player-icon"><i class="fas fa-ghost"></i></div>
+                <div class="player-name">4零丨LGN • LONA</div>
+                <span class="discord-tag"><i class="fab fa-discord"></i> @lonacodm</span>
+                <div class="player-role">OBJECTIVE</div>
+            </div>
+
+            <div class="player-card">
+                <div class="player-icon"><i class="fas fa-bolt"></i></div>
+                <div class="player-name">4零丨KZN</div>
+                <span class="discord-tag"><i class="fab fa-discord"></i> @crimsonvessel1_62045</span>
+                <div class="player-role">SUPPORT</div>
+            </div>
+
+            <div class="player-card">
+                <div class="player-icon"><i class="fas fa-shield-alt"></i></div>
+                <div class="player-name">4零丨CROFTYY</div>
+                <span class="discord-tag"><i class="fab fa-discord"></i> iamdawn01</span>
+                <div class="player-role">ANCHOR</div>
             </div>
         </div>
+
+        <div class="section-header"><span>SUBSTITUTES</span></div>
+        <div class="roster-grid">
+            
+            <div class="player-card">
+                <div class="player-icon"><i class="fas fa-mask"></i></div>
+                <div class="player-name">4零丨¥乇・ĞĦØŠT</div>
+                <span class="discord-tag"><i class="fab fa-discord"></i> @night_revenants</span>
+                <div class="player-role">SUBSTITUTE</div>
+            </div>
+
+            <div class="player-card">
+                <div class="player-icon"><i class="fas fa-volume-up"></i></div>
+                <div class="player-name">4零丨亗UTヤSÇREɅM</div>
+                <span class="discord-tag"><i class="fab fa-discord"></i> @screamz23</span>
+                <div class="player-role">SUBSTITUTE</div>
+            </div>
+
+            <div class="player-card">
+                <div class="player-icon"><i class="fas fa-gavel"></i></div>
+                <div class="player-name">4零丨Ⱥx</div>
+                <span class="discord-tag"><i class="fab fa-discord"></i> @mrnobody0245</span>
+                <div class="player-role">SUBSTITUTE</div>
+            </div>
+
+        </div>
+
+        <div class="section-header"><span>OPERATIONS</span></div>
+        <div class="feature-nav">
+            
+            <a href="kill_table.html" class="feature-btn">
+                <i class="fas fa-skull-crossbones"></i>
+                <span>MP KILL TABLE</span>
+                <small>SCRIMS & RANKINGS DATABASE</small>
+            </a>
+
+            <a href="results.html" class="feature-btn">
+                <i class="fas fa-trophy"></i>
+                <span>RESULTS CENTER</span>
+                <small>MATCH LOGS & HISTORY</small>
+            </a>
+
+            <a href="clan_arena.html" class="feature-btn">
+                <i class="fas fa-fist-raised"></i>
+                <span>CLAN VS CLAN</span>
+                <small>RIVALRY ARENA</small>
+            </a>
+
+        </div>
+
+        <footer>
+            <p>© 2026 BLOOD ESPORTS | 4KT DIVISION | ALL RIGHTS RESERVED</p>
+        </footer>
     </div>
 
     <script>
-        const canvas = document.getElementById('network-canvas'); const ctx = canvas.getContext('2d');
-        canvas.width = window.innerWidth; canvas.height = window.innerHeight;
-        const particles = []; 
-        class Particle { constructor(){ this.x=Math.random()*canvas.width; this.y=Math.random()*canvas.height; this.vx=(Math.random()-0.5); this.vy=(Math.random()-0.5); this.size=Math.random()*2+1; } update(){ this.x+=this.vx; this.y+=this.vy; if(this.x<0||this.x>canvas.width)this.vx*=-1; if(this.y<0||this.y>canvas.height)this.vy*=-1; } draw(){ ctx.fillStyle='#9B30FF'; ctx.beginPath(); ctx.arc(this.x,this.y,this.size,0,Math.PI*2); ctx.fill(); } }
-        for(let i=0;i<40;i++) particles.push(new Particle());
-        function animate(){ ctx.clearRect(0,0,canvas.width,canvas.height); particles.forEach(p=>{ p.update(); p.draw(); }); requestAnimationFrame(animate); }
+        // --- PURPLE NETWORK ANIMATION ---
+        const canvas = document.getElementById('network-canvas');
+        const ctx = canvas.getContext('2d');
+
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        const particles = [];
+        const particleCount = 60; // Less count for cleaner look
+
+        class Particle {
+            constructor() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.vx = (Math.random() - 0.5) * 1;
+                this.vy = (Math.random() - 0.5) * 1;
+                this.size = Math.random() * 2 + 1;
+            }
+
+            update() {
+                this.x += this.vx;
+                this.y += this.vy;
+
+                // Bounce off edges
+                if (this.x < 0 || this.x > canvas.width) this.vx *= -1;
+                if (this.y < 0 || this.y > canvas.height) this.vy *= -1;
+            }
+
+            draw() {
+                ctx.fillStyle = '#9B30FF';
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fill();
+            }
+        }
+
+        function init() {
+            for (let i = 0; i < particleCount; i++) {
+                particles.push(new Particle());
+            }
+        }
+
+        function animate() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            
+            // Draw lines between nearby particles
+            for (let i = 0; i < particles.length; i++) {
+                for (let j = i + 1; j < particles.length; j++) {
+                    const dx = particles[i].x - particles[j].x;
+                    const dy = particles[i].y - particles[j].y;
+                    const distance = Math.sqrt(dx * dx + dy * dy);
+
+                    if (distance < 150) {
+                        ctx.strokeStyle = `rgba(155, 48, 255, ${1 - distance / 150})`;
+                        ctx.lineWidth = 1;
+                        ctx.beginPath();
+                        ctx.moveTo(particles[i].x, particles[i].y);
+                        ctx.lineTo(particles[j].x, particles[j].y);
+                        ctx.stroke();
+                    }
+                }
+                particles[i].update();
+                particles[i].draw();
+            }
+            requestAnimationFrame(animate);
+        }
+
+        init();
         animate();
+
+        window.addEventListener('resize', () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        });
     </script>
 </body>
 </html>
