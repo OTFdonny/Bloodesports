@@ -7,7 +7,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
-        /* --- REUSING CORE STYLES --- */
         :root { --purple: #9B30FF; --black: #050505; --gold: #FFD700; }
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { background-color: var(--black); color: white; font-family: 'Montserrat', sans-serif; overflow-x: hidden; }
@@ -18,6 +17,8 @@
             display: flex; justify-content: space-between; align-items: center;
         }
         .nav-logo { font-family: 'Orbitron'; font-weight: 900; color: white; text-decoration: none; font-size: 1.2rem; }
+        
+        /* BACK BUTTON STYLE */
         .back-btn {
             font-family: 'Orbitron'; font-size: 0.8rem; color: white; text-decoration: none;
             border: 1px solid var(--purple); padding: 8px 20px; border-radius: 20px; transition: 0.3s;
@@ -25,45 +26,18 @@
         .back-btn:hover { background: var(--purple); box-shadow: 0 0 15px var(--purple); }
 
         .container { max-width: 1000px; margin: 4rem auto; padding: 0 1rem; }
-        
         h1 { font-family: 'Orbitron'; text-align: center; font-size: 2.5rem; margin-bottom: 2rem; text-shadow: 0 0 20px var(--purple); }
 
-        /* --- TABLE STYLES --- */
         .table-container {
-            background: rgba(20, 0, 30, 0.8);
-            border: 1px solid var(--purple);
-            border-radius: 15px;
-            overflow: hidden;
-            box-shadow: 0 0 30px rgba(155, 48, 255, 0.2);
-            backdrop-filter: blur(5px);
+            background: rgba(20, 0, 30, 0.8); border: 1px solid var(--purple); border-radius: 15px; overflow: hidden;
+            box-shadow: 0 0 30px rgba(155, 48, 255, 0.2); backdrop-filter: blur(5px);
         }
-
         table { width: 100%; border-collapse: collapse; }
-        
-        th {
-            background: rgba(155, 48, 255, 0.2);
-            padding: 1.5rem;
-            text-align: left;
-            font-family: 'Orbitron';
-            color: var(--purple);
-            letter-spacing: 1px;
-        }
-
-        td {
-            padding: 1.5rem;
-            border-bottom: 1px solid rgba(155, 48, 255, 0.1);
-            font-family: 'Montserrat';
-        }
-
-        /* Empty State Animation */
-        .no-data {
-            text-align: center; padding: 4rem;
-            color: #666; font-style: italic;
-        }
+        th { background: rgba(155, 48, 255, 0.2); padding: 1.5rem; text-align: left; font-family: 'Orbitron'; color: var(--purple); letter-spacing: 1px; }
+        td { padding: 1.5rem; border-bottom: 1px solid rgba(155, 48, 255, 0.1); font-family: 'Montserrat'; }
+        .no-data { text-align: center; padding: 4rem; color: #666; font-style: italic; }
         .no-data i { font-size: 3rem; margin-bottom: 1rem; color: #333; animation: pulse 2s infinite; }
-        
         @keyframes pulse { 0% { opacity: 0.3; } 50% { opacity: 0.7; } 100% { opacity: 0.3; } }
-
     </style>
 </head>
 <body>
@@ -71,30 +45,21 @@
     
     <nav class="nav-bar">
         <a href="#" class="nav-logo">KILL TABLE</a>
-        <a href="syndicate.html" class="back-btn"><i class="fas fa-arrow-left"></i> BACK</a>
+        
+        <a href="4kt-syndicate.html" class="back-btn"><i class="fas fa-arrow-left"></i> BACK TO ROSTER</a>
     </nav>
 
     <div class="container">
         <h1><i class="fas fa-skull"></i> ELITE STATS</h1>
-        
         <div class="table-container">
             <table>
                 <thead>
-                    <tr>
-                        <th>RANK</th>
-                        <th>OPERATOR</th>
-                        <th>KILLS</th>
-                        <th>K/D RATIO</th>
-                    </tr>
+                    <tr><th>RANK</th><th>OPERATOR</th><th>KILLS</th><th>K/D RATIO</th></tr>
                 </thead>
-                <tbody id="stats-body">
-                    </tbody>
+                <tbody id="stats-body"></tbody>
             </table>
-            
             <div class="no-data">
-                <i class="fas fa-database"></i>
-                <p>AWAITING BATTLE DATA...</p>
-                <small>No scrim records found</small>
+                <i class="fas fa-database"></i><p>AWAITING BATTLE DATA...</p><small>No scrim records found</small>
             </div>
         </div>
     </div>
