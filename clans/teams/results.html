@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Results Center - 4KT Syndicate</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        :root { --purple: #9B30FF; --black: #050505; }
+        body { background: var(--black); color: white; font-family: 'Montserrat'; overflow-x: hidden; }
+        canvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; }
+        .nav-bar { background: rgba(10,0,20,0.95); border-bottom: 2px solid var(--purple); padding: 1rem 2rem; display: flex; justify-content: space-between; }
+        .back-btn { font-family: 'Orbitron'; color: white; text-decoration: none; border: 1px solid var(--purple); padding: 8px 20px; border-radius: 20px; transition: 0.3s; }
+        .back-btn:hover { background: var(--purple); box-shadow: 0 0 15px var(--purple); }
+        .container { max-width: 900px; margin: 4rem auto; text-align: center; }
+        h1 { font-family: 'Orbitron'; font-size: 2.5rem; margin-bottom: 3rem; text-shadow: 0 0 20px var(--purple); }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
+        .result-card { background: rgba(20, 0, 30, 0.8); border: 1px solid #333; padding: 3rem; border-radius: 15px; transition: 0.3s; }
+        .result-card:hover { border-color: var(--purple); transform: translateY(-5px); }
+        .icon-box { font-size: 4rem; color: #333; margin-bottom: 1.5rem; }
+        .status { display: inline-block; padding: 5px 15px; border-radius: 5px; background: #220000; color: #ff3333; font-family: 'Orbitron'; font-size: 0.8rem; margin-top: 1rem; border: 1px solid #ff3333; }
+    </style>
+</head>
+<body>
+    <canvas id="network-canvas"></canvas>
+    
+    <nav class="nav-bar">
+        <div style="font-family:'Orbitron'; font-weight:900;">RESULTS LOG</div>
+        
+        <a href="4kt-syndicate.html" class="back-btn"><i class="fas fa-arrow-left"></i> BACK TO ROSTER</a>
+    </nav>
+
+    <div class="container">
+        <h1><i class="fas fa-trophy"></i> MATCH RECORDS</h1>
+        <div class="grid">
+            <div class="result-card">
+                <div class="icon-box"><i class="fas fa-file-upload"></i></div>
+                <h2 style="font-family:'Orbitron'">SCRIM RESULTS</h2>
+                <p style="color:#888; margin-top:10px;">Upload screens and K/D logs</p>
+                <div class="status">NO DATA UPLOADED</div>
+            </div>
+            <div class="result-card">
+                <div class="icon-box"><i class="fas fa-list-ol"></i></div>
+                <h2 style="font-family:'Orbitron'">RANKINGS</h2>
+                <p style="color:#888; margin-top:10px;">Official tournament brackets</p>
+                <div class="status">PENDING UPDATE</div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const canvas = document.getElementById('network-canvas'); const ctx = canvas.getContext('2d');
+        canvas.width = window.innerWidth; canvas.height = window.innerHeight;
+        const particles = []; 
+        class Particle { constructor(){ this.x=Math.random()*canvas.width; this.y=Math.random()*canvas.height; this.vx=(Math.random()-0.5); this.vy=(Math.random()-0.5); this.size=Math.random()*2+1; } update(){ this.x+=this.vx; this.y+=this.vy; if(this.x<0||this.x>canvas.width)this.vx*=-1; if(this.y<0||this.y>canvas.height)this.vy*=-1; } draw(){ ctx.fillStyle='#9B30FF'; ctx.beginPath(); ctx.arc(this.x,this.y,this.size,0,Math.PI*2); ctx.fill(); } }
+        for(let i=0;i<40;i++) particles.push(new Particle());
+        function animate(){ ctx.clearRect(0,0,canvas.width,canvas.height); particles.forEach(p=>{ p.update(); p.draw(); }); requestAnimationFrame(animate); }
+        animate();
+    </script>
+</body>
+</html>
