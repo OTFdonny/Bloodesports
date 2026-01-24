@@ -16,7 +16,7 @@
             --neon-glow: 0 0 15px rgba(255, 215, 0, 0.3);
         }
 
-        html { scroll-behavior: smooth; } /* Enables smooth scrolling for the logo link */
+        html { scroll-behavior: smooth; }
 
         body { 
             background-color: var(--black); 
@@ -46,13 +46,12 @@
             position: sticky; top: 0; z-index: 100;
         }
 
-        /* Updated Nav Brand to be a Link */
         .nav-brand { 
             font-family: 'Orbitron'; 
             font-weight: 900; 
             font-size: 1.2rem; 
             letter-spacing: 2px; 
-            text-decoration: none; /* Removes underline */
+            text-decoration: none; 
             cursor: pointer;
         }
         
@@ -62,6 +61,36 @@
             padding: 10px 25px; transition: 0.3s;
         }
         .back-btn:hover { background: var(--gold); color: black; box-shadow: var(--neon-glow); }
+
+        /* --- MOBILE FIX START --- */
+        @media (max-width: 768px) {
+            .luxury-nav {
+                flex-direction: column; /* Stack items vertically */
+                gap: 15px; /* Space between logo and button */
+                padding: 1rem 1rem;
+            }
+            
+            .nav-brand {
+                font-size: 1.5rem; /* Make logo slightly larger/centered */
+            }
+
+            .back-btn {
+                width: 100%; /* Button takes full width */
+                text-align: center;
+                box-sizing: border-box; /* Keeps padding inside width */
+                padding: 12px;
+                background: rgba(255, 215, 0, 0.05); /* Slight tint so it looks tappable */
+            }
+            
+            .header-section {
+                margin: 2rem 0; /* Reduce gap on mobile */
+            }
+            
+            .header-title {
+                font-size: 2rem; /* Smaller title for mobile */
+            }
+        }
+        /* --- MOBILE FIX END --- */
 
         /* HEADER */
         .header-section { text-align: center; margin: 4rem 0; padding: 0 1rem; }
@@ -90,10 +119,10 @@
             box-shadow: 0 10px 40px rgba(255, 215, 0, 0.1);
         }
 
-        /* IMAGE AREA - INCREASED SIZE */
+        /* IMAGE AREA */
         .image-frame {
             width: 100%;
-            height: 320px; /* Increased from 220px to 320px */
+            height: 320px; 
             background: radial-gradient(circle, #222, #050505);
             display: flex;
             align-items: center;
@@ -103,7 +132,7 @@
         }
 
         .weapon-img {
-            max-width: 95%; /* Increased from 90% */
+            max-width: 95%; 
             max-height: 95%;
             object-fit: contain;
             filter: drop-shadow(0 0 10px rgba(0,0,0,0.8));
