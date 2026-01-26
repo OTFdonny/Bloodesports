@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,7 +8,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
-        :root { --purple: #9B30FF; --black: #050505; --gold: #FFD700; --green: #00ff00; }
+        :root { --purple: #9B30FF; --black: #050505; --gold: #FFD700; --green: #00ff00; --red: #ff3131; }
         body { background: var(--black); color: white; font-family: 'Montserrat'; overflow-x: hidden; margin: 0; }
         
         /* BG ANIMATION */
@@ -41,6 +42,8 @@
             transition: 0.3s;
         }
 
+        .match-card.loss { border-left-color: var(--red); }
+
         /* DATE BOX */
         .date-box { 
             background: rgba(255,255,255,0.05); display: flex; flex-direction: column; 
@@ -66,7 +69,9 @@
             border-left: 1px solid #333; padding: 1rem;
         }
         .score-val { font-family: 'Orbitron'; font-size: 2.5rem; color: var(--green); font-weight: 900; text-shadow: 0 0 10px rgba(0,255,0,0.3); }
+        .loss .score-val { color: var(--red); text-shadow: 0 0 10px rgba(255,0,0,0.3); }
         .result-label { font-size: 0.8rem; letter-spacing: 2px; color: var(--green); font-weight: bold; }
+        .loss .result-label { color: var(--red); }
 
         /* RANKING CARD */
         .ranking-card {
@@ -79,11 +84,11 @@
         /* RESPONSIVE TABLE CONTAINER */
         .table-responsive {
             width: 100%;
-            overflow-x: auto; /* Enables horizontal scroll on mobile */
+            overflow-x: auto; 
             -webkit-overflow-scrolling: touch;
         }
 
-        .rank-table { width: 100%; border-collapse: collapse; font-family: 'Montserrat'; min-width: 500px; /* Forces scroll if screen is smaller than 500px */ }
+        .rank-table { width: 100%; border-collapse: collapse; font-family: 'Montserrat'; min-width: 500px; }
         .rank-table th { text-align: left; color: #888; font-size: 0.75rem; padding: 10px; border-bottom: 1px solid #333; white-space: nowrap; }
         .rank-table td { padding: 15px 10px; border-bottom: 1px solid #222; font-size: 0.9rem; white-space: nowrap; }
         .rank-1 { color: var(--gold); font-weight: bold; background: rgba(255, 215, 0, 0.05); }
@@ -91,14 +96,12 @@
         /* MOBILE FIXES */
         @media(max-width: 768px) {
             .container { margin-top: 1rem; }
-            
-            /* Stack match card vertically */
             .match-card { 
                 grid-template-columns: 1fr; 
                 border-left: 1px solid #333; 
                 border-top: 4px solid var(--green); 
             }
-            
+            .match-card.loss { border-top-color: var(--red); }
             .date-box { 
                 flex-direction: row; gap: 10px; 
                 border-bottom: 1px solid #333; 
@@ -106,18 +109,16 @@
                 background: #111;
             }
             .day, .month, .year { font-size: 1rem; align-self: center; }
-
             .info-box { padding: 1rem; text-align: center; }
             .stats-row { justify-content: center; }
-            
             .score-box { 
                 border-left: none; 
                 border-top: 1px solid #333; 
                 padding: 15px; 
                 background: rgba(0,255,0,0.05); 
             }
+            .loss .score-box { background: rgba(255,0,0,0.05); }
             .score-val { font-size: 2rem; }
-
             .ranking-card { padding: 1rem; }
         }
     </style>
@@ -135,6 +136,72 @@
     <div class="container">
         <h1>BATTLE RECORD</h1>
         <div class="subtitle">OFFICIAL MATCH RESULTS</div>
+
+        <div class="match-card">
+            <div class="date-box">
+                <span class="day">25</span>
+                <span class="month">JAN</span>
+                <span class="year">2026</span>
+            </div>
+            <div class="info-box">
+                <div class="event-name">SYNDICATE SHOWDOWN</div>
+                <div class="versus">
+                    4KT <span class="vs-tag">VS</span> MARAB
+                </div>
+                <div class="stats-row">
+                    <div class="stat-pill">MODE: <span class="stat-val">Scrims</span></div>
+                    <div class="stat-pill">DOMINANCE: <span class="stat-val" style="color:var(--gold)">Clean Sweep</span></div>
+                </div>
+            </div>
+            <div class="score-box">
+                <div class="score-val">3 - 0</div>
+                <div class="result-label">VICTORY</div>
+            </div>
+        </div>
+
+        <div class="match-card">
+            <div class="date-box">
+                <span class="day">22</span>
+                <span class="month">JAN</span>
+                <span class="year">2026</span>
+            </div>
+            <div class="info-box">
+                <div class="event-name">OFFICIAL SCRIM</div>
+                <div class="versus">
+                    4KT <span class="vs-tag">VS</span> CRYPT
+                </div>
+                <div class="stats-row">
+                    <div class="stat-pill">OPPONENT: <span class="stat-val">Cryptic Clan</span></div>
+                    <div class="stat-pill">STATUS: <span class="stat-val" style="color:var(--gold)">Elite</span></div>
+                </div>
+            </div>
+            <div class="score-box">
+                <div class="score-val">3 - 0</div>
+                <div class="result-label">VICTORY</div>
+            </div>
+        </div>
+
+        <div class="match-card loss">
+            <div class="date-box">
+                <span class="day">19</span>
+                <span class="month">JAN</span>
+                <span class="year">2026</span>
+            </div>
+            <div class="info-box">
+                <div class="event-name">CHALLENGE MATCH</div>
+                <div class="versus">
+                    4KT <span class="vs-tag">VS</span> 7SINS
+                </div>
+                <div class="stats-row">
+                    <div class="stat-pill">MODE: <span class="stat-val">Competitive</span></div>
+                    <div class="stat-pill">RECAP: <span class="stat-val">Hard Fought</span></div>
+                </div>
+            </div>
+            <div class="score-box">
+                <div class="score-val">0 - 3</div>
+                <div class="result-label">DEFEAT</div>
+            </div>
+        </div>
 
         <div class="match-card">
             <div class="date-box">
@@ -183,7 +250,7 @@
         <div class="ranking-card">
             <div class="rank-header">
                 <h3 class="rank-title"><i class="fas fa-crown"></i> STANDINGS</h3>
-                <span style="font-size:0.7rem; color:#666;">JAN 14</span>
+                <span style="font-size:0.7rem; color:#666;">JAN 25</span>
             </div>
             
             <div class="table-responsive">
@@ -202,10 +269,10 @@
                         <tr class="rank-1">
                             <td>01</td>
                             <td>4KT SYNDICATE</td>
-                            <td>60</td>
-                            <td>0</td>
-                            <td>101</td>
-                            <td style="text-align:right; font-size:1.1rem;">166</td>
+                            <td>66</td>
+                            <td>3</td>
+                            <td>110</td>
+                            <td style="text-align:right; font-size:1.1rem;">173</td>
                         </tr>
                         <tr>
                             <td>02</td>
