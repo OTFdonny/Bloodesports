@@ -12,9 +12,11 @@
         body { background-color: var(--black); color: white; font-family: 'Montserrat', sans-serif; overflow-x: hidden; }
         canvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; }
         
+        /* RESPONSIVE NAV-BAR */
         .nav-bar {
             background: rgba(10, 0, 20, 0.95); border-bottom: 2px solid var(--purple); padding: 1rem 2rem;
             display: flex; justify-content: space-between; align-items: center;
+            flex-wrap: wrap; gap: 10px;
         }
         .nav-logo { font-family: 'Orbitron'; font-weight: 900; color: white; text-decoration: none; font-size: 1.2rem; }
         
@@ -24,18 +26,31 @@
         }
         .back-btn:hover { background: var(--purple); box-shadow: 0 0 15px var(--purple); }
 
-        .container { max-width: 1000px; margin: 4rem auto; padding: 0 1rem; }
-        h1 { font-family: 'Orbitron'; text-align: center; font-size: 2.5rem; margin-bottom: 2rem; text-shadow: 0 0 20px var(--purple); }
+        .container { max-width: 1000px; margin: 2rem auto; padding: 0 1rem; }
+        h1 { font-family: 'Orbitron'; text-align: center; font-size: 2rem; margin-bottom: 2rem; text-shadow: 0 0 20px var(--purple); }
 
+        /* RESPONSIVE TABLE CONTAINER */
         .table-container {
-            background: rgba(20, 0, 30, 0.8); border: 1px solid var(--purple); border-radius: 15px; overflow: hidden;
+            background: rgba(20, 0, 30, 0.8); border: 1px solid var(--purple); border-radius: 15px; 
             box-shadow: 0 0 30px rgba(155, 48, 255, 0.2); backdrop-filter: blur(5px);
-            margin-bottom: 4rem;
+            margin-bottom: 4rem; overflow-x: auto; /* Enable horizontal scroll for mobile */
         }
-        table { width: 100%; border-collapse: collapse; }
-        th { background: rgba(155, 48, 255, 0.2); padding: 1.5rem; text-align: left; font-family: 'Orbitron'; color: var(--purple); letter-spacing: 1px; }
-        td { padding: 1.5rem; border-bottom: 1px solid rgba(155, 48, 255, 0.1); font-family: 'Montserrat'; }
+        table { width: 100%; border-collapse: collapse; min-width: 600px; /* Ensures columns don't crush */ }
+        th { background: rgba(155, 48, 255, 0.2); padding: 1.2rem; text-align: left; font-family: 'Orbitron'; color: var(--purple); letter-spacing: 1px; font-size: 0.9rem; }
+        td { padding: 1.2rem; border-bottom: 1px solid rgba(155, 48, 255, 0.1); font-family: 'Montserrat'; font-size: 0.9rem; }
         
+        /* NAME ANIMATION (GLITCH EFFECT) */
+        .animated-name {
+            display: inline-block;
+            font-weight: 600;
+            position: relative;
+            animation: name-glow 2s infinite alternate;
+        }
+        @keyframes name-glow {
+            from { text-shadow: 0 0 5px rgba(155, 48, 255, 0.2); }
+            to { text-shadow: 0 0 15px rgba(155, 48, 255, 0.8); color: #e0b0ff; }
+        }
+
         .rank-gold { color: var(--gold); font-weight: bold; }
         .kd-high { color: #00FF00; }
         .no-data { display: none; }
@@ -52,21 +67,30 @@
             align-items: center;
             transition: 0.3s;
         }
-        .log-entry:hover { border-color: var(--purple); transform: translateX(10px); }
+        .log-entry:hover { border-color: var(--purple); transform: translateX(5px); }
         .map-info { display: flex; flex-direction: column; }
-        .map-name { font-family: 'Orbitron'; font-weight: 700; color: var(--purple); font-size: 1.1rem; }
-        .mode-name { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 2px; color: #888; }
+        .map-name { font-family: 'Orbitron'; font-weight: 700; color: var(--purple); font-size: 1rem; }
+        .mode-name { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 2px; color: #888; }
         .score-section { text-align: right; }
-        .score-line { font-family: 'Orbitron'; font-size: 1.5rem; font-weight: 900; letter-spacing: 3px; }
+        .score-line { font-family: 'Orbitron'; font-size: 1.2rem; font-weight: 900; letter-spacing: 2px; }
         .victory-text { color: var(--win); text-shadow: 0 0 10px var(--win); }
         .defeat-text { color: var(--loss); text-shadow: 0 0 10px var(--loss); }
+
+        /* MOBILE OVERRIDES */
+        @media (max-width: 600px) {
+            .nav-bar { padding: 1rem; justify-content: center; }
+            .nav-logo { font-size: 1rem; width: 100%; text-align: center; }
+            h1 { font-size: 1.5rem; }
+            .log-entry { padding: 0.8rem; }
+            .score-line { font-size: 1rem; }
+        }
     </style>
 </head>
 <body>
     <canvas id="network-canvas"></canvas>
     
     <nav class="nav-bar">
-        <a href="#" class="nav-logo">KILL TABLE</a>
+        <a href="#" class="nav-logo">4KT KILL TABLE</a>
         <a href="4kt-syndicate.html" class="back-btn"><i class="fas fa-arrow-left"></i> BACK TO ROSTER</a>
     </nav>
 
@@ -80,56 +104,56 @@
                 <tbody id="stats-body">
                     <tr>
                         <td class="rank-gold">1</td>
-                        <td>4零 | kzÑ</td>
+                        <td><span class="animated-name">4零 | kzÑ</span></td>
                         <td>157</td>
                         <td>41</td>
                         <td>1.33</td>
                     </tr>
                     <tr>
                         <td>2</td>
-                        <td>4零 | Sumayyah</td>
+                        <td><span class="animated-name">4零 | Sumayyah</span></td>
                         <td>143</td>
                         <td>45</td>
                         <td>0.99</td>
                     </tr>
                     <tr>
                         <td>3</td>
-                        <td>Lissa</td>
+                        <td><span class="animated-name">Lissa</span></td>
                         <td>124</td>
                         <td>43</td>
                         <td class="kd-high">1.88</td>
                     </tr>
                     <tr>
                         <td>4</td>
-                        <td>4零 | Virus</td>
+                        <td><span class="animated-name">4零 | Virus</span></td>
                         <td>121</td>
                         <td>32</td>
                         <td>1.01</td>
                     </tr>
                     <tr>
                         <td>5</td>
-                        <td>LouLou</td>
+                        <td><span class="animated-name">LouLou</span></td>
                         <td>89</td>
                         <td>28</td>
                         <td>1.13</td>
                     </tr>
                     <tr>
                         <td>6</td>
-                        <td>4零 | Henny</td>
+                        <td><span class="animated-name">4零 | Henny</span></td>
                         <td>34</td>
                         <td>12</td>
                         <td>0.54</td>
                     </tr>
                     <tr>
                         <td>7</td>
-                        <td>Ax | 4零</td>
+                        <td><span class="animated-name">Ax | 4零</span></td>
                         <td>22</td>
                         <td>23</td>
                         <td>0.48</td>
                     </tr>
                     <tr>
                         <td>8</td>
-                        <td>4零 | LONA</td>
+                        <td><span class="animated-name">4零 | LONA</span></td>
                         <td>11</td>
                         <td>0</td>
                         <td>0.50</td>
@@ -214,9 +238,32 @@
 
     <script>
         const canvas = document.getElementById('network-canvas'); const ctx = canvas.getContext('2d');
-        canvas.width = window.innerWidth; canvas.height = window.innerHeight;
+        function resize() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
+        window.addEventListener('resize', resize);
+        resize();
+
         const particles = []; 
-        class Particle { constructor(){ this.x=Math.random()*canvas.width; this.y=Math.random()*canvas.height; this.vx=(Math.random()-0.5); this.vy=(Math.random()-0.5); this.size=Math.random()*2+1; } update(){ this.x+=this.vx; this.y+=this.vy; if(this.x<0||this.x>canvas.width)this.vx*=-1; if(this.y<0||this.y>canvas.height)this.vy*=-1; } draw(){ ctx.fillStyle='#9B30FF'; ctx.beginPath(); ctx.arc(this.x,this.y,this.size,0,Math.PI*2); ctx.fill(); } }
+        class Particle { 
+            constructor(){ 
+                this.x=Math.random()*canvas.width; 
+                this.y=Math.random()*canvas.height; 
+                this.vx=(Math.random()-0.5); 
+                this.vy=(Math.random()-0.5); 
+                this.size=Math.random()*2+1; 
+            } 
+            update(){ 
+                this.x+=this.vx; 
+                this.y+=this.vy; 
+                if(this.x<0||this.x>canvas.width)this.vx*=-1; 
+                if(this.y<0||this.y>canvas.height)this.vy*=-1; 
+            } 
+            draw(){ 
+                ctx.fillStyle='#9B30FF'; 
+                ctx.beginPath(); 
+                ctx.arc(this.x,this.y,this.size,0,Math.PI*2); 
+                ctx.fill(); 
+            } 
+        }
         for(let i=0;i<40;i++) particles.push(new Particle());
         function animate(){ ctx.clearRect(0,0,canvas.width,canvas.height); particles.forEach(p=>{ p.update(); p.draw(); }); requestAnimationFrame(animate); }
         animate();
